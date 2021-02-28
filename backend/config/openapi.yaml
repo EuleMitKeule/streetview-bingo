@@ -2,25 +2,12 @@ openapi: "3.0.0"
 
 info:
   title: Street View Bingo
-  version: "1.0"
+  version: "0.1"
 
 servers:
   - url: /api/
 
 paths:
-  /hello/:
-    get:
-      operationId: api.hello
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Hello'
-
 
   #/lobby/create?token=xxxxxxxxxxxxxxxx
   /lobby/create:
@@ -167,8 +154,25 @@ paths:
 
 components:
   schemas:
-    Hello:
+    Lobby:
       type: object
       properties:
-        text:
+        id:
+          type: integer
+        user_ids:
+          type: array
+          items:
+            type: integer
+        owner_id:
+          type: integer
+        lobby_token:
           type: string
+    Words:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          value:
+            type: string
