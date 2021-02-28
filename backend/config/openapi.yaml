@@ -31,6 +31,7 @@ paths:
         - in: query
           name: token
           description: The user token of the user creating the lobby
+          required: true
           schema:
             type: string
       responses:
@@ -50,11 +51,13 @@ paths:
         - in: query
           name: lobby_token
           description: The lobby token of the lobby to join
+          required: true
           schema:
             type: string
         - in: query
           name: token
           description: The user token of the user joining the lobby
+          required: true
           schema:
             type: string
       responses:
@@ -70,6 +73,7 @@ paths:
         - in: query
           name: lobby_token
           description: The lobby token of the lobby to obtain info on
+          required: true
           schema:
             type: string
       responses:
@@ -79,6 +83,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Lobby'
+
+  #/lobby/xxxxxxxxxxxxxxxx/game
+  /lobby/{lobby_token}/game/:
+    post:
+      summary: Creates a new game of streetview bingo
+      operationId: api.game_post
+      parameters:
+        - in: path
+          name: lobby_token
+          description: The lobby token of the lobby to create the game in
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Contains the game information
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: Returns the id of the created game
+          content:
+            text/plain:
+              schema:
+                type: string
+
 
 components:
   schemas:
