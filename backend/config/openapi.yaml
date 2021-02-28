@@ -8,7 +8,6 @@ servers:
   - url: /api/
 
 paths:
-
   /hello/:
     get:
       operationId: api.hello
@@ -21,6 +20,65 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Hello'
+
+
+  #/lobby/create?token=xxxxxxxxxxxxxxxx
+  /lobby/create:
+    get:
+      summary: Creates a new lobby
+      operationId: api.lobby_create_post
+      parameters:
+        - in: query
+          name: token
+          description: The user token of the user creating the lobby
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns unique lobby token
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  #/lobby/join?lobby_token=xxxxxxxxxxxxxxxx&token=xxxxxxxxxxxxxxxx
+  /lobby/join:
+    get:
+      summary: Joins a lobby
+      operationId: api.lobby_join_post
+      parameters:
+        - in: query
+          name: lobby_token
+          description: The lobby token of the lobby to join
+          schema:
+            type: string
+        - in: query
+          name: token
+          description: The user token of the user joining the lobby
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns OK if lobby was joined successfully
+    
+  #/lobby?lobby_token=xxxxxxxxxxxxxxxx
+  /lobby:
+    get:
+      summary: Gets info about a lobby
+      operationId: api.lobby_get
+      parameters:
+        - in: query
+          name: lobby_token
+          description: The lobby token of the lobby to obtain info on
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns information about the lobby
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
 
 components:
   schemas:
