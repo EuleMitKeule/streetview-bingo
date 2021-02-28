@@ -1,0 +1,48 @@
+openapi: "3.0.0"
+
+info:
+  title: Angular
+  version: "1.0"
+servers:
+  - url: http://localhost:5000/
+
+paths:
+
+  /:
+    get:
+      summary: Serve angular files
+      description: Serves angular files
+      operationId: api.serve_file2
+      parameters:
+      - name: "filename"
+        in: "path"
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
+
+
+  /{filename}:
+    get:
+      summary: Serve angular files
+      description: Serves angular files
+      operationId: api.serve_file
+      parameters:
+      - name: "filename"
+        in: "path"
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string

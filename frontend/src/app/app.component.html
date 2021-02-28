@@ -1,0 +1,10 @@
+
+
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <button class="btn btn-primary" (click)="test()">Hello World</button>
+    </div>
+    <div class="col"><app-hello (clickedButton)="test($event)" [text]="'Test'"></app-hello></div>
+  </div>
+</div>

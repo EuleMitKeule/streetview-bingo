@@ -1,0 +1,31 @@
+openapi: "3.0.0"
+
+info:
+  title: Street View Bingo
+  version: "1.0"
+
+servers:
+  - url: /api/
+
+paths:
+
+  /hello/:
+    get:
+      operationId: api.hello
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hello'
+
+components:
+  schemas:
+    Hello:
+      type: object
+      properties:
+        text:
+          type: string

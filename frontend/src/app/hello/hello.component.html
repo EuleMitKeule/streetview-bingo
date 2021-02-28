@@ -1,0 +1,6 @@
+<p>hello works!</p>
+
+<p>Text: {{ text }}</p>
+<p *ngFor="let hello of hello$ | async">{{ hello.text }}</p>
+
+<button class="btn btn-secondary" (click)="test()">Button in der Subcomponent</button>
