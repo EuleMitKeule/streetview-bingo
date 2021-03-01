@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 
 info:
-  title: Street View Bingo
+  title: streetview-bingo
   version: "0.1"
 
 servers:
