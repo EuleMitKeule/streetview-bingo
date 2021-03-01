@@ -2,15 +2,35 @@ import connexion
 from flask_cors import CORS
 
 
-def hello():
-    return [
-        {
-            "text": "test123"
-        },
-        {
-            "text": "test345"
-        }
-    ]
+def create_lobby():
+    pass
+
+
+def get_lobby():
+    pass
+
+
+def join_lobby():
+    pass
+
+
+def create_game():
+    pass
+
+
+def update_game():
+    pass
+
+
+def create_word_status():
+    pass
+
+
+def delete_word_status():
+    pass
+
+def get_words():
+    pass
 
 
 if __name__ == '__main__':
