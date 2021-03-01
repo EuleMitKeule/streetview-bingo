@@ -15,6 +15,7 @@ def hello():
 
 if __name__ == '__main__':
     app = connexion.FlaskApp(__name__, port=5000, specification_dir='config')
+    app.add_api('openapi.yaml', strict_validation=True, validate_responses=True, base_path="/api")
     app.add_api('angular.yaml', options={"swagger_ui": False})
     CORS(app.app)
     app.run()
