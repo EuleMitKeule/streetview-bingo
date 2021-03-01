@@ -10,10 +10,13 @@ servers:
 paths:
 
   #/lobby/create?token=xxxxxxxxxxxxxxxx
-  /lobby/create:
-    get:
+  /lobby/:
+
+    post:
       summary: Creates a new lobby
       operationId: api.lobby_create_post
+      tags:
+        - Lobby
       parameters:
         - in: query
           name: token
@@ -25,15 +28,37 @@ paths:
         '200':
           description: Returns unique lobby token
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Lobby'
+
+    get:
+      summary: Gets info about a lobby
+      operationId: api.lobby_get
+      tags:
+        - Lobby
+      parameters:
+        - in: query
+          name: lobby_token
+          description: The lobby token of the lobby to obtain info on
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns information about the lobby
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Lobby'
 
   #/lobby/join?lobby_token=xxxxxxxxxxxxxxxx&token=xxxxxxxxxxxxxxxx
-  /lobby/join:
-    get:
+  /lobby/<lobby_token>/join:
+    post:
       summary: Joins a lobby
       operationId: api.lobby_join_post
+      tags:
+        - Lobby
       parameters:
         - in: query
           name: lobby_token
@@ -50,32 +75,14 @@ paths:
       responses:
         '200':
           description: Returns OK if lobby was joined successfully
-    
-  #/lobby?lobby_token=xxxxxxxxxxxxxxxx
-  /lobby:
-    get:
-      summary: Gets info about a lobby
-      operationId: api.lobby_get
-      parameters:
-        - in: query
-          name: lobby_token
-          description: The lobby token of the lobby to obtain info on
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Returns information about the lobby
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Lobby'
 
   #/lobby/xxxxxxxxxxxxxxxx/game
   /lobby/{lobby_token}/game/:
     post:
       summary: Creates a new game of streetview bingo
       operationId: api.game_post
+      tags:
+        - Game
       parameters:
         - in: path
           name: lobby_token
@@ -94,15 +101,17 @@ paths:
         '200':
           description: Returns the id of the created game
           content:
-            text/plain:
+            application/json:
               schema:
-                type: string
+                $ref: '#/components/schemas/Game'
 
   #/lobby/xxxxxxxxxxxxxxxx/game/xxx/words/xxx/xxx
   /lobby/{lobby_token}/game/{game_id}/words/{word_id}/{user_id}:
     post:
       summary: Sets word as found for specified user
       operationId: api.game_words_post
+      tags:
+        - Game
       parameters:
         - in: path
           name: lobby_token
@@ -110,19 +119,19 @@ paths:
           required: true
           schema:
             type: string
-        - int: path
+        - in: path
           name: game_id
           description: The id of the game to set the word in
           required: true
           schema:
             type: integer
-        - int: path
+        - in: path
           name: word_id
           description: The id of the word to set
           required: true
           schema:
             type: integer
-        - int: path
+        - in: path
           name: user_id
           description: The id of user to set the word to found on
           required: true
@@ -137,6 +146,8 @@ paths:
     get:
       summary: Gets list of suggested words
       operationId: api.words_get
+      tags:
+        - Words
       parameters:
         - in: query
           name: length
@@ -150,7 +161,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Words'
+                type: array
+                items:
+                  $ref: '#/components/schemas/Word'
 
 components:
   schemas:
@@ -167,12 +180,17 @@ components:
           type: integer
         lobby_token:
           type: string
-    Words:
-      type: array
-      items:
-        type: object
-        properties:
-          id:
+    Word:
+      type: object
+      properties:
+        id:
             type: integer
-          value:
-            type: string
+        value:
+          type: string
+    Game:
+      type: object
+      properties:
+        id:
+          type: integer
+        token:
+          type: string
