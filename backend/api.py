@@ -11,6 +11,22 @@ import random
 
 
 def create_lobby():
+    
+    json_data = request.get_json()
+    if not json_data:
+        return {"message": "No username provided"}, 400
+
+    name = json_data['username']
+    token = generate_token(16)
+
+    #create new user
+    user = User(name=name, token=token)
+    db.session.add(user)
+
+    #create new lobby
+    
+    db.session.commit()
+    
     pass
 
 def get_lobby():
