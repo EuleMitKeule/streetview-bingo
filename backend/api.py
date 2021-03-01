@@ -3,14 +3,15 @@ from flask.json import jsonify
 from flask_cors import CORS
 import connexion
 from sqlalchemy.sql.expression import func
-import config
+from config import connex_app, db
 from models import Word, WordSchema, User, UserSchema
 from marshmallow import ValidationError
 import string
+import random
+
 
 def create_lobby():
     pass
-
 
 def get_lobby():
     pass
@@ -45,8 +46,12 @@ def get_words(length):
     return result
 
 
+def generate_token(length):
+    letters = string.ascii_letters + string.digits
+    token = ''.join(random.choice(letters) for i in range(length))
+    return token
+
 if __name__ == "__main__":
-    connex_app = config.connex_app
     CORS(connex_app.app)
     connex_app.add_api('openapi.yaml', strict_validation=True, validate_responses=True, base_path="/api")
     connex_app.add_api('angular.yaml', options={"swagger_ui": False})
