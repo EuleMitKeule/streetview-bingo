@@ -1,0 +1,6 @@
+flask
+flask_cors
+flask-marshmallow
+flask-sqlalchemy
+marshmallow-sqlalchemy
+connexion
