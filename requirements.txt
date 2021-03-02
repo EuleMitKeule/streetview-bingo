@@ -3,4 +3,4 @@ flask_cors
 flask-marshmallow
 flask-sqlalchemy
 marshmallow-sqlalchemy
-connexion
+connexion[swagger-ui]
