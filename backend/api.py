@@ -60,11 +60,19 @@ def create_game(body):
 
     return result
 
-def update_game(lobby_token, user_token, body):
+def update_game(lobby_token, game_token, user_token, body):
 
-    
+    game = game_service.update_game(lobby_token, game_token, user_token, body)
 
-    pass
+    if game is None:
+        return {"message": "You are not moderator"}, 403
+
+    game_schema = GameSchema()
+    result = jsonify(game_schema.dump(game))
+
+    print(result.get_data(as_text=True))
+
+    return result
 
 
 def create_word_status():

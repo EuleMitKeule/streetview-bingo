@@ -78,8 +78,8 @@ class GameSchema(ModelSchema):
         model = Game
         sqla_session = db.session
 
-    users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby"], many=True)
-
+    users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"], many=True)
+    moderator = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"])
 
 class GameWordSchema(ModelSchema):
     class Meta:
