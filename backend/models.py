@@ -80,6 +80,7 @@ class GameSchema(ModelSchema):
 
     users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"], many=True)
     moderator = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"])
+    words = Nested(WordSchema, many=True) 
 
 class GameWordSchema(ModelSchema):
     class Meta:

@@ -132,6 +132,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Game'
 
+  /lobby/{lobby_token}/game/{game_token}:
     put:
       summary: Changes a game
       operationId: api.update_game
@@ -140,6 +141,12 @@ paths:
       parameters:
         - in: path
           name: lobby_token
+          description: The lobby token of the lobby to create the game in
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: game_token
           description: The lobby token of the lobby to create the game in
           required: true
           schema:
@@ -165,7 +172,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Game'
 
-  /lobby/{lobby_token}/game/{game_id}/words/{word_id}/users/{user_id}:
+  /lobby/{lobby_token}/game/{game_token}/words/{word_id}/users/{user_id}:
     post:
       summary: Sets word as found for specified user
       operationId: api.create_word_status
@@ -179,7 +186,7 @@ paths:
           schema:
             type: string
         - in: path
-          name: game_id
+          name: game_token
           description: The id of the game to set the word in
           required: true
           schema:
@@ -219,7 +226,7 @@ paths:
           schema:
             type: string
         - in: path
-          name: game_id
+          name: game_token
           description: The id of the game to set the word in
           required: true
           schema:
