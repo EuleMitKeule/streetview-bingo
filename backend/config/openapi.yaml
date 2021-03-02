@@ -325,7 +325,7 @@ components:
       type: object
       properties:
         id:
-            type: integer
+          type: integer
         token:
           type: string
         name:

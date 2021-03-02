@@ -48,3 +48,5 @@ frontend/typings
 .DS_Store
 Thumbs.db
 
+#SQLite
+**/*.db

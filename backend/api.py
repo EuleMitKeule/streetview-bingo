@@ -8,23 +8,17 @@ from models import Word, WordSchema, User, UserSchema, Lobby, LobbySchema
 from marshmallow import ValidationError
 import string
 import random
-
+import services.word_service as word_service
+import services.lobby_service as lobby_service
+import services.user_service as user_service
+import services.token_service as token_service
 
 def create_lobby(body):
     
     name = body['username']
-    token = generate_token(16)
 
-    #create new user
-    user = User(name=name, token=token)
-    db.session.add(user)
-    
-    #create new lobby
-    token = generate_token(16)
-    lobby = Lobby(owner=user, token=token)
-    lobby.users.append(user)
-
-    db.session.commit()
+    user = user_service.create_user(name=name)
+    lobby = lobby_service.create_lobby(owner=user)
 
     lobby_schema = LobbySchema(many=False)
     result = jsonify(lobby_schema.dump(lobby))
@@ -32,16 +26,26 @@ def create_lobby(body):
     return result
 
 def get_lobby(lobby_token, user_token):
-    lobby = Lobby.query.filter(Lobby.token==lobby_token).first()
+
+    lobby = lobby_service.get_lobby(lobby_token)
+
     lobby_schema = LobbySchema()
     result = jsonify(lobby_schema.dump(lobby))
 
     return result
 
 
-def join_lobby():
-    pass
+def join_lobby(lobby_token, body):
 
+    name = body['username']
+    user = user_service.create_user(name)
+
+    lobby_service.join_lobby(user, lobby_token)
+
+    user_schema = UserSchema()
+    result = jsonify(user_schema.dump(user))
+
+    return result
 
 def create_game():
     pass
@@ -61,17 +65,12 @@ def delete_word_status():
 
 def get_words(length):
 
-    words = Word.query.order_by(func.random()).limit(length).all()
+    words = word_service.get_random_words(length)
     word_schema = WordSchema(many=True)
     result = jsonify(word_schema.dump(words))
 
     return result
 
-
-def generate_token(length):
-    letters = string.ascii_letters + string.digits
-    token = ''.join(random.choice(letters) for i in range(length))
-    return token
 
 if __name__ == "__main__":
     CORS(connex_app.app)

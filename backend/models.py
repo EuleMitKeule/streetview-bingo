@@ -10,10 +10,8 @@ class Word(db.Model):
 class Lobby(db.Model):
     __tablename__ = "lobby"
     id = db.Column(db.Integer, primary_key=True)
-
     users = db.relationship("User", backref="lobby", foreign_keys='User.lobby_id')
     owner = db.relationship("User", backref="owned_lobby", uselist=False, foreign_keys='User.owned_lobby_id')
-
     token = db.Column(db.String(16), index=True)
 
 class User(db.Model):
@@ -21,7 +19,6 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), index=True)
     token = db.Column(db.String(16), index=True)
-
     lobby_id = db.Column(db.Integer, db.ForeignKey("lobby.id"))
     owned_lobby_id = db.Column(db.Integer, db.ForeignKey("lobby.id"))
 
