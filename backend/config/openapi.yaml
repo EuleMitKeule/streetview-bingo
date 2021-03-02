@@ -306,7 +306,7 @@ components:
           enum: [created, started, ended]
         moderator:
           $ref: '#/components/schemas/User'
-        user:
+        users:
           type: array
           items:
             $ref: '#/components/schemas/User'
@@ -314,12 +314,24 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
-        foundStatus:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/User'
+        # foundStatus:
+        #   type: object
+        #   additionalProperties:
+        #     type: array
+        #     items:
+        #       $ref: '#/components/schemas/User'
+
+    GameWord:
+      type: object
+      properties:
+        id:
+          type: integer
+        text:
+          type: string
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
 
     User:
       type: object
