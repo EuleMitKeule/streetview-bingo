@@ -10,24 +10,18 @@ import string
 import random
 
 
-def create_lobby():
+def create_lobby(body):
     
-    json_data = request.get_json()
-    if not json_data:
-        return {"message": "No username provided"}, 400
-
-    name = json_data['username']
+    name = body['username']
     token = generate_token(16)
 
     #create new user
     user = User(name=name, token=token)
     db.session.add(user)
-
-    db.session.commit()
     
     #create new lobby
     token = generate_token(16)
-    lobby = Lobby(owner=user.id, token=token)
+    lobby = Lobby(owner=user, token=token)
     lobby.users.append(user)
 
     db.session.commit()
@@ -37,8 +31,12 @@ def create_lobby():
     
     return result
 
-def get_lobby():
-    pass
+def get_lobby(lobby_token, user_token):
+    lobby = Lobby.query.filter(Lobby.token==lobby_token).first()
+    lobby_schema = LobbySchema()
+    result = jsonify(lobby_schema.dump(lobby))
+
+    return result
 
 
 def join_lobby():
