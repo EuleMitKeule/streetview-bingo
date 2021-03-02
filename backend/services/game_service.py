@@ -6,13 +6,13 @@ import services.token_service as token_service
 def create_game(lobby_token, moderator_id):
 
     token = token_service.generate_token(16)
-    moderator = User.query().filter(User.id==moderator_id).first()
+    moderator = User.query.filter(User.id==moderator_id).first()
     game = Game(
         token=token,
         status="created",
         moderator=moderator)
 
-    lobby = Lobby.query().filter(Lobby.token==lobby_token).first()
+    lobby = Lobby.query.filter(Lobby.token==lobby_token).first()
     game.users = lobby.users
 
     db.session.add(game)

@@ -23,10 +23,10 @@ def create_lobby(body):
     lobby = lobby_service.create_lobby(owner=user)
 
     user_schema = UserSchema()
-    user_result = jsonify(user_schema.dump(user))
+    user_result = user_schema.dump(user)
 
     lobby_schema = LobbySchema()
-    lobby_result = jsonify(lobby_schema.dump(lobby))
+    lobby_result = lobby_schema.dump(lobby)
     
     result = {
         "user": user_result,
@@ -57,11 +57,11 @@ def join_lobby(lobby_token, body):
 
     return result
 
-def create_game(body):
+def create_game(lobby_token, body):
 
     moderator_id = body['moderator']['id']
 
-    game = game_service.create_game(moderator_id)
+    game = game_service.create_game(lobby_token, moderator_id)
 
     game_schema = GameSchema()
     result = jsonify(game_schema.dump(game))
@@ -83,12 +83,24 @@ def update_game(lobby_token, game_token, user_token, body):
     return result
 
 
-def create_word_status():
-    pass
+def create_word_status(lobby_token, game_token, user_token, word_id, user_id):
+
+    successful = word_service.set_word_found(lobby_token, game_token, user_token, word_id, user_id)
+
+    if not successful:
+        return {"message": "You are not moderator"}, 403
+
+    return {"message": "OK"}, 200
 
 
-def delete_word_status():
-    pass
+def delete_word_status(lobby_token, game_token, user_token, word_id, user_id):
+
+    successful = word_service.set_word_not_found(lobby_token, game_token, user_token, word_id, user_id)
+
+    if not successful:
+        return {"message": "You are not moderator"}, 403
+
+    return {"message": "OK"}, 200
 
 
 def get_words(length):
@@ -101,7 +113,7 @@ def get_words(length):
 
 
 if __name__ == "__main__":
-    CORS(connex_app.app)
     connex_app.add_api('openapi.yaml', strict_validation=True, validate_responses=True, base_path="/api")
     connex_app.add_api('angular.yaml', options={"swagger_ui": False})
+    CORS(connex_app.app)
     connex_app.run()
