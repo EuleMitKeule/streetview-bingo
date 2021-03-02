@@ -4,7 +4,7 @@ from flask_cors import CORS
 import connexion
 from sqlalchemy.sql.expression import func
 from config import connex_app, db
-from models import Word, WordSchema, User, UserSchema
+from models import Word, WordSchema, User, UserSchema, Lobby, LobbySchema
 from marshmallow import ValidationError
 import string
 import random
@@ -23,11 +23,19 @@ def create_lobby():
     user = User(name=name, token=token)
     db.session.add(user)
 
-    #create new lobby
-    
     db.session.commit()
     
-    pass
+    #create new lobby
+    token = generate_token(16)
+    lobby = Lobby(owner=user.id, token=token)
+    lobby.users.append(user)
+
+    db.session.commit()
+
+    lobby_schema = LobbySchema(many=False)
+    result = jsonify(lobby_schema.dump(lobby))
+    
+    return result
 
 def get_lobby():
     pass
