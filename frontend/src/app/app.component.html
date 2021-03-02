@@ -1,10 +1,11 @@
 
-
-<div class="container">
-  <div class="row mt-5">
+<div class="container mt-5 mb-5">
+  <div class="row">
     <div class="col">
-      <button class="btn btn-primary" (click)="test()">Hello World</button>
+      <h1>Streetview Bingo</h1>
     </div>
-    <div class="col"><app-hello (clickedButton)="test($event)" [text]="'Test'"></app-hello></div>
   </div>
+</div>
+<div class="container">
+  <router-outlet></router-outlet>
 </div>
