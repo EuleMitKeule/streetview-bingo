@@ -22,9 +22,17 @@ def create_lobby(body):
     user = user_service.create_user(name=name)
     lobby = lobby_service.create_lobby(owner=user)
 
-    lobby_schema = LobbySchema(many=False)
-    result = jsonify(lobby_schema.dump(lobby))
+    user_schema = UserSchema()
+    user_result = jsonify(user_schema.dump(user))
+
+    lobby_schema = LobbySchema()
+    lobby_result = jsonify(lobby_schema.dump(lobby))
     
+    result = {
+        "user": user_result,
+        "lobby": lobby_result
+    }
+
     return result
 
 def get_lobby(lobby_token, user_token):
