@@ -4,7 +4,7 @@ from flask_cors import CORS
 import connexion
 from sqlalchemy.sql.expression import func
 from config import connex_app, db
-from models import Word, WordSchema, User, UserSchema, Lobby, LobbySchema
+from models import Word, WordSchema, User, UserSchema, Lobby, LobbySchema, Game, GameSchema
 from marshmallow import ValidationError
 import string
 import random
@@ -12,6 +12,8 @@ import services.word_service as word_service
 import services.lobby_service as lobby_service
 import services.user_service as user_service
 import services.token_service as token_service
+import services.game_service as game_service
+
 
 def create_lobby(body):
     
@@ -47,11 +49,21 @@ def join_lobby(lobby_token, body):
 
     return result
 
-def create_game():
-    pass
+def create_game(body):
 
+    moderator_id = body['moderator']['id']
 
-def update_game():
+    game = game_service.create_game(moderator_id)
+
+    game_schema = GameSchema()
+    result = jsonify(game_schema.dump(game))
+
+    return result
+
+def update_game(lobby_token, user_token, body):
+
+    
+
     pass
 
 
