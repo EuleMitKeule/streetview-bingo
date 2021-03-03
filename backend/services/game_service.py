@@ -62,7 +62,7 @@ def delete_game(game_token: str):
     db.session.commit()
 
 
-def update_game(game_token: str, user_token: str, status: str = None, *texts: str):
+def update_game(game_token: str, user_token: str, status: str = None, texts: list[str] = None):
     """
     Updates a games information.
 
@@ -82,10 +82,11 @@ def update_game(game_token: str, user_token: str, status: str = None, *texts: st
 
     game_words = []
 
-    for text in texts:
-        game_word = GameWord(text=text)
-        db.session.add(game_word)
-        game_words.append(game_word)
+    if texts is not None:
+        for text in texts:
+            game_word = GameWord(text=text)
+            db.session.add(game_word)
+            game_words.append(game_word)
 
     game.words = game_words
 
