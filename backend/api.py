@@ -65,6 +65,16 @@ def create_game(lobby_token, body):
     return result
 
 
+def get_game(lobby_token, game_token):
+
+    game = game_service.get_game(game_token=game_token)
+
+    game_schema = GameSchema()
+    result = jsonify(game_schema.dump(game))
+
+    return result
+
+
 def update_game(lobby_token, game_token, user_token, body):
 
     if not game_service.is_moderator(game_token=game_token, user_token=user_token):

@@ -133,6 +133,32 @@ paths:
                 $ref: '#/components/schemas/Game'
 
   /lobby/{lobby_token}/game/{game_token}:
+    get:
+      summary: Gets a game
+      operationId: api.get_game
+      tags:
+          - Game
+      parameters:
+        - in: path
+          name: lobby_token
+          description: The lobby token of the lobby to create the game in
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: game_token
+          description: The lobby token of the lobby to create the game in
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns the id of the created game
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Game'
+
     put:
       summary: Changes a game
       operationId: api.update_game
