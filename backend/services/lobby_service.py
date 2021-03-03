@@ -12,9 +12,9 @@ def get_lobby(lobby_id: int = None, lobby_token: str = None):
     :return: The lobby if found.
     """
     if lobby_id is not None:
-        return Lobby.query.filter(Lobby.token == lobby_token).first()
-    elif lobby_token is not None:
         return Lobby.query.filter(Lobby.id == lobby_id).first()
+    elif lobby_token is not None:
+        return Lobby.query.filter(Lobby.token == lobby_token).first()
     else:
         return None
 
