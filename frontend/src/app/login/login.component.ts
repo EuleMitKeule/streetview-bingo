@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   createLobby() {
     this.lobbyService.apiCreateLobby({"username": this.username }).subscribe(x => {
       this.loginService.setUserToken(x.user.token);
+      this.loginService.setUserId(x.user.id)
       this.router.navigate(['lobby', x.lobby.token])
     });
 
@@ -30,6 +31,7 @@ export class LoginComponent implements OnInit {
   joinLobby() {
     this.lobbyService.apiJoinLobby(this.lobbyToken, {"username": this.username}).subscribe(x => {
       this.loginService.setUserToken(x.token);
+      this.loginService.setUserId(x.id)
       this.router.navigate(['lobby', this.lobbyToken])
     })
   }

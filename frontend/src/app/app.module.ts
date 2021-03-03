@@ -8,12 +8,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { LobbyComponent } from './lobby/lobby.component';
 import { FormsModule } from '@angular/forms';
+import { GameCreatorComponent } from './lobby/game-creator/game-creator.component';
+import { GameComponent } from './lobby/game/game.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    LobbyComponent
+    LobbyComponent,
+    GameCreatorComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,

@@ -11,9 +11,10 @@ import { LoginService } from '../_shared/login.service';
 })
 export class LobbyComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private lobbyService: LobbyService, private route: ActivatedRoute ) { }
+  constructor(private loginService: LoginService, private lobbyService: LobbyService, private route: ActivatedRoute) { }
 
   userToken: string = "";
+  userId: number = this.loginService.userId;
   lobbyToken: string = "";
 
   lobby$: Observable<Lobby>;

@@ -1,0 +1,52 @@
+<div class="row" *ngIf="game; else indicator">
+  <div class="col">
+    <p>Status: {{game.status}}</p>
+    <p>Moderator: {{ game.moderator.name }}</p>
+    <p>Players:</p>
+    <ul>
+      <li *ngFor="let user of game.users">{{ user.name }}</li>
+    </ul>
+  </div>
+  <div class="col" *ngIf="game.status == 'created'">
+    <div *ngIf="game.moderator.id == userId; then thenBlock else elseBlock">
+    </div>
+    <ng-template #thenBlock>
+        <p>You are the moderator. Please select the words for this round.</p>
+        <h3>Words</h3>
+        <div class="input-group mt-3">
+          <input type="text" class="form-control" placeholder="Enter a word to add" [(ngModel)]="wordInput">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="button" (click)="addWord()">Add Word</button>
+          </div>
+        </div>
+  
+        <ul class="list-group mt-3">
+          <li class="list-group-item" *ngFor="let word of game.words">
+            {{ word.text}}
+            <button type="button" class="close" aria-label="Close" (click)="removeWord(word)">
+              <span aria-hidden="true">&times;</span>
+            </button></li>
+        </ul>
+
+        <button class="btn btn-primary mt-5" (click)="startGame()">
+            Start Game
+        </button>
+    </ng-template>
+    <ng-template #elseBlock>
+        <p>The moderator is selecting the words for this round.</p>
+    </ng-template>
+  </div>
+  <div class="col" *ngIf="game.status == 'started'">
+    <p>Game started! Find the following things:</p>
+    <ul>
+        <li *ngFor="let word of game.words">{{ word.text }}</li>
+    </ul>
+  </div>
+</div>
+<ng-template #indicator>
+  <div class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>

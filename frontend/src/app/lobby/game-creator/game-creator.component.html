@@ -1,0 +1,10 @@
+<hr>
+<p>Your the owner of this lobby.</p>
+<div class="form-group">
+  <label for="exampleInputEmail1">Next moderator</label>
+  <select class="form-control" [(ngModel)]="selectedModeratorId">
+    <option *ngFor="let user of lobby.users" value="{{user.id}}">{{ user.name }}</option>
+  </select>
+  <small id="emailHelp" class="form-text text-muted">Please select the moderator for the next round.</small>
+</div>
+<button class="btn btn-primary" (click)="createGame()">Create New Game</button>
