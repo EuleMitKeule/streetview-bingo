@@ -3,25 +3,27 @@ from models import Word
 from sqlalchemy.sql.expression import func
 
 
-def get_random_words(length: int):
-    """
-        Returns a random list of words from the word database.
-
-        :param length: The count of words to return.
-        :returns: A list of words.
-    """
-    words = Word.query.order_by(func.random()).limit(length).all()
-    return words
-
-
 def get_word(word_id: int):
     """
         Returns a word from the word database.
 
         :param word_id: The ID of the word to return.
-        :returns: The word if it was found.
+        :returns: The word if found.
     """
     word = Word.query.filter(Word.id == word_id).first()
+
+    return word
+
+
+def get_word(text: str):
+    """
+    Returns a word from the word database.
+
+    :param text: The text of the word to return
+    :return: The word if found
+    """
+    word = Word.query.filter(Word.text == text).first()
+
     return word
 
 
@@ -42,13 +44,28 @@ def get_words(word_ids: list[int]):
     return words
 
 
+def get_random_words(length: int):
+    """
+        Returns a random list of words from the word database.
+
+        :param length: The count of words to return.
+        :returns: A list of words.
+    """
+    words = Word.query.order_by(func.random()).limit(length).all()
+
+    return words
+
+
 def delete_word(word_id: int):
     """
         Deletes a word from the word database.
 
         :param word_id: The ID of the word to delete.
     """
-    Word.query.filter(Word.id == word_id).first().delete()
+    word = get_word(word_id)
+    word.delete()
+
+    db.session.commit()
 
 
 def delete_words(word_ids: list[int]):
@@ -58,7 +75,10 @@ def delete_words(word_ids: list[int]):
         :param word_ids: The IDs of the words to delete.
     """
     for word_id in word_ids:
-        Word.query.filter(Word.id == word_id).first().delete()
+        word = get_word(word_id)
+        word.delete()
+
+    db.session.commit()
 
 
 def create_word(text: str):
@@ -78,5 +98,4 @@ def create_word(text: str):
     db.session.add(word)
 
     db.session.commit()
-
     return word

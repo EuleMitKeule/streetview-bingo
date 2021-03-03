@@ -10,9 +10,10 @@ import services.game_word_service as game_word_service
 
 
 def create_lobby(body):
-    name = body['username']
 
-    user = user_service.create_user(name=name)
+    owner_name = body['username']
+
+    user = user_service.create_user(name=owner_name)
     lobby = lobby_service.create_lobby(owner=user)
 
     user_schema = UserSchema()
@@ -30,6 +31,7 @@ def create_lobby(body):
 
 
 def get_lobby(lobby_token, user_token):
+
     lobby = lobby_service.get_lobby(lobby_token)
 
     lobby_schema = LobbySchema()
@@ -39,6 +41,7 @@ def get_lobby(lobby_token, user_token):
 
 
 def join_lobby(lobby_token, body):
+
     name = body['username']
     user = user_service.create_user(name)
 
@@ -51,6 +54,7 @@ def join_lobby(lobby_token, body):
 
 
 def create_game(lobby_token, body):
+
     moderator_id = body['moderator']['id']
 
     game = game_service.create_game(lobby_token, moderator_id)
@@ -76,7 +80,7 @@ def update_game(lobby_token, game_token, user_token, body):
 
 
 def create_word_status(lobby_token, game_token, user_token, word_id, user_id):
-    successful = game_word_service.set_word_found(lobby_token, game_token, user_token, word_id, user_id)
+    successful = game_word_service.set_found(lobby_token, game_token, user_token, word_id, user_id)
 
     if not successful:
         return {"message": "You are not moderator"}, 403
@@ -85,7 +89,7 @@ def create_word_status(lobby_token, game_token, user_token, word_id, user_id):
 
 
 def delete_word_status(lobby_token, game_token, user_token, word_id, user_id):
-    successful = game_word_service.set_word_not_found(lobby_token, game_token, user_token, word_id, user_id)
+    successful = game_word_service.set_not_found(lobby_token, game_token, user_token, word_id, user_id)
 
     if not successful:
         return {"message": "You are not moderator"}, 403

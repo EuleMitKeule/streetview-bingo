@@ -1,14 +1,43 @@
 from config import db
 from models import User
-import token_service
+import services.token_service as token_service
 
 
-def create_user(name):
-    
+def get_user(user_id: int):
+    """
+    Returns a user from the user database.
+
+    :param user_id: The ID of the user to return.
+    :return: The user if found.
+    """
+    user = User.query.filter(User.id == user_id).first()
+
+    return user
+
+
+def create_user(name: str):
+    """
+    Creates a new user.
+
+    :param name: The name of the user.
+    :return: The created user if successful.
+    """
     token = token_service.generate_token(16)
     user = User(name=name, token=token)
 
     db.session.add(user)
-    db.session.commit()
 
+    db.session.commit()
     return user
+
+
+def delete_user(user_id: int):
+    """
+    Deletes a user from the user database.
+
+    :param user_id: The ID of the user to delete
+    """
+    user = get_user(user_id)
+    user.delete()
+
+    db.session.commit()
