@@ -1,6 +1,7 @@
-flask
+flask~=1.1.2
 flask_cors
 flask-marshmallow
 flask-sqlalchemy
 marshmallow-sqlalchemy
-connexion[swagger-ui]
+connexion[swagger-ui]~=2.7.0
+SQLAlchemy~=1.3.23

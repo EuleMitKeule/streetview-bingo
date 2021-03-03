@@ -1,6 +1,7 @@
 from config import db
 from models import User
-import services.token_service as token_service
+import token_service
+
 
 def create_user(name):
     

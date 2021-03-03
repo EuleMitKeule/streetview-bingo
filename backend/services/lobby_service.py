@@ -1,10 +1,10 @@
 from config import db
 from models import Lobby
-import services.token_service as token_service
+import token_service
 
 
 def get_lobby(token):
-    lobby = Lobby.query.filter(Lobby.token==token).first()
+    lobby = Lobby.query.filter(Lobby.token == token).first()
     return lobby
 
 
@@ -22,7 +22,7 @@ def create_lobby(owner):
 
 def join_lobby(user, token):
 
-    lobby = Lobby.query.filter(Lobby.token==token).first()
+    lobby = Lobby.query.filter(Lobby.token == token).first()
     lobby.users.append(user)
     
     db.session.commit()
