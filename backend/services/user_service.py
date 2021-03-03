@@ -3,28 +3,20 @@ from models import User
 import services.token_service as token_service
 
 
-def get_user_by_id(user_id: int):
-    """
-    Returns a user from the user database.
-
-    :param user_id: The ID of the user to return.
-    :return: The user if found.
-    """
-    user = User.query.filter(User.id == user_id).first()
-
-    return user
-
-
-def get_user_by_token(user_token: str):
+def get_user(user_id: int = None, user_token: str = None):
     """
     Returns a user from the user database.
 
     :param user_token: The token of the user to return.
+    :param user_id: The ID of the user to return.
     :return: The user if found.
     """
-    user = User.query.filter(User.token == user_token).first()
-
-    return user
+    if user_id is not None:
+        return User.query.filter(User.id == user_id).first()
+    elif user_token is not None:
+        return User.query.filter(User.token == user_token).first()
+    else:
+        return None
 
 
 def create_user(name: str):
@@ -49,7 +41,7 @@ def delete_user(user_id: int):
 
     :param user_id: The ID of the user to delete
     """
-    user = get_user_by_id(user_id)
+    user = get_user(user_id)
     user.delete()
 
     db.session.commit()

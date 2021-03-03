@@ -364,6 +364,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/User'
+        lobby:
+          type: object
+          schema:
+            $ref: '#/components/schemas/Lobby'
         words:
           type: array
           items:

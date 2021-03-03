@@ -4,7 +4,7 @@ import services.game_service as game_service
 import services.user_service as user_service
 
 
-def get_game_word_by_id(game_word_id: int):
+def get_game_word(game_word_id: int):
     """
     Returns a game word from the game word database
 
@@ -15,16 +15,22 @@ def get_game_word_by_id(game_word_id: int):
     return game_word
 
 
-def get_game_word_by_content(text: str, game_id: int):
+def get_game_word_by_content(text: str, game_id: int = None, game_token: str = None):
     """
     Returns a game word from the game word database
 
     :param text: The text of the word to get
     :param game_id: The ID of the game the game word belongs to
+    :param game_token: The token of the game the word belongs to
     :return: The game word if found
     """
-    game_word = GameWord.query.filter(GameWord.text == text and GameWord.game_id == game_id).first()
-    return game_word
+    if game_id is not None:
+        return GameWord.query.filter(GameWord.text == text and GameWord.game_id == game_id).first()
+    elif game_token is not None:
+        game = game_service.get_game(game_token=game_token)
+        return GameWord.query.filter(GameWord.text == text and GameWord.game_id == game.id).first()
+    else:
+        return None
 
 
 def create_game_word(text: str, game_token: str):
@@ -35,8 +41,8 @@ def create_game_word(text: str, game_token: str):
     :param game_token: The token of the game the word belongs to
     :return: The created game word
     """
-    game = game_service.get_game(game_token)
-    game_word = get_game_word_by_content(text, game_token)
+    game = game_service.get_game(game_token=game_token)
+    game_word = get_game_word_by_content(text, game_token=game_token)
 
     if game_word is None:
         game_word = GameWord(text=text)
@@ -55,7 +61,7 @@ def delete_word(game_token: str, text: str):
     :param game_token: The token of the game the word belongs to
     :param text: The text of the game word to create
     """
-    game_word = get_game_word_by_content(text, game_token)
+    game_word = get_game_word_by_content(text, game_token=game_token)
 
     if game_word is not None:
         game_word.delete()
@@ -101,8 +107,8 @@ def set_not_found(game_token, user_token, game_word_id, user_id):
     if not game_service.is_moderator(game_token, user_token):
         return False
 
-    game_word = get_game_word_by_id(game_word_id)
-    user = user_service.get_user_by_id(user_id)
+    game_word = get_game_word(game_word_id)
+    user = user_service.get_user(user_id)
 
     game_word.users.remove(user)
 
