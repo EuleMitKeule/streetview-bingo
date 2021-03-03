@@ -1,3 +1,4 @@
+from typing import List
 from config import db
 from models import Word
 from sqlalchemy.sql.expression import func
@@ -27,7 +28,7 @@ def get_word(text: str):
     return word
 
 
-def get_words(word_ids: list[int]):
+def get_words(word_ids: List[int]):
     """
         Returns a list of words from the database
 
@@ -68,7 +69,7 @@ def delete_word(word_id: int):
     db.session.commit()
 
 
-def delete_words(word_ids: list[int]):
+def delete_words(word_ids: List[int]):
     """
         Deletes words from the word database.
 

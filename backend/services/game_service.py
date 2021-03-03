@@ -1,3 +1,4 @@
+from typing import List
 from config import db
 from models import Game, GameWord
 import services.token_service as token_service
@@ -62,7 +63,7 @@ def delete_game(game_token: str):
     db.session.commit()
 
 
-def update_game(game_token: str, user_token: str, status: str = None, texts: list[str] = None):
+def update_game(game_token: str, user_token: str, status: str = None, texts: List[str] = None):
     """
     Updates a games information.
 
