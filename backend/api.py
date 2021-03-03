@@ -115,6 +115,15 @@ def delete_word_status(lobby_token, game_token, user_token, word_id, user_id):
     return {"message": "OK"}, 200
 
 
+def get_user(user_token):
+
+    user = user_service.get_user(user_token=user_token)
+    user_schema = UserSchema()
+    result = jsonify(user_schema.dump(user))
+
+    return result
+
+
 def get_words(length):
 
     words = word_service.get_random_words(length)

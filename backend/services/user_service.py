@@ -15,6 +15,18 @@ def get_user(user_id: int):
     return user
 
 
+def get_user(user_token: str):
+    """
+    Returns a user from the user database.
+
+    :param user_token: The token of the user to return.
+    :return: The user if found.
+    """
+    user = User.query.filter(User.token == user_token).first()
+
+    return user
+
+
 def create_user(name: str):
     """
     Creates a new user.

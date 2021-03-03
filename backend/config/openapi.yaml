@@ -253,12 +253,33 @@ paths:
         '200':
           description: Returns OK if the status was deleted
 
-  /words:
+  /user:
+    get:
+      summary: Gets a user by token
+      operationId: api.get_user
+      tags:
+        - User
+      parameters:
+        - in: query
+          name: token
+          description: The token of the user to get
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Returns the user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /word:
     get:
       summary: Gets list of suggested words
       operationId: api.get_words
       tags:
-        - Words
+        - Word
       parameters:
         - in: query
           name: length
@@ -275,7 +296,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Word'
-
+    
 components:
   schemas:
 
