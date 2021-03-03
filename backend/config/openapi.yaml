@@ -344,7 +344,7 @@ components:
       type: object
       properties:
         id:
-            type: integer
+          type: integer
         text:
           type: string
 
@@ -365,8 +365,7 @@ components:
           items:
             $ref: '#/components/schemas/User'
         lobby:
-          type: object
-            $ref: '#/components/schemas/Lobby'
+          $ref: '#/components/schemas/Lobby'
         words:
           type: array
           items:
