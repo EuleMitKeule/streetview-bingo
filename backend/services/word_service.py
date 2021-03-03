@@ -4,7 +4,7 @@ from models import Word
 from sqlalchemy.sql.expression import func
 
 
-def get_word(word_id: int):
+def get_word_by_id(word_id: int):
     """
         Returns a word from the word database.
 
@@ -16,7 +16,7 @@ def get_word(word_id: int):
     return word
 
 
-def get_word(text: str):
+def get_word_by_content(text: str):
     """
     Returns a word from the word database.
 
@@ -63,7 +63,7 @@ def delete_word(word_id: int):
 
         :param word_id: The ID of the word to delete.
     """
-    word = get_word(word_id)
+    word = get_word_by_id(word_id)
     word.delete()
 
     db.session.commit()
@@ -76,7 +76,7 @@ def delete_words(word_ids: List[int]):
         :param word_ids: The IDs of the words to delete.
     """
     for word_id in word_ids:
-        word = get_word(word_id)
+        word = get_word_by_id(word_id)
         word.delete()
 
     db.session.commit()

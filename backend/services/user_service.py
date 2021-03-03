@@ -3,7 +3,7 @@ from models import User
 import services.token_service as token_service
 
 
-def get_user(user_id: int):
+def get_user_by_id(user_id: int):
     """
     Returns a user from the user database.
 
@@ -15,7 +15,7 @@ def get_user(user_id: int):
     return user
 
 
-def get_user(user_token: str):
+def get_user_by_token(user_token: str):
     """
     Returns a user from the user database.
 
@@ -49,7 +49,7 @@ def delete_user(user_id: int):
 
     :param user_id: The ID of the user to delete
     """
-    user = get_user(user_id)
+    user = get_user_by_id(user_id)
     user.delete()
 
     db.session.commit()

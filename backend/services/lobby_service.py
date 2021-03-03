@@ -3,7 +3,7 @@ from models import Lobby, User
 import services.token_service as token_service
 
 
-def get_lobby(lobby_token: str):
+def get_lobby_by_token(lobby_token: str):
     """
     Returns a lobby from the lobby database.
 
@@ -15,7 +15,7 @@ def get_lobby(lobby_token: str):
     return lobby
 
 
-def get_lobby(lobby_id: int):
+def get_lobby_by_id(lobby_id: int):
     """
     Returns a lobby from the lobby database.
 
@@ -50,7 +50,7 @@ def delete_lobby(lobby_id: int):
 
     :param lobby_id: The ID of the lobby to delete.
     """
-    lobby = get_lobby(lobby_id)
+    lobby = get_lobby_by_id(lobby_id)
     lobby.delete()
     db.session.commit()
 
@@ -62,7 +62,7 @@ def join_lobby(user: User, lobby_token: str):
     :param user: The user that should join the lobby.
     :param lobby_token: The token of the lobby to join.
     """
-    lobby = get_lobby(lobby_token)
+    lobby = get_lobby_by_token(lobby_token)
     lobby.users.append(user)
     
     db.session.commit()
