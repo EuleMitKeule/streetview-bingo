@@ -2,16 +2,17 @@ from config import db, ma
 from marshmallow_sqlalchemy import ModelSchema
 from marshmallow_sqlalchemy.fields import Nested
 
-
-game_user_table = db.Table('game_user', db.Model.metadata,
+game_user_table = db.Table(
+    'game_user', db.Model.metadata,
     db.Column('game_id', db.Integer, db.ForeignKey('game.id')),
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
-)
+    )
 
-word_user_table = db.Table('word_user', db.Model.metadata,
+word_user_table = db.Table(
+    'word_user', db.Model.metadata,
     db.Column('word_id', db.Integer, db.ForeignKey('game_word.id')),
     db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
-)
+    )
 
 
 class Word(db.Model):
@@ -84,7 +85,7 @@ class GameSchema(ModelSchema):
 
     users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"], many=True)
     moderator = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"])
-    words = Nested(WordSchema, many=True) 
+    words = Nested(WordSchema, many=True)
 
 
 class GameWordSchema(ModelSchema):
