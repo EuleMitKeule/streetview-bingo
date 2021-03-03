@@ -27,6 +27,7 @@ class Lobby(db.Model):
     users = db.relationship("User", backref="lobby", foreign_keys='User.lobby_id')
     owner = db.relationship("User", backref="owned_lobby", uselist=False, foreign_keys='User.owned_lobby_id')
     token = db.Column(db.String(16), index=True)
+    games = db.relationship("Game", backref="lobby", foreign_keys="Game.lobby_id")
 
 
 class User(db.Model):
@@ -47,6 +48,7 @@ class Game(db.Model):
     moderator_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     users = db.relationship("User", secondary=game_user_table)
     words = db.relationship("GameWord", backref="game", foreign_keys='GameWord.game_id')
+    lobby_id = db.Column(db.Integer, db.ForeignKey("lobby.id"))
 
 
 class GameWord(db.Model):
@@ -86,6 +88,7 @@ class GameSchema(ModelSchema):
     users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"], many=True)
     moderator = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"])
     words = Nested(WordSchema, many=True)
+    lobby = Nested(LobbySchema, exclude=["users", "games"])
 
 
 class GameWordSchema(ModelSchema):

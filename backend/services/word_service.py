@@ -4,28 +4,20 @@ from models import Word
 from sqlalchemy.sql.expression import func
 
 
-def get_word_by_id(word_id: int):
-    """
-        Returns a word from the word database.
-
-        :param word_id: The ID of the word to return.
-        :returns: The word if found.
-    """
-    word = Word.query.filter(Word.id == word_id).first()
-
-    return word
-
-
-def get_word_by_content(text: str):
+def get_word(word_id: int = None, text: str = None):
     """
     Returns a word from the word database.
 
     :param text: The text of the word to return
-    :return: The word if found
+    :param word_id: The ID of the word to return.
+    :returns: The word if found.
     """
-    word = Word.query.filter(Word.text == text).first()
-
-    return word
+    if word_id is not None:
+        return Word.query.filter(Word.id == word_id).first()
+    elif text is not None:
+        return Word.query.filter(Word.text == text).first()
+    else:
+        return None
 
 
 def get_words(word_ids: List[int]):
@@ -38,7 +30,7 @@ def get_words(word_ids: List[int]):
     words = []
 
     for word_id in word_ids:
-        word = Word.query.filter(Word.id == word_id).first()
+        word = get_word(word_id=word_id)
         if word is not None:
             words.append(word)
 
@@ -63,7 +55,7 @@ def delete_word(word_id: int):
 
         :param word_id: The ID of the word to delete.
     """
-    word = get_word_by_id(word_id)
+    word = get_word(word_id=word_id)
     word.delete()
 
     db.session.commit()
@@ -76,7 +68,7 @@ def delete_words(word_ids: List[int]):
         :param word_ids: The IDs of the words to delete.
     """
     for word_id in word_ids:
-        word = get_word_by_id(word_id)
+        word = get_word(word_id=word_id)
         word.delete()
 
     db.session.commit()

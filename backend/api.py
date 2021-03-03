@@ -32,7 +32,7 @@ def create_lobby(body):
 
 def get_lobby(lobby_token, user_token):
 
-    lobby = lobby_service.get_lobby_by_token(lobby_token=lobby_token)
+    lobby = lobby_service.get_lobby(lobby_token=lobby_token)
 
     lobby_schema = LobbySchema()
     result = jsonify(lobby_schema.dump(lobby))
@@ -67,7 +67,7 @@ def create_game(lobby_token, body):
 
 def get_game(lobby_token, game_token):
 
-    game = game_service.get_game_by_token(game_token=game_token)
+    game = game_service.get_game(game_token=game_token)
 
     game_schema = GameSchema()
     result = jsonify(game_schema.dump(game))
@@ -127,7 +127,7 @@ def delete_word_status(lobby_token, game_token, user_token, word_id, user_id):
 
 def get_user(user_token):
 
-    user = user_service.get_user_by_token(user_token=user_token)
+    user = user_service.get_user(user_token=user_token)
     user_schema = UserSchema()
     result = jsonify(user_schema.dump(user))
 
