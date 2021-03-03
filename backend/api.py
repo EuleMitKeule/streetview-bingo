@@ -6,6 +6,7 @@ import services.word_service as word_service
 import services.lobby_service as lobby_service
 import services.user_service as user_service
 import services.game_service as game_service
+import services.game_word_service as game_word_service
 
 
 def create_lobby(body):
@@ -75,7 +76,7 @@ def update_game(lobby_token, game_token, user_token, body):
 
 
 def create_word_status(lobby_token, game_token, user_token, word_id, user_id):
-    successful = word_service.set_word_found(lobby_token, game_token, user_token, word_id, user_id)
+    successful = game_word_service.set_word_found(lobby_token, game_token, user_token, word_id, user_id)
 
     if not successful:
         return {"message": "You are not moderator"}, 403
@@ -84,7 +85,7 @@ def create_word_status(lobby_token, game_token, user_token, word_id, user_id):
 
 
 def delete_word_status(lobby_token, game_token, user_token, word_id, user_id):
-    successful = word_service.set_word_not_found(lobby_token, game_token, user_token, word_id, user_id)
+    successful = game_word_service.set_word_not_found(lobby_token, game_token, user_token, word_id, user_id)
 
     if not successful:
         return {"message": "You are not moderator"}, 403
