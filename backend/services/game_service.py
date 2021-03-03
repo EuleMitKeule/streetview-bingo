@@ -85,7 +85,7 @@ def update_game(game_token: str, user_token: str, status: str = None, texts: Lis
 
     if texts is not None:
         for text in texts:
-            game_word = GameWord(text=text)
+            game_word = GameWord(text=text, game_id=game.id)
             db.session.add(game_word)
             game_words.append(game_word)
 

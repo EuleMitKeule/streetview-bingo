@@ -83,8 +83,8 @@ def update_game(lobby_token, game_token, user_token, body):
     status = body['status']
 
     word_texts = []
-    for text in body['words']:
-        word_texts.append(text)
+    for word in body['words']:
+        word_texts.append(word["text"])
 
     game = game_service.update_game(game_token=game_token, user_token=user_token, status=status, texts=word_texts)
 
