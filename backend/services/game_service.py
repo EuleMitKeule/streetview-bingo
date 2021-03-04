@@ -32,10 +32,11 @@ def create_game(lobby_token: str, moderator_id: int):
     """
     token = token_service.generate_token(16)
     moderator = user_service.get_user(moderator_id)
-    game = Game(token=token, status="created", moderator_id=moderator)
+    game = Game(token=token, status="created", moderator=moderator)
 
-    lobby = lobby_service.get_lobby(lobby_token)
+    lobby = lobby_service.get_lobby(lobby_token=lobby_token)
     game.users = lobby.users
+    lobby.games.append(game)
 
     db.session.add(game)
 
