@@ -17,7 +17,7 @@ export class LobbyComponent implements OnInit {
   userId: number = this.loginService.userId;
   lobbyToken: string = "";
 
-  lobby$: Observable<Lobby>;
+  lobby: Lobby;
 
   ngOnInit(): void {
     this.userToken = this.loginService.userToken;
@@ -30,7 +30,9 @@ export class LobbyComponent implements OnInit {
   }
 
   loadLobby() {
-    this.lobby$ = this.lobbyService.apiGetLobby(this.lobbyToken, this.userToken);
+    this.lobbyService.apiGetLobby(this.lobbyToken, this.userToken).subscribe(x => {
+      this.lobby = x;
+    })
   }
 
 }

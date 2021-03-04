@@ -5,18 +5,11 @@
       <div class="card">
         <div class="card-body">
           <h2 class="card-title">Users</h2>
-          <div *ngIf="lobby$ | async as lobby; else indicator">
+          <div *ngIf="lobby; else indicator">
             <ul>
               <li *ngFor="let user of lobby.users">{{user.name}} <small *ngIf="user.id == lobby.owner.id">Owner</small></li>
             </ul>
           </div>
-          <ng-template #indicator>
-            <div class="text-center">
-              <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-            </div>
-          </ng-template>
         </div>
       </div>
     </div>
@@ -28,22 +21,33 @@
           <p>UserToken: {{ userToken }}</p>
           <p>LobbyToken: {{ lobbyToken }}</p>
 
-          <div *ngIf="lobby$ | async as lobby; else indicator">
+          <div *ngIf="lobby; else indicator">
             <div *ngIf="userId == lobby.owner.id">
               <app-game-creator [lobby]="lobby"></app-game-creator>
             </div>
           </div>
-          <ng-template #indicator>
-            <div class="text-center">
-              <div class="spinner-border" role="status">
-                <span class="sr-only">Loading...</span>
-              </div>
-            </div>
-          </ng-template>  
-
         </div>
       </div>
+
+      <div *ngIf="lobby; else indicator">
+        <div class="card mt-3" *ngFor="let game of lobby.games; let i = index">
+          <div class="card-body">
+            <h2 class="card-title">Game {{ i + 1 }} </h2>
+            <p>Moderated by {{ game.moderator.name }}</p>
+            <p>Status: {{ game.status }}</p>
+            <button class="btn btn-primary" routerLink="./game/{{game.token}}">Open</button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-  </div>
 </div>
+
+<ng-template #indicator>
+  <div class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</ng-template>
