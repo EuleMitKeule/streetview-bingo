@@ -71,15 +71,6 @@ class UserSchema(ModelSchema):
         sqla_session = db.session
 
 
-class LobbySchema(ModelSchema):
-    class Meta:
-        model = Lobby
-        sqla_session = db.session
-
-    users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby"], many=True)
-    owner = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby"])
-
-
 class GameSchema(ModelSchema):
     class Meta:
         model = Game
@@ -88,7 +79,16 @@ class GameSchema(ModelSchema):
     users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"], many=True)
     moderator = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"])
     words = Nested(WordSchema, many=True)
-    lobby = Nested(LobbySchema, exclude=["users", "games"])
+
+
+class LobbySchema(ModelSchema):
+    class Meta:
+        model = Lobby
+        sqla_session = db.session
+
+    users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby"], many=True)
+    owner = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby"])
+    games = Nested(GameSchema, many=True)
 
 
 class GameWordSchema(ModelSchema):
