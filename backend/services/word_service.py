@@ -1,7 +1,10 @@
 from typing import List
-from config import db
+from flask import current_app
 from models import Word
 from sqlalchemy.sql.expression import func
+
+
+db = current_app.db
 
 
 def get_word(word_id: int = None, text: str = None):
@@ -22,10 +25,10 @@ def get_word(word_id: int = None, text: str = None):
 
 def get_words(word_ids: List[int]):
     """
-        Returns a list of words from the database
+    Returns a list of words from the database
 
-        :param word_ids: The IDs of the words to return
-        :returns: A list of words
+    :param word_ids: The IDs of the words to return
+    :returns: A list of words
     """
     words = []
 
@@ -39,10 +42,10 @@ def get_words(word_ids: List[int]):
 
 def get_random_words(length: int):
     """
-        Returns a random list of words from the word database.
+    Returns a random list of words from the word database.
 
-        :param length: The count of words to return.
-        :returns: A list of words.
+    :param length: The count of words to return.
+    :returns: A list of words.
     """
     words = Word.query.order_by(func.random()).limit(length).all()
 
@@ -51,38 +54,36 @@ def get_random_words(length: int):
 
 def delete_word(word_id: int):
     """
-        Deletes a word from the word database.
+    Deletes a word from the word database.
 
-        :param word_id: The ID of the word to delete.
+    :param word_id: The ID of the word to delete.
     """
-    word = get_word(word_id=word_id)
-    word.delete()
+    Word.query.filter(Word.id == word_id).first().delete()
 
     db.session.commit()
 
 
 def delete_words(word_ids: List[int]):
     """
-        Deletes words from the word database.
+    Deletes words from the word database.
 
-        :param word_ids: The IDs of the words to delete.
+    :param word_ids: The IDs of the words to delete.
     """
     for word_id in word_ids:
-        word = get_word(word_id=word_id)
-        word.delete()
+        Word.query.filter(Word.id == word_id).first().delete()
 
     db.session.commit()
 
 
 def create_word(text: str):
     """
-        Creates a new word in the word database if it doesn't exist yet (case insensitive)
+    Creates a new word in the word database if it doesn't exist yet (case insensitive)
 
-        :param text: The text for the new word
-        :returns: The created word if successful
+    :param text: The text for the new word
+    :returns: The created word if successful
     """
     lower_text = text.lower()
-    existing_word = Word.query.filter(Word.text.lower() == lower_text).first()
+    existing_word = Word.query.filter(str(Word.text).lower() == lower_text).first()
 
     if existing_word is not None:
         return None

@@ -1,7 +1,10 @@
-from config import db
+from flask import current_app
 from models import Game, User, GameWord
 import services.game_service as game_service
 import services.user_service as user_service
+
+
+db = current_app.db
 
 
 def get_game_word(game_word_id: int):

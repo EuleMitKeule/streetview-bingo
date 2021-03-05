@@ -1,7 +1,5 @@
 from flask.json import jsonify
-from flask_cors import CORS
-from config import connex_app
-from models import WordSchema, UserSchema, LobbySchema, GameSchema
+from schemas import WordSchema, UserSchema, LobbySchema, GameSchema
 import services.word_service as word_service
 import services.lobby_service as lobby_service
 import services.user_service as user_service
@@ -141,10 +139,3 @@ def get_words(length):
     result = jsonify(word_schema.dump(words))
 
     return result
-
-
-if __name__ == "__main__":
-    connex_app.add_api('openapi.yaml', strict_validation=True, validate_responses=True, base_path="/api")
-    connex_app.add_api('angular.yaml', options={"swagger_ui": False})
-    CORS(connex_app.app)
-    connex_app.run()

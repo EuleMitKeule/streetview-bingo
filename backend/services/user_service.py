@@ -1,6 +1,9 @@
-from config import db
+from flask import current_app
 from models import User
 import services.token_service as token_service
+
+
+db = current_app.db
 
 
 def get_user(user_id: int = None, user_token: str = None):

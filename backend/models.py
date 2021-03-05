@@ -1,6 +1,7 @@
-from config import db, ma
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-from marshmallow_sqlalchemy.fields import Nested
+from flask import current_app
+
+
+db = current_app.db
 
 game_user_table = db.Table(
     'game_user', db.Model.metadata,
@@ -57,51 +58,3 @@ class GameWord(db.Model):
     text = db.Column(db.String(32), index=True)
     game_id = db.Column(db.Integer, db.ForeignKey("game.id"))
     users = db.relationship("User", secondary=word_user_table)
-
-
-class WordSchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Word
-        sqla_session = db.session
-        load_instance = True
-        include_relationships = True
-
-
-class UserSchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = User
-        sqla_session = db.session
-        load_instance = True
-        include_relationships = True
-
-
-class GameWordSchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = GameWord
-        sqla_session = db.session
-        load_instance = True
-        include_relationships = True
-
-    users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"], many=True)
-class GameSchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Game
-        sqla_session = db.session
-        load_instance = True
-        include_relationships = True
-
-    users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"], many=True)
-    moderator = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"])
-    words = Nested(GameWordSchema, many=True)
-
-
-class LobbySchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Lobby
-        sqla_session = db.session
-        load_instance = True
-        include_relationships = True
-
-    users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby"], many=True)
-    owner = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby"])
-    games = Nested(GameSchema, many=True)

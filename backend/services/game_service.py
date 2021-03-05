@@ -1,9 +1,12 @@
 from typing import List
-from config import db
+from flask import current_app
 from models import Game, GameWord
 import services.token_service as token_service
 import services.user_service as user_service
 import services.lobby_service as lobby_service
+
+
+db = current_app.db
 
 
 def get_game(game_id: int = None, game_token: str = None):

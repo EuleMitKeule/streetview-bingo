@@ -1,6 +1,9 @@
-from config import db
+from flask import current_app
 from models import Lobby, User
 import services.token_service as token_service
+
+
+db = current_app.db
 
 
 def get_lobby(lobby_id: int = None, lobby_token: str = None):
