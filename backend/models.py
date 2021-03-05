@@ -75,6 +75,14 @@ class UserSchema(SQLAlchemyAutoSchema):
         include_relationships = True
 
 
+class GameWordSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = GameWord
+        sqla_session = db.session
+        load_instance = True
+        include_relationships = True
+
+    users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"], many=True)
 class GameSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Game
@@ -84,7 +92,7 @@ class GameSchema(SQLAlchemyAutoSchema):
 
     users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"], many=True)
     moderator = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby", "moderated_games"])
-    words = Nested(WordSchema, many=True)
+    words = Nested(GameWordSchema, many=True)
 
 
 class LobbySchema(SQLAlchemyAutoSchema):
@@ -97,11 +105,3 @@ class LobbySchema(SQLAlchemyAutoSchema):
     users = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby"], many=True)
     owner = Nested(UserSchema, exclude=["token", "lobby", "owned_lobby"])
     games = Nested(GameSchema, many=True)
-
-
-class GameWordSchema(SQLAlchemyAutoSchema):
-    class Meta:
-        model = GameWord
-        sqla_session = db.session
-        load_instance = True
-        include_relationships = True
