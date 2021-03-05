@@ -339,6 +339,10 @@ components:
           $ref: '#/components/schemas/User'
         token:
           type: string
+        games:
+          type: array
+          items:
+            $ref: '#/components/schemas/Game'
 
     Word:
       type: object
