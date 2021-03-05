@@ -6,10 +6,10 @@ from flask_sqlalchemy import SQLAlchemy
 
 @pytest.fixture
 def mock_flask_app():
-   mock_app = Flask(__name__)
-   db = SQLAlchemy(mock_app)
-   db.init_app(mock_app)
-   return mock_app
+    mock_app = Flask(__name__)
+    db = SQLAlchemy(mock_app)
+    db.init_app(mock_app)
+    return mock_app
 
 
 @pytest.fixture
@@ -21,4 +21,10 @@ def mock_word():
 @pytest.fixture
 def mock_get_sqlalchemy(mocker):
     mock = mocker.patch("flask_sqlalchemy._QueryProperty.__get__").return_value = mocker.Mock()
+    return mock
+
+
+@pytest.fixture
+def mock_db_session(mocker):
+    mock = mocker.patch("main.db.session")
     return mock
