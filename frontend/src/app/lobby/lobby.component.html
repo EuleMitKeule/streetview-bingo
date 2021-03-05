@@ -1,14 +1,33 @@
 <div class="container">
   <div class="row">
+    <div class="col">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Login</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Lobby</li>
+      </ol>
+    </nav>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="alert alert-primary" role="alert">
+        Your user-token for this lobby is <strong>{{ userToken }}</strong>. In case you get logged out, you have to enter this token.
+      </div>
+    </div>
+  </div>
+  <div class="row">
 
     <div class="col">
       <div class="card">
         <div class="card-body">
           <h2 class="card-title">Users</h2>
           <div *ngIf="lobby; else indicator">
-            <ul>
-              <li *ngFor="let user of lobby.users">{{user.name}} <small *ngIf="user.id == lobby.owner.id">Owner</small></li>
+
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let user of lobby.users">{{user.name}} <small *ngIf="user.id == lobby.owner.id">Owner</small></li>
             </ul>
+
           </div>
         </div>
       </div>
@@ -18,8 +37,7 @@
       <div class="card">
         <div class="card-body">
           <h2 class="card-title">Lobby Information</h2>
-          <p>UserToken: {{ userToken }}</p>
-          <p>LobbyToken: {{ lobbyToken }}</p>
+          <p>The lobby token is <strong (click)="copyToken()" class="copy-link">{{ lobbyToken }}</strong>. Send this token to your friends to let them join this lobby.</p>
 
           <div *ngIf="lobby; else indicator">
             <div *ngIf="userId == lobby.owner.id">
@@ -29,15 +47,14 @@
         </div>
       </div>
 
-      <div *ngIf="lobby; else indicator">
-        <div class="card mt-3" *ngFor="let game of lobby.games; let i = index">
-          <div class="card-body">
-            <h2 class="card-title">Game {{ i + 1 }} </h2>
-            <p>Moderated by {{ game.moderator.name }}</p>
-            <p>Status: {{ game.status }}</p>
-            <button class="btn btn-primary" routerLink="./game/{{game.token}}">Open</button>
+      <div class="list-group mt-3" *ngIf="lobby; else indicator">
+        <a routerLink="./game/{{game.token}}" class="list-group-item list-group-item-action" *ngFor="let game of lobby.games; let i = index">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Game {{ i + 1 }}</h5>
+            <small class="text-muted">Status: {{ game.status }}</small>
           </div>
-        </div>
+          <p>Moderated by {{ game.moderator.name }}</p>
+        </a>
       </div>
 
     </div>

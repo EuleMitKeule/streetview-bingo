@@ -1,3 +1,15 @@
+<div class="container">
+<div class="row">
+  <div class="col">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/">Login</a></li>
+      <li class="breadcrumb-item"><a routerLink="/lobby/{{lobbyToken}}">Lobby</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Game</li>
+    </ol>
+  </nav>
+</div>
+</div>
 <div class="row" *ngIf="game; else indicator">
   <div class="col">
     <p>Status: {{game.status}}</p>
@@ -38,9 +50,33 @@
   </div>
   <div class="col" *ngIf="game.status == 'started'">
     <p>Game started! Find the following things:</p>
-    <ul>
-        <li *ngFor="let word of game.words">{{ word.text }}</li>
-    </ul>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" *ngFor="let word of game.words">{{ word.text }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of game.users">
+          <th scope="row">{{ user.name }}</th>
+          <td *ngFor="let word of game.words" >
+            <div *ngIf="userId == game.moderator.id; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <button *ngIf="!userFoundWord(user.id, word.id)" class="btn btn-primary" (click)="markFound(word.id, user.id)">Mark Found</button>
+              <button *ngIf="userFoundWord(user.id, word.id)" class="btn btn-primary" (click)="markNotFound(word.id, user.id)">Mark Not Found</button>
+            </ng-template>
+            <ng-template #elseBlock>
+              <p *ngIf="userFoundWord(user.id, word.id)">Gefunden</p>
+            </ng-template>
+
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
   </div>
 </div>
 <ng-template #indicator>
@@ -50,3 +86,4 @@
     </div>
   </div>
 </ng-template>
+</div>

@@ -13,7 +13,7 @@ export class GameComponent implements OnInit {
 
   constructor(private gameService: GameService, private route: ActivatedRoute, private loginService: LoginService) { }
 
-  game$: Observable<Game>;
+  //game$: Observable<Game>;
 
   gameToken: string = ""
   lobbyToken: string = ""
@@ -28,13 +28,18 @@ export class GameComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.gameToken = params.gameToken;
       this.lobbyToken = params.lobbyToken;
-      this.game$ = this.gameService.apiGetGame(this.lobbyToken, this.gameToken)
-      this.gameService.apiGetGame(this.lobbyToken, this.gameToken).subscribe(game => {
-        this.game = game;
-      })
+      //this.game$ = this.gameService.apiGetGame(this.lobbyToken, this.gameToken)
+      this.loadGame();
     })
 
   }
+
+  loadGame() {
+    this.gameService.apiGetGame(this.lobbyToken, this.gameToken).subscribe(game => {
+      this.game = game;
+    })
+  }
+
 
   addWord() {
 
@@ -63,7 +68,30 @@ export class GameComponent implements OnInit {
     this.game.status = "started";
     this.gameService.apiUpdateGame(this.lobbyToken, this.gameToken, this.userToken, this.game).subscribe(x => {
       console.log(x);
+      this.loadGame();
     });
+  }
+
+  markFound(wordId: number, userId: number) {
+    console.log(this.game)
+    this.gameService.apiCreateWordStatus(this.lobbyToken, this.gameToken, wordId, userId, this.userToken).subscribe(x => {
+      console.log(x);
+      this.game.words.filter(word => word.id == wordId)[0].users.push({id: userId})
+    })
+  }
+
+  markNotFound(wordId: number, userId: number) {
+    this.gameService.apiDeleteWordStatus(this.lobbyToken, this.gameToken, wordId, userId, this.userToken).subscribe(x => {
+      console.log(x);
+      let word = this.game.words.filter(word => word.id == wordId)[0];
+      word.users = word.users.filter(user => user.id != userId)
+    })
+  }
+
+  userFoundWord(userId: number, wordId: number) {
+    let found_word = this.game.words.filter(word => word.id == wordId)[0];
+    let found_user = found_word.users.filter(user => user.id == userId);
+    return found_user.length > 0
   }
 
   
