@@ -216,7 +216,7 @@ paths:
           description: The id of the game to set the word in
           required: true
           schema:
-            type: integer
+            type: string
         - in: path
           name: word_id
           description: The id of the word to set
@@ -256,7 +256,7 @@ paths:
           description: The id of the game to set the word in
           required: true
           schema:
-            type: integer
+            type: string
         - in: path
           name: word_id
           description: The id of the word to set
