@@ -1,6 +1,6 @@
 from typing import List
 from flask import current_app
-from models import Word
+from models.word import Word
 from sqlalchemy.sql.expression import func
 
 

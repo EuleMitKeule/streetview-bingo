@@ -1,5 +1,5 @@
 from flask import current_app
-from models import User
+from models.user import User
 import services.token_service as token_service
 
 

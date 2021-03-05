@@ -1,5 +1,6 @@
 from flask import current_app
-from models import Lobby, User
+from models.lobby import Lobby
+from models.user import User
 import services.token_service as token_service
 
 

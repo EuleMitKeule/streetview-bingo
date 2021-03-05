@@ -1,5 +1,7 @@
 from flask import current_app
-from models import Game, User, GameWord
+from models.game import Game
+from models.game_word import GameWord
+from models.user import User
 import services.game_service as game_service
 import services.user_service as user_service
 

@@ -1,6 +1,7 @@
 from typing import List
 from flask import current_app
-from models import Game, GameWord
+from models.game import Game
+from models.game_word import GameWord
 import services.token_service as token_service
 import services.user_service as user_service
 import services.lobby_service as lobby_service
