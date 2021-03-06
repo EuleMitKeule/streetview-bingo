@@ -42,7 +42,3 @@ class StreetViewBingo:
     def create_db(self):
         self.db.create_all()
 
-
-if __name__ == '__main__':
-    streetview_bingo = StreetViewBingo()
-    streetview_bingo.run()
