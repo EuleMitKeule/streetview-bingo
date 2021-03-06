@@ -48,6 +48,10 @@ frontend/typings
 .DS_Store
 Thumbs.db
 
+#pytest
+**/.pytest_cache/*
+**/.coverage
+
 # streetview-bingo
 **/*.db
 **/venv/*
