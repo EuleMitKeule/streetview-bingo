@@ -1,5 +1,9 @@
 from flask.json import jsonify
-from schemas import WordSchema, UserSchema, LobbySchema, GameSchema
+
+from schemas.word_schema import WordSchema
+from schemas.user_schema import UserSchema
+from schemas.lobby_schema import LobbySchema
+from schemas.game_schema import GameSchema
 import services.word_service as word_service
 import services.lobby_service as lobby_service
 import services.user_service as user_service

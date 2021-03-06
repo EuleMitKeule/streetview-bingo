@@ -1,6 +1,13 @@
 from flask import current_app
 
+
 db = current_app.db
+
+word_user_table = db.Table(
+    'word_user', db.Model.metadata,
+    db.Column('word_id', db.Integer, db.ForeignKey('game_word.id')),
+    db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
+)
 
 
 class GameWord(db.Model):
