@@ -4,6 +4,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from flask import current_app
+from config.config import Config
+from config.database_config import SqliteConfig, MysqlConfig
 
 
 class StreetViewBingo:
@@ -11,16 +13,24 @@ class StreetViewBingo:
     db: SQLAlchemy = None
     ma: Marshmallow = None
 
-    def __init__(self):
-        basedir: str = os.path.abspath(os.path.dirname(__file__))
-        db_path: str = os.path.join(basedir, 'streetview-bingo.db')
+    def __init__(self, config: Config):
 
         self.connex_app = FlaskApp(__name__, port=5000, specification_dir='config')
 
         with self.connex_app.app.app_context():
+
             self.connex_app.app.config['SQLALCHEMY_ECHO'] = True
-            self.connex_app.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
             self.connex_app.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+            if config.database_config is SqliteConfig:
+                sqlite_config: SqliteConfig = config.database_config
+                self.connex_app.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + sqlite_config.path
+
+            if config.database_config is MysqlConfig:
+                mysql_config: MysqlConfig = config.database_config
+                self.connex_app.app.config['SQLALCHEMY_DATABASE_URI'] = \
+                    f"mysql:///{mysql_config.username}:{mysql_config.password}@" \
+                    f"{mysql_config.host}:{mysql_config.port}/{mysql_config.db_name}"
 
             self.db = SQLAlchemy(self.connex_app.app)
             self.ma = Marshmallow(self.connex_app.app)
@@ -33,8 +43,7 @@ class StreetViewBingo:
 
             CORS(self.connex_app.app)
 
-        if not os.path.exists(db_path):
-            self.create_db()
+        self.create_db()
 
     def run(self):
         self.connex_app.run()

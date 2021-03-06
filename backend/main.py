@@ -12,6 +12,8 @@ if __name__ == '__main__':
     conf_path: str = path.join(basedir, "streetview-bingo.conf")
     config: Config = Config()
 
+    print("Loading configuration from file: " + conf_path)
+
     if not path.exists(conf_path):
         print("ERROR - No configuration file found.")
         quit()
@@ -22,6 +24,8 @@ if __name__ == '__main__':
     # # # Logging Configuration # # #
 
     if "logging" in conf_dict:
+        print("Found logging configuration.")
+
         if "path" in conf_dict["logging"]:
             config.log_path = conf_dict["logging"]["path"]
 
@@ -80,17 +84,36 @@ if __name__ == '__main__':
         if "host" not in conf_dict["database"]:
             logging.error("MySQL host not specified.")
             quit()
-
         if "port" not in conf_dict["database"]:
             logging.error("MySQL port not specified.")
+            quit()
+        if "user" not in conf_dict["database"]:
+            logging.error("MySQL username not specified.")
+            quit()
+        if "pass" not in conf_dict["database"]:
+            logging.error("MySQL password not specified.")
+            quit()
+        if "db_name" not in conf_dict["database"]:
+            logging.error("MySQL database name not specified.")
             quit()
 
         db_host = conf_dict["database"]["host"]
         db_port = conf_dict["database"]["port"]
+        db_user = conf_dict["database"]["user"]
+        db_pass = conf_dict["database"]["pass"]
+        db_name = conf_dict["database"]["db_name"]
 
-        database_config = MysqlConfig(host=db_host, port=db_port)
+        logging.info(f"Using MySQL database at {db_host}:{db_port}")
+
+        database_config = MysqlConfig(
+            host=db_host,
+            port=db_port,
+            username=db_user,
+            password=db_pass,
+            db_name=db_name
+        )
 
     config.database_config = database_config
 
-    streetview_bingo = StreetViewBingo()
+    streetview_bingo = StreetViewBingo(config)
     streetview_bingo.run()
