@@ -26,10 +26,17 @@ jobs:
         pip install pytest
         pip install -r ./backend/requirements.txt
         pip install coverage
-        pip install coverage-badge
     - name: Run tests and coverage
       run: |
         cd backend
         coverage run -m pytest ./tests
         mkdir ../badges
-        coverage-badge -o ../badges/api-coverage.svg
+    - name: Create coverage badge
+      uses: schneegans/dynamic-badges-action@v1.0.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: be76ee17e9743cffe36884b6b9ffcb54
+        filename: coverage.json
+        label: coverage
+        message: 0
+        color: red
