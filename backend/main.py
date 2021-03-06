@@ -1,6 +1,7 @@
 import yaml
 from os import path
 import logging
+
 from streetview_bingo import StreetViewBingo
 from config.config import Config
 from config.database_config import DatabaseConfig, MysqlConfig, SqliteConfig

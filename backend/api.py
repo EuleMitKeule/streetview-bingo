@@ -136,6 +136,16 @@ def get_user(user_token):
     return result
 
 
+def create_word(body):
+
+    word = word_service.create_word(body['text'])
+
+    word_schema = WordSchema()
+    result = jsonify(word_schema.dump(word))
+
+    return result
+
+
 def get_words(length):
 
     words = word_service.get_random_words(length)

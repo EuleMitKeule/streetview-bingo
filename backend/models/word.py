@@ -1,5 +1,6 @@
 from flask import current_app
-
+from flask_sqlalchemy import Model
+from sqlalchemy import Column, String, Integer
 
 db = current_app.db
 

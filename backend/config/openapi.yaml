@@ -322,7 +322,23 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Word'
-    
+
+    post:
+      operationId: api.create_word
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Word'
+      responses:
+        '200':
+          description: The created word
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Word'
+
 components:
   schemas:
 

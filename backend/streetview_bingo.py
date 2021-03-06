@@ -22,12 +22,12 @@ class StreetViewBingo:
             self.connex_app.app.config['SQLALCHEMY_ECHO'] = True
             self.connex_app.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-            if config.database_config is SqliteConfig:
-                sqlite_config: SqliteConfig = config.database_config
+            if type(config.database_config) is SqliteConfig:
+                sqlite_config = config.database_config
                 self.connex_app.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + sqlite_config.path
 
-            if config.database_config is MysqlConfig:
-                mysql_config: MysqlConfig = config.database_config
+            if type(config.database_config) is MysqlConfig:
+                mysql_config = config.database_config
                 self.connex_app.app.config['SQLALCHEMY_DATABASE_URI'] = \
                     f"mysql:///{mysql_config.username}:{mysql_config.password}@" \
                     f"{mysql_config.host}:{mysql_config.port}/{mysql_config.db_name}"
@@ -50,4 +50,5 @@ class StreetViewBingo:
 
     def create_db(self):
         self.db.create_all()
+
 
