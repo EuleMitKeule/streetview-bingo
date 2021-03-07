@@ -1,11 +1,9 @@
 # This workflow will install Python dependencies and run tests
 
-name: test-api
+name: api-coverage
 
 on:
   push:
-    branches: [ master ]
-  pull_request:
     branches: [ master ]
   workflow_dispatch:
 jobs:
