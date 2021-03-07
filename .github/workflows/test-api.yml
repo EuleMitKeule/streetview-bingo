@@ -1,5 +1,4 @@
-# This workflow will install Python dependencies, run tests and lint with a single version of Python
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+# This workflow will install Python dependencies and run tests
 
 name: test-api
 
@@ -26,10 +25,20 @@ jobs:
         pip install pytest
         pip install -r ./backend/requirements.txt
         pip install coverage
-        pip install coverage-badge
     - name: Run tests and coverage
       run: |
         cd backend
-        coverage run -m pytest ./tests
-        mkdir ../badges
-        coverage-badge -o ../badges/api-coverage.svg
+        pytest --cov-report term --cov backend ./tests >> report.txt
+        echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        cat report.txt
+        echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        { echo "RESULT="; grep -oE '[^ ]+$' report.txt | tail -1; } | tr "\n" " " >> $GITHUB_ENV
+    - name: Create coverage badge
+      uses: schneegans/dynamic-badges-action@v1.0.0
+      with:
+        auth: ${{ secrets.GIST_SECRET }}
+        gistID: be76ee17e9743cffe36884b6b9ffcb54
+        filename: coverage.json
+        label: api-coverage
+        message: ${{env.RESULT}}
+        color: blue

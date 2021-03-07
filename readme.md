@@ -1,3 +1,5 @@
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/EuleMitKeule/be76ee17e9743cffe36884b6b9ffcb54/raw/coverage.json)
+
 # Introduction
 
 Street View-Bingo is inspired by [Geowizards Videos](https://www.youtube.com/watch?v=3B72lu2WdEo). 
