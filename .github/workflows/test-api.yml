@@ -28,7 +28,7 @@ jobs:
     - name: Run tests and coverage
       run: |
         cd backend
-        pytest --cov-report term --cov backend ./tests >> report.txt
+        python -m pytest --cov-report term --cov backend ./tests >> report.txt
         echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         cat report.txt
         echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
