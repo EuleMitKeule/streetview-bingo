@@ -27,7 +27,8 @@ jobs:
       run: |
         cd backend
         python -m pytest --cov-report term --cov backend ./tests >> report.txt
-        { echo "RESULT=";grep -oE '[^ ]+$' report.txt | tail -n2 | head -n1; } | tr "\n" " " >> $GITHUB_ENV
+        cat report.txt
+        { echo "RESULT="; grep -oE '[^ ]+$' report.txt | tail -n2 | head -n1 | awk 4; } | tr "\n" " " >> $GITHUB_ENV
     - name: Create coverage badge
       uses: schneegans/dynamic-badges-action@v1.0.0
       with:
