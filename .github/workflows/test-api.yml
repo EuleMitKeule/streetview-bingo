@@ -30,7 +30,8 @@ jobs:
         cd backend
         coverage run -m pytest ./tests
         coverage report >> report.txt
-        { echo "RESULT="; echo grep -oE '[^ ]+$' report.txt | tail -1 | sed 's/.$//'; } | tr "\n" " " >> $GITHUB_ENV
+        { echo "RESULT="; grep -oE '[^ ]+$' report.txt | tail -1 | sed 's/.$//'; } | tr "\n" " " >> $GITHUB_ENV
+        echo ${{ env.RESULT }}
     - name: Create coverage badge
       uses: schneegans/dynamic-badges-action@v1.0.0
       with:
