@@ -29,14 +29,7 @@ jobs:
       run: |
         cd backend
         coverage run -m pytest ./tests
-        mkdir ../badges
-    - name: Get total coverage
-      run: |
-        python
-        import coverage
-        cov = coverage.Coverage()
-        cov.load()
-        
+        coverage report
     - name: Create coverage badge
       uses: schneegans/dynamic-badges-action@v1.0.0
       with:
