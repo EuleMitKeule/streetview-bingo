@@ -10,7 +10,7 @@
 
 # Introduction
 
-Street View-Bingo is inspired by [Geowizards Videos](https://www.youtube.com/watch?v=3B72lu2WdEo). 
+streetview-bingo is inspired by [Geowizards Videos](https://www.youtube.com/watch?v=3B72lu2WdEo). 
 This application adopts this idea and provides a platform to play this game with your friends.
 
 The concept is simple: One of the players comes up with a list of things that can be found on Google Street View. The players job is it to find those things as quick as possible on Google Street View, and then tell the first player, who is acting as a moderator and verifies it for you.
