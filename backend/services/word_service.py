@@ -15,7 +15,9 @@ def get_word(word_id: int = None, text: str = None):
     :param word_id: The ID of the word to return.
     :returns: The word if found.
     """
-    if word_id is not None:
+    if word_id is not None and text is not None:
+        return Word.query.filter(Word.id == word_id).filter(Word.text == text).first()
+    elif word_id is not None:
         return Word.query.filter(Word.id == word_id).first()
     elif text is not None:
         return Word.query.filter(Word.text == text).first()
@@ -23,21 +25,48 @@ def get_word(word_id: int = None, text: str = None):
         return None
 
 
-def get_words(word_ids: List[int]):
+def get_words(word_ids: List[int] = None, texts: List[str] = None):
     """
     Returns a list of words from the database
 
     :param word_ids: The IDs of the words to return
+    :param texts: The texts of the words to return
     :returns: A list of words
     """
     words = []
 
-    for word_id in word_ids:
-        word = get_word(word_id=word_id)
-        if word is not None:
-            words.append(word)
+    if word_ids is not None and texts is not None:
+        if len(word_ids) != len(texts):
+            return None
 
-    return words
+        for i in range(len(word_ids)):
+            word_id = word_ids[i]
+            text = texts[i]
+
+            word = get_word(word_id=word_id, text=text)
+            if word is not None:
+                words.append(word)
+
+        return words
+
+    elif word_ids is not None:
+        for word_id in word_ids:
+            word = get_word(word_id=word_id)
+            if word is not None:
+                words.append(word)
+
+        return words
+
+    elif texts is not None:
+        for text in texts:
+            word = get_word(text=text)
+            if word is not None:
+                words.append(word)
+
+        return words
+
+    else:
+        return None
 
 
 def get_random_words(length: int):
