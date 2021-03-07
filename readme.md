@@ -1,4 +1,12 @@
 ![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/EuleMitKeule/be76ee17e9743cffe36884b6b9ffcb54/raw/coverage.json)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=bugs)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=code_smells)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=ncloc)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=security_rating)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
 
 # Introduction
 
