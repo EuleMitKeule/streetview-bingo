@@ -28,8 +28,10 @@ jobs:
     - name: Run tests and coverage
       run: |
         cd backend
-        coverage run -m pytest ./tests
-        coverage report >> report.txt
+        pytest --cov-report term --cov backend ./tests >> report.txt
+        echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        cat report.txt
+        echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         { echo "RESULT="; grep -oE '[^ ]+$' report.txt | tail -1; } | tr "\n" " " >> $GITHUB_ENV
     - name: Create coverage badge
       uses: schneegans/dynamic-badges-action@v1.0.0
