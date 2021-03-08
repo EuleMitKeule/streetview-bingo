@@ -5,6 +5,8 @@ name: api-test
 on:
   push:
     branches: [ master ]
+  pull_request:
+    branches: [ master ]
   workflow_dispatch:
 jobs:
   build:
@@ -23,7 +25,7 @@ jobs:
         pip install pytest
         pip install -r ./backend/requirements.txt
         pip install coverage
-    - name: Run tests and coverage
+    - name: Run tests
       run: |
         cd backend
         python -m pytest ./tests
