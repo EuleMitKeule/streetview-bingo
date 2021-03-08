@@ -81,29 +81,6 @@ def get_random_words(length: int):
     return words
 
 
-def delete_word(word_id: int):
-    """
-    Deletes a word from the word database.
-
-    :param word_id: The ID of the word to delete.
-    """
-    Word.query.filter(Word.id == word_id).first().delete()
-
-    db.session.commit()
-
-
-def delete_words(word_ids: List[int]):
-    """
-    Deletes words from the word database.
-
-    :param word_ids: The IDs of the words to delete.
-    """
-    for word_id in word_ids:
-        Word.query.filter(Word.id == word_id).first().delete()
-
-    db.session.commit()
-
-
 def create_word(text: str):
     """
     Creates a new word in the word database if it doesn't exist yet (case insensitive)
@@ -122,3 +99,26 @@ def create_word(text: str):
 
     db.session.commit()
     return word
+
+
+def delete_word(word_id: int):
+    """
+    Deletes a word from the word database.
+
+    :param word_id: The ID of the word to delete.
+    """
+    Word.query.filter(Word.id == word_id).delete()
+
+    db.session.commit()
+
+
+def delete_words(word_ids: List[int]):
+    """
+    Deletes words from the word database.
+
+    :param word_ids: The IDs of the words to delete.
+    """
+    for word_id in word_ids:
+        Word.query.filter(Word.id == word_id).delete()
+
+    db.session.commit()

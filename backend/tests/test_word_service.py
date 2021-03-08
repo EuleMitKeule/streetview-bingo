@@ -1,3 +1,4 @@
+from typing import List
 
 
 def test_get_word_by_id(mock_flask_app):
@@ -102,44 +103,6 @@ def test_get_word_by_none(mock_flask_app):
         assert response is None
 
 
-def test_get_words_by_ids_and_texts(mock_flask_app):
-
-    with mock_flask_app.app_context():
-        import services.word_service as word_service
-        from models.word import Word
-        from flask import current_app
-
-        db = current_app.db
-
-        db.create_all()
-
-        Word.query.delete()
-        db.session.commit()
-
-        word_service.create_word(text="test 1")
-        word_service.create_word(text="test 2")
-        word_service.create_word(text="test 3")
-
-        word_ids = [1, 3]
-        texts = ["test 1", "test 3"]
-        result = word_service.get_words(word_ids=word_ids, texts=texts)
-
-        assert result[0].text == "test 1" and result[1].id == 3 and len(result) == 2
-
-        Word.query.delete()
-        db.session.commit()
-
-        word_service.create_word(text="test 1")
-        word_service.create_word(text="test 2")
-        word_service.create_word(text="test 3")
-
-        word_ids = [1, 4]
-        texts = ["test 1", "test 3"]
-        result = word_service.get_words(word_ids=word_ids, texts=texts)
-
-        assert result[0].text == "test 1" and len(result) == 1
-
-
 def test_get_words_by_ids(mock_flask_app):
 
     with mock_flask_app.app_context():
@@ -220,6 +183,57 @@ def test_get_words_by_texts(mock_flask_app):
         assert len(result) == 0
 
 
+def test_get_words_by_ids_and_texts(mock_flask_app):
+
+    with mock_flask_app.app_context():
+        import services.word_service as word_service
+        from models.word import Word
+        from flask import current_app
+
+        db = current_app.db
+
+        db.create_all()
+
+        Word.query.delete()
+        db.session.commit()
+
+        word_service.create_word(text="test 1")
+        word_service.create_word(text="test 2")
+        word_service.create_word(text="test 3")
+
+        word_ids = [1, 3]
+        texts = ["test 1", "test 3"]
+        result = word_service.get_words(word_ids=word_ids, texts=texts)
+
+        assert result[0].text == "test 1" and result[1].id == 3 and len(result) == 2
+
+        Word.query.delete()
+        db.session.commit()
+
+        word_service.create_word(text="test 1")
+        word_service.create_word(text="test 2")
+        word_service.create_word(text="test 3")
+
+        word_ids = [1, 4]
+        texts = ["test 1", "test 3"]
+        result = word_service.get_words(word_ids=word_ids, texts=texts)
+
+        assert result[0].text == "test 1" and len(result) == 1
+
+        Word.query.delete()
+        db.session.commit()
+
+        word_service.create_word(text="test 1")
+        word_service.create_word(text="test 2")
+        word_service.create_word(text="test 3")
+
+        word_ids = [1]
+        texts = ["test 1", "test 2"]
+        result = word_service.get_words(word_ids=word_ids, texts=texts)
+
+        assert result is None
+
+
 def test_get_words_by_none(mock_flask_app):
 
     with mock_flask_app.app_context():
@@ -239,6 +253,33 @@ def test_get_words_by_none(mock_flask_app):
         result = word_service.get_words()
 
         assert result is None
+
+
+def test_get_random_words(mock_flask_app):
+
+    with mock_flask_app.app_context():
+        import services.word_service as word_service
+        from models.word import Word
+        from flask import current_app
+
+        db = current_app.db
+
+        db.create_all()
+
+        Word.query.delete()
+        db.session.commit()
+
+        texts = ["test 1", "test 2", "test 3"]
+
+        word_service.create_word(text="test 1")
+        word_service.create_word(text="test 2")
+        word_service.create_word(text="test 3")
+
+        results: List[Word] = word_service.get_random_words(length=2)
+
+        assert len(results) == 2
+        assert any(text in [result.text for result in results] for text in texts)
+        assert results[0] != results[1]
 
 
 def test_create_word(mock_flask_app):
@@ -294,16 +335,48 @@ def test_create_word_duplicate(mock_flask_app):
         assert len(result) == 1
 
 
-# def test_delete_word(mock_flask_app):
-#
-#     with mock_flask_app.app_context():
-#         import services.word_service as word_service
-#         from models.word import Word
-#         from flask import current_app
-#
-#         new_word = word_service.create_word("Dog")
-#
-#         word_service.delete_word(word_id=1)
-#         response = word_service.get_word(word_id=1)
-#
-#         assert response is None
+def test_delete_word(mock_flask_app):
+
+    with mock_flask_app.app_context():
+        import services.word_service as word_service
+        from models.word import Word
+        from flask import current_app
+
+        db = current_app.db
+
+        db.create_all()
+
+        Word.query.delete()
+        db.session.commit()
+
+        word_service.create_word("Dog")
+
+        word_service.delete_word(word_id=1)
+        response = word_service.get_word(word_id=1)
+
+        assert response is None
+
+
+def test_delete_words(mock_flask_app):
+
+    with mock_flask_app.app_context():
+        import services.word_service as word_service
+        from models.word import Word
+        from flask import current_app
+
+        db = current_app.db
+
+        db.create_all()
+
+        Word.query.delete()
+        db.session.commit()
+
+        word_service.create_word("Dog")
+        word_service.create_word("Stoplight")
+
+        word_ids = [1, 2]
+        word_service.delete_words(word_ids=word_ids)
+
+        response = word_service.get_words(word_ids=word_ids)
+
+        assert len(response) == 0
