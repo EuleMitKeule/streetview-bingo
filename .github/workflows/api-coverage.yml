@@ -20,15 +20,13 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest
         pip install -r ./backend/requirements.txt
-        pip install coverage
     - name: Run tests and coverage
       run: |
         cd backend
         python -m pytest --cov-report term --cov backend ./tests >> report.txt
         cat report.txt
-        { echo "RESULT="; grep -oE '[^ ]+$' report.txt | tail -n2 | head -n1 | awk 4; } | tr "\n" " " >> $GITHUB_ENV
+        { echo "RESULT="; grep -oE '[^ ]+$' report.txt | tail -n2 | head -n1; } | tr "\n" " " >> $GITHUB_ENV
     - name: Create coverage badge
       uses: schneegans/dynamic-badges-action@v1.0.0
       with:
