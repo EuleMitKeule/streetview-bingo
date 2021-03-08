@@ -112,7 +112,7 @@ def create_word(text: str):
     :returns: The created word if successful
     """
     lower_text = text.lower()
-    existing_word = Word.query.filter(str(Word.text).lower() == lower_text).first()
+    existing_word = Word.query.filter(func.lower(Word.text) == lower_text).first()
 
     if existing_word is not None:
         return None

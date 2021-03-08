@@ -126,17 +126,18 @@ def test_get_words_by_ids_and_texts(mock_flask_app):
 
         assert result[0].text == "test 1" and result[1].id == 3 and len(result) == 2
 
+        Word.query.delete()
+        db.session.commit()
+
+        word_service.create_word(text="test 1")
+        word_service.create_word(text="test 2")
+        word_service.create_word(text="test 3")
+
         word_ids = [1, 4]
+        texts = ["test 1", "test 3"]
         result = word_service.get_words(word_ids=word_ids, texts=texts)
 
         assert result[0].text == "test 1" and len(result) == 1
-
-        word_service.create_word(text="test 1")
-
-        texts = ["test 1", "test 1"]
-        result = word_service.get_words(word_ids=word_ids, texts=texts)
-
-        assert result[0].text == "test 1" and result[1].id == 4 and len(result) == 2
 
 
 def test_get_words_by_ids(mock_flask_app):
@@ -219,6 +220,27 @@ def test_get_words_by_texts(mock_flask_app):
         assert len(result) == 0
 
 
+def test_get_words_by_none(mock_flask_app):
+
+    with mock_flask_app.app_context():
+        import services.word_service as word_service
+        from models.word import Word
+        from flask import current_app
+
+        db = current_app.db
+
+        db.create_all()
+
+        Word.query.delete()
+        db.session.commit()
+
+        word_service.create_word(text="test")
+
+        result = word_service.get_words()
+
+        assert result is None
+
+
 def test_create_word(mock_flask_app):
 
     with mock_flask_app.app_context():
@@ -246,7 +268,7 @@ def test_create_word(mock_flask_app):
         assert result.text == "Bus Stop"
 
 
-def test_get_words_by_none(mock_flask_app):
+def test_create_word_duplicate(mock_flask_app):
 
     with mock_flask_app.app_context():
         import services.word_service as word_service
@@ -260,11 +282,16 @@ def test_get_words_by_none(mock_flask_app):
         Word.query.delete()
         db.session.commit()
 
-        word_service.create_word(text="test")
+        db.create_all()
 
-        result = word_service.get_words()
+        word_service.create_word("Bus Stop")
+        new_word = word_service.create_word("Bus Stop")
 
-        assert result is None
+        assert new_word is None
+
+        result = Word.query.filter(Word.text == "Bus Stop").all()
+
+        assert len(result) == 1
 
 
 # def test_delete_word(mock_flask_app):
