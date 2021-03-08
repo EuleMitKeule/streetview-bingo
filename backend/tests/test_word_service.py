@@ -1,25 +1,3 @@
-def test_get_word_by_id_and_text(mock_flask_app):
-
-    with mock_flask_app.app_context():
-        import services.word_service as word_service
-        from models.word import Word
-        from flask import current_app
-
-        db = current_app.db
-
-        Word.query.delete()
-        db.session.commit()
-
-        word_service.create_word(text="Hanging Bridge")
-        word_service.create_word(text="Suspension Bridge")
-
-        result = word_service.get_word(word_id=2, text="Suspension Bridge")
-
-        assert result.id == 2 and result.text == "Suspension Bridge"
-
-        result = word_service.get_word(word_id=1, text="Suspension Bridge")
-
-        assert result is None
 
 
 def test_get_word_by_id(mock_flask_app):
@@ -31,10 +9,10 @@ def test_get_word_by_id(mock_flask_app):
 
         db = current_app.db
 
+        db.create_all()
+
         Word.query.delete()
         db.session.commit()
-
-        db.create_all()
 
         word_service.create_word(text="Stoplight")
 
@@ -60,6 +38,8 @@ def test_get_word_by_text(mock_flask_app):
 
         db = current_app.db
 
+        db.create_all()
+
         Word.query.delete()
         db.session.commit()
 
@@ -75,6 +55,32 @@ def test_get_word_by_text(mock_flask_app):
         assert response is None
 
 
+def test_get_word_by_id_and_text(mock_flask_app):
+
+    with mock_flask_app.app_context():
+        import services.word_service as word_service
+        from models.word import Word
+        from flask import current_app
+
+        db = current_app.db
+
+        db.create_all()
+
+        Word.query.delete()
+        db.session.commit()
+
+        word_service.create_word(text="Hanging Bridge")
+        word_service.create_word(text="Suspension Bridge")
+
+        result = word_service.get_word(word_id=2, text="Suspension Bridge")
+
+        assert result.id == 2 and result.text == "Suspension Bridge"
+
+        result = word_service.get_word(word_id=1, text="Suspension Bridge")
+
+        assert result is None
+
+
 def test_get_word_by_none(mock_flask_app):
 
     with mock_flask_app.app_context():
@@ -83,6 +89,8 @@ def test_get_word_by_none(mock_flask_app):
         from flask import current_app
 
         db = current_app.db
+
+        db.create_all()
 
         Word.query.delete()
         db.session.commit()
@@ -102,6 +110,8 @@ def test_get_words_by_ids_and_texts(mock_flask_app):
         from flask import current_app
 
         db = current_app.db
+
+        db.create_all()
 
         Word.query.delete()
         db.session.commit()
@@ -137,6 +147,8 @@ def test_get_words_by_ids(mock_flask_app):
         from flask import current_app
 
         db = current_app.db
+
+        db.create_all()
 
         Word.query.delete()
         db.session.commit()
@@ -181,6 +193,8 @@ def test_get_words_by_texts(mock_flask_app):
 
         db = current_app.db
 
+        db.create_all()
+
         Word.query.delete()
         db.session.commit()
 
@@ -214,6 +228,8 @@ def test_create_word(mock_flask_app):
 
         db = current_app.db
 
+        db.create_all()
+
         Word.query.delete()
         db.session.commit()
 
@@ -238,6 +254,8 @@ def test_get_words_by_none(mock_flask_app):
         from flask import current_app
 
         db = current_app.db
+
+        db.create_all()
 
         Word.query.delete()
         db.session.commit()
