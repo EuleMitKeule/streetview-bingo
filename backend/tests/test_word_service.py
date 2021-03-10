@@ -10,8 +10,6 @@ def test_get_word_by_id(mock_flask_app):
 
         db = current_app.db
 
-        db.create_all()
-
         Word.query.delete()
         db.session.commit()
 
@@ -39,8 +37,6 @@ def test_get_word_by_text(mock_flask_app):
 
         db = current_app.db
 
-        db.create_all()
-
         Word.query.delete()
         db.session.commit()
 
@@ -64,8 +60,6 @@ def test_get_word_by_id_and_text(mock_flask_app):
         from flask import current_app
 
         db = current_app.db
-
-        db.create_all()
 
         Word.query.delete()
         db.session.commit()
@@ -91,8 +85,6 @@ def test_get_word_by_none(mock_flask_app):
 
         db = current_app.db
 
-        db.create_all()
-
         Word.query.delete()
         db.session.commit()
 
@@ -111,8 +103,6 @@ def test_get_words_by_ids(mock_flask_app):
         from flask import current_app
 
         db = current_app.db
-
-        db.create_all()
 
         Word.query.delete()
         db.session.commit()
@@ -157,8 +147,6 @@ def test_get_words_by_texts(mock_flask_app):
 
         db = current_app.db
 
-        db.create_all()
-
         Word.query.delete()
         db.session.commit()
 
@@ -191,8 +179,6 @@ def test_get_words_by_ids_and_texts(mock_flask_app):
         from flask import current_app
 
         db = current_app.db
-
-        db.create_all()
 
         Word.query.delete()
         db.session.commit()
@@ -243,8 +229,6 @@ def test_get_words_by_none(mock_flask_app):
 
         db = current_app.db
 
-        db.create_all()
-
         Word.query.delete()
         db.session.commit()
 
@@ -263,8 +247,6 @@ def test_get_random_words(mock_flask_app):
         from flask import current_app
 
         db = current_app.db
-
-        db.create_all()
 
         Word.query.delete()
         db.session.commit()
@@ -291,8 +273,6 @@ def test_create_word(mock_flask_app):
 
         db = current_app.db
 
-        db.create_all()
-
         Word.query.delete()
         db.session.commit()
 
@@ -318,8 +298,6 @@ def test_create_word_duplicate(mock_flask_app):
 
         db = current_app.db
 
-        db.create_all()
-
         Word.query.delete()
         db.session.commit()
 
@@ -344,8 +322,6 @@ def test_delete_word(mock_flask_app):
 
         db = current_app.db
 
-        db.create_all()
-
         Word.query.delete()
         db.session.commit()
 
@@ -365,8 +341,6 @@ def test_delete_words(mock_flask_app):
         from flask import current_app
 
         db = current_app.db
-
-        db.create_all()
 
         Word.query.delete()
         db.session.commit()

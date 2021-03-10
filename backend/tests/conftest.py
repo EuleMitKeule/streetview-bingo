@@ -11,6 +11,7 @@ def mock_flask_app():
     mock_app = Flask(__name__)
 
     with mock_app.app_context():
+
         mock_app.config['SQLALCHEMY_ECHO'] = True
         mock_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         mock_app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + path.join(basedir, "test.db")
@@ -18,5 +19,7 @@ def mock_flask_app():
         db.init_app(mock_app)
 
         current_app.db = db
+
+        db.create_all()
 
     return mock_app
