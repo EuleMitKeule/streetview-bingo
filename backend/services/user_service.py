@@ -44,7 +44,6 @@ def delete_user(user_id: int):
 
     :param user_id: The ID of the user to delete
     """
-    user = get_user(user_id)
-    user.delete()
+    User.query.filter(User.id == user_id).delete()
 
     db.session.commit()
