@@ -1,9 +1,11 @@
 import os
+from os import path
 from connexion import FlaskApp
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from flask import current_app
+
 from config.config import Config
 from config.database_config import SqliteConfig, MysqlConfig
 
@@ -12,10 +14,12 @@ class StreetViewBingo:
     connex_app: FlaskApp = None
     db: SQLAlchemy = None
     ma: Marshmallow = None
+    config: Config = None
 
     def __init__(self, config: Config):
 
         self.connex_app = FlaskApp(__name__, port=5000, specification_dir='config')
+        self.config = config
 
         with self.connex_app.app.app_context():
 
@@ -49,6 +53,8 @@ class StreetViewBingo:
         self.connex_app.run()
 
     def create_db(self):
+        if type(self.config.database_config) is SqliteConfig:
+            sqlite_config = self.config.database_config
+            if sqlite_config.recreate:
+                self.db.drop_all()
         self.db.create_all()
-
-

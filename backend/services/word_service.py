@@ -92,7 +92,7 @@ def create_word(text: str):
     existing_word = Word.query.filter(func.lower(Word.text) == lower_text).first()
 
     if existing_word is not None:
-        return None
+        return existing_word
 
     word = Word(text=text)
     db.session.add(word)

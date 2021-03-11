@@ -8,9 +8,11 @@ class DatabaseConfig:
 
 class SqliteConfig(DatabaseConfig):
     path: str = None
+    recreate: bool = False
 
-    def __init__(self, path):
+    def __init__(self, path, recreate=False):
         self.path = path
+        self.recreate = recreate
 
 
 class MysqlConfig(DatabaseConfig):
