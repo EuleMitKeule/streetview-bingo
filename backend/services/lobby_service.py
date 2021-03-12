@@ -46,8 +46,12 @@ def delete_lobby(lobby_id: int):
 
     :param lobby_id: The ID of the lobby to delete.
     """
-    lobby = get_lobby(lobby_id=lobby_id)
-    lobby.delete()
+    lobby = Lobby.query.filter(Lobby.id == lobby_id).first()
+
+    for user in lobby.users:
+        User.query.filter(User.id == user.id).delete()
+
+    Lobby.query.filter(Lobby.id == lobby_id).delete()
     db.session.commit()
 
 
@@ -59,6 +63,8 @@ def join_lobby(user: User, lobby_token: str):
     :param lobby_token: The token of the lobby to join.
     """
     lobby = get_lobby(lobby_token=lobby_token)
-    lobby.users.append(user)
+
+    if user not in lobby.users:
+        lobby.users.append(user)
     
     db.session.commit()
