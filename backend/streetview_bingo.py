@@ -1,5 +1,3 @@
-import os
-from os import path
 from connexion import FlaskApp
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
@@ -18,7 +16,7 @@ class StreetViewBingo:
 
     def __init__(self, config: Config):
 
-        self.connex_app = FlaskApp(__name__, port=5000, specification_dir='config')
+        self.connex_app = FlaskApp(__name__, port=5000, specification_dir='specification')
         self.config = config
 
         with self.connex_app.app.app_context():
