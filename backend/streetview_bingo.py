@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from flask import current_app
+from flask_socketio import SocketIO, emit, send
+from threading import Thread
 
 from config.config import Config
 from config.database_config import SqliteConfig, MysqlConfig
@@ -36,7 +38,9 @@ class StreetViewBingo:
 
             self.db = SQLAlchemy(self.connex_app.app)
             self.ma = Marshmallow(self.connex_app.app)
+            self.socketio = SocketIO(self.connex_app.app, cors_allowed_origins="*")
 
+            current_app.streetview_bingo = self
             current_app.db = self.db
             current_app.ma = self.ma
 
