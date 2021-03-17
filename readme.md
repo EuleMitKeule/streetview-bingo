@@ -1,5 +1,5 @@
 [![api-test](https://github.com/euleGIT/streetview-bingo/actions/workflows/api-test.yml/badge.svg?branch=master&event=push)](https://github.com/euleGIT/streetview-bingo/actions/workflows/api-test.yml)
-![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/EuleMitKeule/be76ee17e9743cffe36884b6b9ffcb54/raw/coverage.json)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=coverage)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=bugs)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=code_smells)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
