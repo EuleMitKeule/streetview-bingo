@@ -1,4 +1,8 @@
+import time
+
 from flask.json import jsonify
+from flask import current_app
+from threading import Thread
 
 from schemas.word_schema import WordSchema
 from schemas.user_schema import UserSchema
@@ -10,8 +14,35 @@ import services.user_service as user_service
 import services.game_service as game_service
 import services.game_word_service as game_word_service
 
+streetview_bingo = current_app.streetview_bingo
+socketio = streetview_bingo.socketio
+thread = None
+clients = 0
+
+
+def init_socket():
+    global clients, thread
+
+    while clients != 0:
+        print("running")
+        time.sleep(1)
+
+    thread = None
+
+
+@socketio.on("connect")
+def on_connect():
+    global clients
+    print("Client connected!")
+    clients += 1
+
 
 def create_lobby(body):
+
+    global thread
+    if thread is None:
+        thread = Thread(target=init_socket)
+        thread.start()
 
     owner_name = body['username']
 
