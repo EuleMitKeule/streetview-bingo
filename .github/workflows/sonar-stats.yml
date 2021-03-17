@@ -27,6 +27,7 @@ jobs:
           cd backend
           python -m pytest --cov-report xml --cov . ./tests
           ls -la
+          cat coverage.xml
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
