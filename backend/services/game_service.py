@@ -54,8 +54,7 @@ def delete_game(game_token: str):
 
     :param game_token: The token of the game to delete.
     """
-    game = get_game(game_token=game_token)
-    game.delete()
+    Game.query.filter(Game.token == game_token).delete()
 
     db.session.commit()
 
@@ -70,7 +69,7 @@ def update_game(game_token: str, user_token: str, status: str = None, texts: Lis
     :param texts: (optional) List of word texts the game should contain.
     :return: The updated game if successful.
     """
-    game = get_game(game_token=game_token)
+    game: Game = get_game(game_token=game_token)
 
     if game.moderator.token != user_token:
         return None
@@ -78,13 +77,18 @@ def update_game(game_token: str, user_token: str, status: str = None, texts: Lis
     if status is not None:
         game.status = status
 
-    game_words = []
+    game_words = game.words
 
     if texts is not None:
         for text in texts:
-            game_word = GameWord(text=text, game_id=game.id)
-            db.session.add(game_word)
-            game_words.append(game_word)
+            existing_game_word = GameWord.query\
+                .filter(GameWord.text == text)\
+                .filter(GameWord.game_id == game.id)\
+                .first()
+            if existing_game_word is None:
+                game_word = GameWord(text=text, game_id=game.id)
+                db.session.add(game_word)
+                game_words.append(game_word)
 
     game.words = game_words
 
