@@ -143,7 +143,6 @@ def test_is_moderator(mock_streetview_bingo):
     import services.user_service as user_service
     import services.lobby_service as lobby_service
     import services.game_service as game_service
-    from models.game import Game
 
     owner = user_service.create_user(name="eule")
     moderator = user_service.create_user(name="eule")
