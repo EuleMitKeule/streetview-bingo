@@ -45,7 +45,7 @@ class StreetViewBingo:
             current_app.ma = self.ma
 
             self.connex_app.add_api('openapi.yaml', strict_validation=True, validate_responses=True, base_path="/api")
-            self.connex_app.add_api('angular.yaml', options={"swagger_ui": False})
+            import frontend
 
             CORS(self.connex_app.app)
 
