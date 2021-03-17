@@ -10,6 +10,9 @@ import { LobbyComponent } from './lobby/lobby.component';
 import { FormsModule } from '@angular/forms';
 import { GameCreatorComponent } from './lobby/game-creator/game-creator.component';
 import { GameComponent } from './lobby/game/game.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:4200/socket.io/', options: {} };
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { GameComponent } from './lobby/game/game.component';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

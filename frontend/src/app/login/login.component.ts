@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LobbyService } from 'generated/openapi';
+import { Socket } from 'ngx-socket-io';
 import { LoginService } from '../_shared/login.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
   lobbyToken: string = "";
   userToken: string = "";
 
-  constructor(private lobbyService: LobbyService, private loginService: LoginService, private router: Router) {}
+  constructor(private lobbyService: LobbyService, private loginService: LoginService, private router: Router, private socket: Socket) {}
 
   ngOnInit(): void {
   }

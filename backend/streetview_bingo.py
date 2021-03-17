@@ -1,3 +1,5 @@
+import logging
+
 from connexion import FlaskApp
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
@@ -23,7 +25,7 @@ class StreetViewBingo:
 
         with self.connex_app.app.app_context():
 
-            self.connex_app.app.config['SQLALCHEMY_ECHO'] = True
+            self.connex_app.app.config['SQLALCHEMY_ECHO'] = False
             self.connex_app.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
             if type(config.database_config) is SqliteConfig:
@@ -52,7 +54,9 @@ class StreetViewBingo:
         self.create_db()
 
     def run(self):
-        self.connex_app.run()
+        # self.connex_app.run()
+        logging.getLogger('socketio').setLevel(logging.INFO)
+        self.socketio.run(app=self.connex_app.app, debug=True)
 
     def create_db(self):
         if type(self.config.database_config) is SqliteConfig:

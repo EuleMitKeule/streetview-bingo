@@ -1,3 +1,4 @@
+import logging
 import time
 
 from flask.json import jsonify
@@ -16,33 +17,21 @@ import services.game_word_service as game_word_service
 
 streetview_bingo = current_app.streetview_bingo
 socketio = streetview_bingo.socketio
-thread = None
-clients = 0
-
-
-def init_socket():
-    global clients, thread
-
-    while clients != 0:
-        print("running")
-        time.sleep(1)
-
-    thread = None
 
 
 @socketio.on("connect")
 def on_connect():
-    global clients
     print("Client connected!")
-    clients += 1
+
+
+@socketio.on('message')
+def on_message(message):
+    print(message)
 
 
 def create_lobby(body):
 
-    global thread
-    if thread is None:
-        thread = Thread(target=init_socket)
-        thread.start()
+    socketio.emit("message", {"data": "hello world"})
 
     owner_name = body['username']
 
