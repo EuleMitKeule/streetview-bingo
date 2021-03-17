@@ -1,9 +1,5 @@
-import logging
-import time
-
 from flask.json import jsonify
 from flask import current_app
-from threading import Thread
 
 from schemas.word_schema import WordSchema
 from schemas.user_schema import UserSchema
@@ -31,7 +27,7 @@ def on_message(message):
 
 def create_lobby(body):
 
-    socketio.emit("message", {"data": "hello world"})
+    socketio.emit("message", "hello world")
 
     owner_name = body['username']
 
