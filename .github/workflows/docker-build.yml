@@ -29,12 +29,20 @@ jobs:
           cd frontend
           ls -la
 
-      - name: build image and push to gcr
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          username: ${{ github.actor }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: euleGIT/streetview-bingo/streetview-bingo
+      # - name: build image and push to gcr
+      #   uses: docker/build-push-action@v2
+      #   with:
+      #     context: .
+      #     username: ${{ github.actor }}
+      #     password: ${{ secrets.DOCKER_TOKEN }}
+      #     registry: docker.pkg.github.com
+      #     repository: euleGIT/streetview-bingo/streetview-bingo
           # tag_with_ref: true
+
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: streetview-bingo
+          registry: ghcr.io
+          githubOrg: euleGIT
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_TOKEN }} 
