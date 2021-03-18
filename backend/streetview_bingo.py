@@ -56,7 +56,7 @@ class StreetViewBingo:
     def run(self):
         # self.connex_app.run()
         logging.getLogger('socketio').setLevel(logging.INFO)
-        self.socketio.run(app=self.connex_app.app, debug=True)
+        self.socketio.run(host="0.0.0.0", app=self.connex_app.app, debug=True)
 
     def create_db(self):
         if type(self.config.database_config) is SqliteConfig:
