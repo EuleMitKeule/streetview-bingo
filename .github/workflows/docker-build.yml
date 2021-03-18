@@ -23,4 +23,4 @@ jobs:
         run: |
           cd frontend
           npm run generate:api
-          ng build
+          npm run build
