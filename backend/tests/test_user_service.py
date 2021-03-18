@@ -34,16 +34,19 @@ def test_get_user_by_none(mock_streetview_bingo):
 
 def test_create_user(mock_streetview_bingo):
     import services.user_service as user_service
-    from models.user import User
 
     new_user = user_service.create_user(name="eule")
 
-    all_users = User.query.all()
-
-    print(len(all_users))
-
     assert new_user.name == "eule"
     assert new_user.token is not None
+
+
+def test_create_empty(mock_streetview_bingo):
+    import services.user_service as user_service
+
+    new_user = user_service.create_user(name="  * +++ =?")
+
+    assert new_user is None
 
 
 def test_delete_user(mock_streetview_bingo):

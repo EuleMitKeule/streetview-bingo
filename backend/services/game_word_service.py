@@ -1,3 +1,5 @@
+import re
+
 from flask import current_app
 from models.game import Game
 from models.game_word import GameWord
@@ -30,10 +32,16 @@ def get_game_word_by_content(text: str, game_id: int = None, game_token: str = N
     :return: The game word if found
     """
     if game_id is not None:
-        return GameWord.query.filter(GameWord.text == text and GameWord.game_id == game_id).first()
+        return GameWord.query\
+            .filter(GameWord.text == text)\
+            .filter(GameWord.game_id == game_id)\
+            .first()
     elif game_token is not None:
         game = game_service.get_game(game_token=game_token)
-        return GameWord.query.filter(GameWord.text == text and GameWord.game_id == game.id).first()
+        return GameWord.query\
+            .filter(GameWord.text == text)\
+            .filter(GameWord.game_id == game.id)\
+            .first()
     else:
         return None
 
@@ -46,14 +54,16 @@ def create_game_word(text: str, game_token: str):
     :param game_token: The token of the game the word belongs to
     :return: The created game word
     """
+    if not re.search('[a-zA-Z]', text):
+        return None
+
     game = game_service.get_game(game_token=game_token)
-    game_word = get_game_word_by_content(text, game_token=game_token)
+    game_word: GameWord = get_game_word_by_content(text, game_token=game_token)
 
     if game_word is None:
         game_word = GameWord(text=text)
         db.session.add(game_word)
-
-    game.words.append(game_word)
+        game.words.append(game_word)
 
     db.session.commit()
     return game_word
@@ -66,13 +76,14 @@ def delete_word(game_token: str, text: str):
     :param game_token: The token of the game the word belongs to
     :param text: The text of the game word to create
     """
-    game_word = get_game_word_by_content(text, game_token=game_token)
+    game = Game.query.filter(Game.token == game_token).first()
 
-    if game_word is not None:
-        game_word.delete()
+    GameWord.query\
+        .filter(GameWord.game_id == game.id)\
+        .filter(GameWord.text == text)\
+        .delete()
 
     db.session.commit()
-    return game_word
 
 
 def set_found(game_token, user_token, game_word_id, user_id):
