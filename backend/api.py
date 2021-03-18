@@ -1,6 +1,6 @@
 from flask.json import jsonify
 from flask import current_app
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, join_room, leave_room
 
 from schemas.word_schema import WordSchema
 from schemas.user_schema import UserSchema
@@ -21,14 +21,13 @@ def on_connect():
     print("Client connected!")
 
 
-@socketio.on('message')
-def on_message(message):
-    print(message)
+@socketio.on("join")
+def on_join(lobby_token):
+    print(f"Someone joined the room with token {lobby_token}")
+    join_room(room=lobby_token)
 
 
 def create_lobby(body):
-
-    socketio.emit("message", "hello world")
 
     owner_name = body['username']
 
