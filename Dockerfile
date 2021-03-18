@@ -2,8 +2,8 @@ FROM python:3.9
 
 WORKDIR /app/
 
-ADD ./backend ./
-ADD ./frontend ./
+ADD ./backend ./backend
+ADD ./frontend/dist/frontend ./frontend/dist/frontend
 
 RUN ls -la
 
