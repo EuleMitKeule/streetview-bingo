@@ -325,6 +325,8 @@ paths:
 
     post:
       operationId: api.create_word
+      tags:
+        - Word
       requestBody:
         required: true
         content:
