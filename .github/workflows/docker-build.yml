@@ -41,8 +41,9 @@ jobs:
 
       - uses: mr-smithers-excellent/docker-build-push@v5
         with:
-          image: streetview-bingo:latest
+          image: streetview-bingo
           registry: ghcr.io
           githubOrg: euleGIT
+          tag: latest
           username: ${{ github.actor }}
           password: ${{ secrets.DOCKER_TOKEN }} 
