@@ -24,3 +24,18 @@ jobs:
           cd frontend
           npm run generate:api
           npm run build
+  
+  build_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: build image and push to gcr
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+          registry: docker.pkg.github.com
+          repository: euleGIT/streetview-bingo/streetview-bingo
+          # tag_with_ref: true
