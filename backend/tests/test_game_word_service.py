@@ -102,6 +102,22 @@ def test_create_game_word(mock_streetview_bingo):
     assert len(game.words) == 1
 
 
+def test_create_empty(mock_streetview_bingo):
+    import services.user_service as user_service
+    import services.lobby_service as lobby_service
+    import services.game_service as game_service
+    import services.game_word_service as game_word_service
+
+    owner = user_service.create_user(name="eule")
+    moderator = user_service.create_user(name="eule")
+    lobby = lobby_service.create_lobby(owner=owner)
+    game = game_service.create_game(lobby_token=lobby.token, moderator_id=moderator.id)
+
+    game_word = game_word_service.create_game_word(text="  / 12@**#", game_token=game.token)
+
+    assert game_word is None
+
+
 def test_delete_game_word(mock_streetview_bingo):
     import services.user_service as user_service
     import services.lobby_service as lobby_service

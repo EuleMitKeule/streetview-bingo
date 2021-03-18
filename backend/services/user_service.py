@@ -1,3 +1,5 @@
+import re
+
 from flask import current_app
 from models.user import User
 import services.token_service as token_service
@@ -29,6 +31,9 @@ def create_user(name: str):
     :param name: The name of the user.
     :return: The created user if successful.
     """
+    if not re.search("[a-zA-Z0-9]", name):
+        return None
+
     token = token_service.generate_token(16)
     user = User(name=name, token=token)
 

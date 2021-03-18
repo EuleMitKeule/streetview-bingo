@@ -1,3 +1,5 @@
+import re
+
 from flask import current_app
 from models.game import Game
 from models.game_word import GameWord
@@ -52,6 +54,9 @@ def create_game_word(text: str, game_token: str):
     :param game_token: The token of the game the word belongs to
     :return: The created game word
     """
+    if not re.search('[a-zA-Z]', text):
+        return None
+
     game = game_service.get_game(game_token=game_token)
     game_word: GameWord = get_game_word_by_content(text, game_token=game_token)
 

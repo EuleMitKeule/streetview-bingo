@@ -93,8 +93,6 @@ def update_game(lobby_token, game_token, user_token, body):
     game_schema = GameSchema()
     result = jsonify(game_schema.dump(game))
 
-    print(result.get_data(as_text=True))
-
     return result
 
 
