@@ -31,6 +31,7 @@ export class LobbyComponent implements OnInit {
 
     this.socket.on("reload", x => {
       console.log("Reloading");
+      this.loadLobby();
     });
 
   }
