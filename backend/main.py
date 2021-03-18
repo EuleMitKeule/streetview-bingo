@@ -116,5 +116,5 @@ if __name__ == '__main__':
 
     config.database_config = database_config
 
-    streetview_bingo = StreetViewBingo(config)
+    streetview_bingo: StreetViewBingo = StreetViewBingo(config)
     streetview_bingo.run()

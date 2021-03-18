@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game, GameService, GameWord } from 'generated/openapi';
+import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { LoginService } from 'src/app/_shared/login.service';
 
@@ -11,7 +12,7 @@ import { LoginService } from 'src/app/_shared/login.service';
 })
 export class GameComponent implements OnInit {
 
-  constructor(private gameService: GameService, private route: ActivatedRoute, private loginService: LoginService) { }
+  constructor(private gameService: GameService, private route: ActivatedRoute, private loginService: LoginService, private socket: Socket) { }
 
   //game$: Observable<Game>;
 
@@ -30,6 +31,11 @@ export class GameComponent implements OnInit {
       this.lobbyToken = params.lobbyToken;
       //this.game$ = this.gameService.apiGetGame(this.lobbyToken, this.gameToken)
       this.loadGame();
+
+      this.socket.on("reload", x => {
+        console.log("Reloading");
+        this.loadGame();
+      });
     })
 
   }
