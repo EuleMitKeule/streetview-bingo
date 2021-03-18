@@ -1,0 +1,25 @@
+name: docker-build
+ 
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+      - uses: actions/checkout@v2
+      
+      - name: setup node.js
+        uses: actions/setup-node@v1
+
+      - name: install npm dependencies
+        run: |
+          cd frontend
+          npm install
+      - name: generate and build
+        run: |
+          npm run generate:api
+          ng build
