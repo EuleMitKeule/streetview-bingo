@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Lobby, LobbyService } from 'generated/openapi';
+import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
 import { LoginService } from '../_shared/login.service';
 
@@ -11,7 +12,7 @@ import { LoginService } from '../_shared/login.service';
 })
 export class LobbyComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private lobbyService: LobbyService, private route: ActivatedRoute) { }
+  constructor(private loginService: LoginService, private lobbyService: LobbyService, private route: ActivatedRoute, private socket: Socket) { }
 
   userToken: string = "";
   userId: number = this.loginService.userId;
@@ -25,7 +26,12 @@ export class LobbyComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.lobbyToken = params.token;
       this.loadLobby();
+      this.socket.emit("join", this.lobbyToken);
     })
+
+    this.socket.on("reload", x => {
+      console.log("Reloading");
+    });
 
   }
 
