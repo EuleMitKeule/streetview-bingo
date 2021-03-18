@@ -14,7 +14,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { BASE_PATH } from 'generated/openapi';
 import { environment } from 'src/environments/environment';
 
-const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
+const config: SocketIoConfig = { url: '/', options: {} };
 
 @NgModule({
   declarations: [
