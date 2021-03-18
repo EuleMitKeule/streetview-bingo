@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { GameCreatorComponent } from './lobby/game-creator/game-creator.component';
 import { GameComponent } from './lobby/game/game.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { BASE_PATH } from 'generated/openapi';
+import { environment } from 'src/environments/environment';
 
 const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
 
@@ -28,9 +30,9 @@ const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
   ],
-  providers: [],
+  providers: [{ provide: BASE_PATH, useValue: environment.API_BASE_PATH }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
