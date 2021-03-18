@@ -40,6 +40,7 @@ def create_game(lobby_token: str, moderator_id: int):
 
     lobby = lobby_service.get_lobby(lobby_token=lobby_token)
     game.users = lobby.users
+    game.users.remove(moderator)
     lobby.games.append(game)
 
     db.session.add(game)
