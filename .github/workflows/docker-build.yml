@@ -25,6 +25,9 @@ jobs:
           npm run generate:api
           npm run build
 
+      - run: |
+          ls -la
+
       - name: build image and push to gcr
         uses: docker/build-push-action@v2
         with:
