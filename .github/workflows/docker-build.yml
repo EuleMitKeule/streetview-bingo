@@ -2,15 +2,15 @@ name: docker-build
  
 on:
   push:
-    branches: [ master ]
+    branches: [ ci-build ]
   workflow_dispatch:
 
 jobs:
-  build frontend:
+  build_frontend:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       
       - name: setup node.js
         uses: actions/setup-node@v1
