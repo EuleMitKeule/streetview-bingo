@@ -172,6 +172,14 @@ def test_create_word(mock_streetview_bingo):
     assert result.text == "Cat"
 
 
+def test_create_empty(mock_streetview_bingo):
+    import services.word_service as word_service
+
+    new_word = word_service.create_word(" ** $0123 .-,")
+
+    assert new_word is None
+
+
 def test_create_word_duplicate(mock_streetview_bingo):
     import services.word_service as word_service
     from models.word import Word

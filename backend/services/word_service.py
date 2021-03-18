@@ -1,3 +1,4 @@
+import re
 from typing import List
 from flask import current_app
 from models.word import Word
@@ -88,6 +89,9 @@ def create_word(text: str):
     :param text: The text for the new word
     :returns: The created word if successful
     """
+    if not re.search("[a-zA-Z]", text):
+        return None
+
     lower_text = text.lower()
     existing_word = Word.query.filter(func.lower(Word.text) == lower_text).first()
 
