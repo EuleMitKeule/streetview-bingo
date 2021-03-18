@@ -4,6 +4,7 @@ ADD backend /app/backend
 ADD frontend/dist /app/frontend/dist
 
 RUN ls -la
+RUN chmod 777 -R /app
 
 WORKDIR /app/
 
