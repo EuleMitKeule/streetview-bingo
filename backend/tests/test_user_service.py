@@ -41,6 +41,14 @@ def test_create_user(mock_streetview_bingo):
     assert new_user.token is not None
 
 
+def test_create_empty(mock_streetview_bingo):
+    import services.user_service as user_service
+
+    new_user = user_service.create_user(name="  * +++ =?")
+
+    assert new_user is None
+
+
 def test_delete_user(mock_streetview_bingo):
     import services.user_service as user_service
 
