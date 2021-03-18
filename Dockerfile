@@ -2,8 +2,8 @@ FROM python:3.9
 
 RUN mkdir /app
 COPY ./backend /app/backend
-RUN mkdir /app/frontend/dist
-COPY ./frontend/dist/frontend /app/frontend/dist/frontend
+RUN mkdir /app/frontend
+COPY ./frontend/dist /app/frontend/dist
 
 RUN ls -la
 
