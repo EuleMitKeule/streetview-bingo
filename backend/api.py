@@ -1,5 +1,6 @@
 from flask.json import jsonify
 from flask import current_app
+from flask_socketio import SocketIO
 
 from schemas.word_schema import WordSchema
 from schemas.user_schema import UserSchema
@@ -12,7 +13,7 @@ import services.game_service as game_service
 import services.game_word_service as game_word_service
 
 streetview_bingo = current_app.streetview_bingo
-socketio = streetview_bingo.socketio
+socketio: SocketIO = streetview_bingo.socketio
 
 
 @socketio.on("connect")
@@ -68,6 +69,8 @@ def join_lobby(lobby_token, body):
     user_schema = UserSchema()
     result = jsonify(user_schema.dump(user))
 
+    socketio.emit(event="reload", room=lobby_token)
+
     return result
 
 
@@ -79,6 +82,8 @@ def create_game(lobby_token, body):
 
     game_schema = GameSchema()
     result = jsonify(game_schema.dump(game))
+
+    socketio.emit(event="reload", room=lobby_token)
 
     return result
 
@@ -109,6 +114,8 @@ def update_game(lobby_token, game_token, user_token, body):
     game_schema = GameSchema()
     result = jsonify(game_schema.dump(game))
 
+    socketio.emit(event="reload", room=lobby_token)
+
     return result
 
 
@@ -124,6 +131,8 @@ def create_word_status(lobby_token, game_token, user_token, word_id, user_id):
     if not successful:
         return {"message": "You are not moderator"}, 403
 
+    socketio.emit(event="reload", room=lobby_token)
+
     return {"message": "OK"}, 200
 
 
@@ -137,6 +146,8 @@ def delete_word_status(lobby_token, game_token, user_token, word_id, user_id):
 
     if not successful:
         return {"message": "You are not moderator"}, 403
+
+    socketio.emit(event="reload", room=lobby_token)
 
     return {"message": "OK"}, 200
 
