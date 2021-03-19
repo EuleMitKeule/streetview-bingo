@@ -77,7 +77,7 @@ def update_game(game_token: str, user_token: str, status: str = None, texts: Lis
     if status is not None:
         game.status = status
 
-    game_words = game.words
+    game_words = []
 
     if texts is not None:
         for text in texts:
