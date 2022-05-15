@@ -28,7 +28,6 @@ jobs:
 
       - name: Run coverage
         run: |
-          mkdir config
           cd backend
           mkdir data
           cp ./config/test.config.yml ../config/test.config.yml
