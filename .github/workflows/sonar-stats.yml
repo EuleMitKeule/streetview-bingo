@@ -36,7 +36,7 @@ jobs:
 
       - name: fix code coverage paths
         run: |
-          sed -i 's/\/home\/runner\/work\/streetview-bingo\/streetview-bingo\//\/github\/workspace\//g' ..coverage/coverage.xml
+          sed -i 's/\/home\/runner\/work\/streetview-bingo\/streetview-bingo\//\/github\/workspace\//g' backend/coverage/coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
