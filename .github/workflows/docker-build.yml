@@ -27,6 +27,7 @@ jobs:
           
       - name: generate and build
         run: |
+          cd frontend
           npm run generate:api
           ng build-prod
           
