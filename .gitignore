@@ -56,3 +56,4 @@ Thumbs.db
 **/*.db
 **/venv/*
 **/*.log
+**/*.sqlite

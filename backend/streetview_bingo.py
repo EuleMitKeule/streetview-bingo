@@ -20,7 +20,7 @@ class StreetViewBingo:
 
     def __init__(self, config: Config):
 
-        self.connex_app = FlaskApp(__name__, port=5000, specification_dir='specification')
+        self.connex_app = FlaskApp(__name__, host="0.0.0.0", port=5000, specification_dir='specification')
         self.config = config
 
         with self.connex_app.app.app_context():
