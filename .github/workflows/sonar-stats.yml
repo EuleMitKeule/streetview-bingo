@@ -33,6 +33,8 @@ jobs:
           cd src
           python -m pytest --rootdir . --cov=. --cov-config=../config/.coveragerc --cov-report=xml:../coverage/coverage.xml
           cat ../coverage/coverage.xml
+          cd ../coverage/
+          python -m coverage xml -i
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
