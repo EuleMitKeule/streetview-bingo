@@ -5,6 +5,8 @@ WORKDIR /app
 
 COPY ./ /app/
 
+RUN mkdir /backend/specification
+
 COPY ../backend/specification/openapi.yaml /backend/specification/openapi.yaml
 
 RUN npm install
