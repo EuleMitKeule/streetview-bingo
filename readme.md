@@ -1,3 +1,4 @@
+[![docker-build](https://github.com/EuleMitKeule/streetview-bingo/actions/workflows/docker-build.yml/badge.svg)](https://github.com/EuleMitKeule/streetview-bingo/actions/workflows/docker-build.yml)
 [![api-test](https://github.com/euleGIT/streetview-bingo/actions/workflows/api-test.yml/badge.svg?branch=master&event=push)](https://github.com/euleGIT/streetview-bingo/actions/workflows/api-test.yml)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=coverage)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=euleGIT_streetview-bingo&metric=bugs)](https://sonarcloud.io/dashboard?id=euleGIT_streetview-bingo)
