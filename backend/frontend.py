@@ -10,3 +10,7 @@ def serve_file(filename: str):
 
 def serve_root():
     return serve_file("index.html")
+
+
+def serve_config():
+    return serve_file("assets/config/config.json")

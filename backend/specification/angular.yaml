@@ -33,3 +33,14 @@ paths:
             text/html:
               schema:
                 type: string
+
+  /assets/config/config.json:
+    get:
+      operationId: frontend.serve_config
+      responses:
+        '200':
+          description: OK
+          content:
+            text/html:
+              schema:
+                type: string
