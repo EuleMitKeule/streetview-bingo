@@ -20,7 +20,7 @@ class StreetViewBingo:
 
     def __init__(self, config: Config):
 
-        self.connex_app = FlaskApp(__name__, host="0.0.0.0", port=5000, specification_dir='specification')
+        self.connex_app = FlaskApp(__name__, host=config.networking_config.host, port=config.networking_config.port, specification_dir='specification')
         self.config = config
 
         with self.connex_app.app.app_context():
@@ -56,7 +56,7 @@ class StreetViewBingo:
     def run(self):
         # self.connex_app.run()
         logging.getLogger('socketio').setLevel(logging.INFO)
-        self.socketio.run(app=self.connex_app.app, debug=True)
+        self.socketio.run(app=self.connex_app.app, port=self.config.networking_config.port, host=self.config.networking_config.host, debug=True)
 
     def create_db(self):
         if type(self.config.database_config) is SqliteConfig:

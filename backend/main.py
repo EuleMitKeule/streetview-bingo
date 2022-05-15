@@ -48,6 +48,15 @@ if __name__ == '__main__':
             level=config.log_level
         )
 
+    if "networking" in conf_dict:
+        print("Found networking configuration.")
+
+        if "host" in conf_dict["networking"]:
+            config.networking_config.host = conf_dict["networking"]["host"]
+
+        if "port" in conf_dict["networking"]:
+            config.networking_config.port = conf_dict["networking"]["port"]
+
     # # # Database Configuration # # #
 
     if "database" not in conf_dict:
