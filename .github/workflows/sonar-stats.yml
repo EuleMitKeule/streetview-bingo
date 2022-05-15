@@ -35,6 +35,7 @@ jobs:
           cat ../coverage/coverage.xml
           cd ../coverage/
           python -m coverage xml -i
+          cat ../coverage/coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
