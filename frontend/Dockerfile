@@ -5,6 +5,8 @@ WORKDIR /app
 
 COPY ./ /app/
 
+COPY ../backend/specification/openapi.yaml /backend/specification/openapi.yaml
+
 RUN npm install
 
 RUN npm run generate:api
