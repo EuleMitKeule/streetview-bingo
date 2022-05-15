@@ -13,8 +13,9 @@ jobs:
   build-frontend:
     runs-on: ubuntu-latest
     steps:
+    
       - name: checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
       
       - name: setup node.js
         uses: actions/setup-node@v1
@@ -23,6 +24,7 @@ jobs:
         run: |
           cd frontend
           npm install
+          
       - name: generate and build
         run: |
           npm run generate:api
