@@ -48,6 +48,9 @@ def join_lobby(lobby_token: str):
     if user not in lobby.users:
         lobby.users.append(user)
 
+    db.session.commit()
+    sio.emit("reload", to=lobby_token)
+
     user_dict = User.dump(user)
 
     return jsonify(user_dict)
@@ -63,6 +66,9 @@ def create_game(lobby_token: str):
     lobby: Lobby = Lobby.find_by_token(lobby_token)
     game: Game = Game.create(moderator=moderator, users=lobby.users)
     lobby.games.append(game)
+
+    db.session.commit()
+    sio.emit("reload", to=lobby_token)
 
     game_dict = Game.dump(game)
 
@@ -91,6 +97,8 @@ def update_game(lobby_token: str, game_token: str):
     game: Game = Game.load(body)
     db.session.commit()
 
+    sio.emit("reload", to=lobby_token)
+
     game_dict: dict = Game.dump(game)
 
     return jsonify(game_dict)
@@ -110,6 +118,10 @@ def create_word_status(lobby_token, game_token, word_id, user_id):
     if user not in game_word.users:
         game_word.users.append(user)
 
+    db.session.commit()
+
+    sio.emit("reload", to=lobby_token)
+
     return {"message": "OK"}, 200
 
 
@@ -126,6 +138,10 @@ def delete_word_status(lobby_token, game_token, word_id, user_id):
 
     if user in game_word.users:
         game_word.users.remove(user)
+        
+    db.session.commit()
+
+    sio.emit("reload", to=lobby_token)
 
     return {"message": "OK"}, 200
 
@@ -143,6 +159,7 @@ def get_user():
 def create_word():
     body: dict = request.get_json()
     word: Word = Word.load(body)
+        
     db.session.commit()
 
     word_dict = Word.dump(word)
