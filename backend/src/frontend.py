@@ -14,3 +14,8 @@ def serve_file(filename: str):
 @frontend_bp.route("", methods=["GET"])
 def serve_root():
     return serve_file("index.html")
+
+
+@frontend_bp.route("/assets/config/config.json", methods=["GET"])
+def serve_config():
+    return serve_file("assets/config/config.json")
