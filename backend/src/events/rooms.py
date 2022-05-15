@@ -3,12 +3,10 @@ from common import *
 
 
 @sio.on("join")
-def on_join(data):
-    room = data["room"]
+def on_join(room):
     join_room(room)
 
 
 @sio.on("leave")
-def on_leave(data):
-    room = data["room"]
+def on_leave(room):
     leave_room(room)

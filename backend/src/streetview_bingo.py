@@ -7,6 +7,7 @@ from common import *
 from models import *
 from api import bp
 from frontend import frontend_bp
+from events import *
 
 def create_app(config_path: str) -> Flask:
     app = Flask(__name__)
@@ -50,8 +51,6 @@ if __name__ == '__main__':
     arg_parser.add_argument("-c", "--config", dest="config_path", help="The path to the configuration file.")
     args = arg_parser.parse_args()
     config_path = args.config_path if args.config_path else "../config/streetview-bingo.yml"
-    
-    print("Starting StreetView Bingo with config: " + config_path)
 
     app: Flask = create_app(config_path)
     sio.run(app, host=config.config_model.networking.host, port=config.config_model.networking.port)
