@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Lobby, LobbyService } from 'generated/openapi';
 import { Socket } from 'ngx-socket-io';
-import { Observable } from 'rxjs';
-import { BingoSocket } from '../_shared/bingo-socket';
 import { LoginService } from '../_shared/login.service';
+import { SocketService } from '../_shared/socket.service';
 
 @Component({
   selector: 'app-lobby',
@@ -13,13 +12,15 @@ import { LoginService } from '../_shared/login.service';
 })
 export class LobbyComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private lobbyService: LobbyService, private route: ActivatedRoute, private socket: BingoSocket) { }
+  constructor(private loginService: LoginService, private lobbyService: LobbyService, private route: ActivatedRoute, private socketService: SocketService) { }
 
   userToken: string = "";
   userId: number = this.loginService.userId;
   lobbyToken: string = "";
 
   lobby: Lobby;
+
+  socket: Socket = this.socketService.socket;
 
   ngOnInit(): void {
     this.userToken = this.loginService.userToken;

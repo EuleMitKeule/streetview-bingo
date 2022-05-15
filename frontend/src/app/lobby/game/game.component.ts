@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Game, GameService, GameWord } from 'generated/openapi';
 import { Socket } from 'ngx-socket-io';
-import { Observable } from 'rxjs';
-import { BingoSocket } from 'src/app/_shared/bingo-socket';
 import { LoginService } from 'src/app/_shared/login.service';
+import { SocketService } from 'src/app/_shared/socket.service';
 
 @Component({
   selector: 'app-game',
@@ -13,7 +12,7 @@ import { LoginService } from 'src/app/_shared/login.service';
 })
 export class GameComponent implements OnInit {
 
-  constructor(private gameService: GameService, private route: ActivatedRoute, private loginService: LoginService, private socket: BingoSocket) { }
+  constructor(private gameService: GameService, private route: ActivatedRoute, private loginService: LoginService, private socketService: SocketService) { }
 
   //game$: Observable<Game>;
 
@@ -25,6 +24,8 @@ export class GameComponent implements OnInit {
   wordInput: string = "";
 
   game: Game;
+
+  socket: Socket = this.socketService.socket;
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
