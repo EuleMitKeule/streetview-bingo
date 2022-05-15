@@ -9,3 +9,4 @@ pytest-mock~=3.5.1
 pytest-cov
 pytest~=6.2.2
 pyyaml
+markupsafe~=2.0.1

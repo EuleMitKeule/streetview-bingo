@@ -1,3 +1,8 @@
 {
-    "python.autoComplete.extraPaths": ["./backend"],
+    "python.autoComplete.extraPaths": [
+        "./backend"
+    ],
+    "python.analysis.extraPaths": [
+        "./backend"
+    ],
 }
