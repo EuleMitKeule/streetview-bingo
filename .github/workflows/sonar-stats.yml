@@ -32,7 +32,9 @@ jobs:
           mkdir data
           cd src
           python -m pytest --rootdir . --cov=. --cov-config=../config/.coveragerc --cov-report=xml:../coverage/coverage.xml
-          
+          cd ..
+          mv coverage/* ./
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
