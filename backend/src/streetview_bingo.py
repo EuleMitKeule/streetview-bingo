@@ -6,6 +6,7 @@ from flask import Flask
 from common import *
 from models import *
 from api import bp
+from frontend import frontend_bp
 
 def create_app(config_path: str) -> Flask:
     app = Flask(__name__)
@@ -40,6 +41,7 @@ def create_app(config_path: str) -> Flask:
         db.session.commit()
 
     app.register_blueprint(bp)
+    app.register_blueprint(frontend_bp)
 
     return app
 
@@ -49,5 +51,7 @@ if __name__ == '__main__':
     args = arg_parser.parse_args()
     config_path = args.config_path if args.config_path else "../config/streetview-bingo.yml"
     
+    print("Starting StreetView Bingo with config: " + config_path)
+
     app: Flask = create_app(config_path)
     sio.run(app, host=config.config_model.networking.host, port=config.config_model.networking.port)
