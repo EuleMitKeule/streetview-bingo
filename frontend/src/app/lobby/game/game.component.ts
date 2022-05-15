@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Game, GameService, GameWord } from 'generated/openapi';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
+import { BingoSocket } from 'src/app/_shared/bingo-socket';
 import { LoginService } from 'src/app/_shared/login.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { LoginService } from 'src/app/_shared/login.service';
 })
 export class GameComponent implements OnInit {
 
-  constructor(private gameService: GameService, private route: ActivatedRoute, private loginService: LoginService, private socket: Socket) { }
+  constructor(private gameService: GameService, private route: ActivatedRoute, private loginService: LoginService, private socket: BingoSocket) { }
 
   //game$: Observable<Game>;
 

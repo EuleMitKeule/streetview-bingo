@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Lobby, LobbyService } from 'generated/openapi';
 import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
+import { BingoSocket } from '../_shared/bingo-socket';
 import { LoginService } from '../_shared/login.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { LoginService } from '../_shared/login.service';
 })
 export class LobbyComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private lobbyService: LobbyService, private route: ActivatedRoute, private socket: Socket) { }
+  constructor(private loginService: LoginService, private lobbyService: LobbyService, private route: ActivatedRoute, private socket: BingoSocket) { }
 
   userToken: string = "";
   userId: number = this.loginService.userId;

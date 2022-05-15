@@ -13,8 +13,8 @@ import { GameComponent } from './lobby/game/game.component';
 import { BASE_PATH } from 'generated/openapi';
 import { ConfigurationService } from './_shared/configuration.service';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { BingoSocket } from './_shared/bingo-socket';
 
-const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    SocketIoModule.forRoot(config),
+    SocketIoModule
   ],
   providers: [
     {
@@ -43,7 +43,8 @@ const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
       provide: BASE_PATH,
       useFactory: (configurationService: ConfigurationService) => {return configurationService.getConfig().API_BASE_PATH},
       deps: [ConfigurationService]
-    }
+    },
+    BingoSocket
   ],
   bootstrap: [AppComponent]
 })
