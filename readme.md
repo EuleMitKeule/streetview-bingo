@@ -45,3 +45,9 @@ Start the frontend by first running the OpenAPI-Generator, then start the applic
 
 The flask server is set up to serve the Angular build files. Run ``ng build`` to generate them. The UI should be available at the root path of the flask server.
 
+### Docker
+
+#### Frontend
+
+To deploy the frontend in a separate container the url of the backend service as to be configured. To do this a `config.json`-file that includes the backend-configuration has to be mounted to `/usr/share/nginx/html/assets/config/config.json` in the container.
+

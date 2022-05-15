@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,6 +10,8 @@ import { LobbyComponent } from './lobby/lobby.component';
 import { FormsModule } from '@angular/forms';
 import { GameCreatorComponent } from './lobby/game-creator/game-creator.component';
 import { GameComponent } from './lobby/game/game.component';
+import { BASE_PATH } from 'generated/openapi';
+import { ConfigurationService } from './_shared/configuration.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,19 @@ import { GameComponent } from './lobby/game/game.component';
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (configurationService: ConfigurationService) => {return () => configurationService.loadConfig()},
+      deps: [ConfigurationService],
+      multi: true
+    },
+    {
+      provide: BASE_PATH,
+      useFactory: (configurationService: ConfigurationService) => {return configurationService.getConfig().API_BASE_PATH},
+      deps: [ConfigurationService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
