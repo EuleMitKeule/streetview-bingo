@@ -1,20 +1,38 @@
+
 import pytest
-from os import path
+from flask import Flask
 
-from config.database_config import SqliteConfig
-from config.config import Config
-from streetview_bingo import StreetViewBingo
+from streetview_bingo import create_app
+from common import db
 
 
-@pytest.fixture(scope="module")
-def mock_streetview_bingo():
-    basedir: str = path.abspath(path.dirname(__file__))
+def pytest_addoption(parser):
+    parser.addoption(
+        "--config",
+        action="store",
+        default="../config/test.config.yml",
+        help="Path to config file"
+    )
 
-    db_path = path.join(basedir, "test.db")
-    db_config = SqliteConfig(path=db_path, recreate=True)
-    config = Config()
-    config.database_config = db_config
+@pytest.fixture(scope="session")
+def config_path(pytestconfig):
+    return pytestconfig.getoption("--config")
 
-    streetview_bingo = StreetViewBingo(config=config)
 
-    return streetview_bingo
+@pytest.fixture(autouse=True, scope="function")
+def mock_app(request, config_path):
+    app: Flask = create_app(config_path)
+
+    ctx = app.app_context()
+    ctx.push()
+
+    db.drop_all()
+    db.create_all()
+    db.session.commit()
+
+    def teardown():
+        ctx.pop()
+
+    request.addfinalizer(teardown)
+    return app
+

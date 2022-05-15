@@ -18,8 +18,9 @@ class Game(TokenModel):
     __tablename__ = "game"
     status = db.Column(db.String(16), default="created")
     users = db.relationship("User", secondary=game_user_table)
-    words = db.relationship("GameWord", backref="game", foreign_keys='GameWord.game_id')
-    lobby_id = db.Column(db.Integer, db.ForeignKey("lobby.id"))
+    words = db.relationship("GameWord", backref="game", foreign_keys="GameWord.game_id")
 
+    lobby_id = db.Column(db.Integer, db.ForeignKey("lobby.id"))
+    
     moderator_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    moderator = db.relationship("User", foreign_keys='Game.moderator_id')
+    moderator = db.relationship("User", foreign_keys="Game.moderator_id")

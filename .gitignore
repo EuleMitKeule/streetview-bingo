@@ -58,3 +58,4 @@ Thumbs.db
 **/*.log
 **/*.sqlite
 backend/config/streetview-bingo.yml
+**/coverage/

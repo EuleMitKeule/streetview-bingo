@@ -1,3 +1,4 @@
+from sqlalchemy.ext.hybrid import hybrid_property
 from common import *
 from models import add_schema, User, Game, TokenModel
 
@@ -11,7 +12,11 @@ from models import add_schema, User, Game, TokenModel
 class Lobby(TokenModel):
     __tablename__ = "lobby"
     users = db.relationship("User", backref="lobby", foreign_keys='User.lobby_id')
-    # owner = db.relationship("User", backref="owned_lobby", foreign_keys='User.owned_lobby_id')
     owner = db.relationship("User", uselist=False, foreign_keys='User.owned_lobby_id')
 
-    games = db.relationship("Game", backref="games", foreign_keys="Game.lobby_id")
+    games = db.relationship("Game", foreign_keys="Game.lobby_id")
+
+    def add_game(self, game: Game):
+        self.games.append(game)
+        if self.owner not in game.users:
+            game.users.append(self.owner)

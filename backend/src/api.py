@@ -65,7 +65,7 @@ def create_game(lobby_token: str):
     moderator: User = User.find(moderator_id)
     lobby: Lobby = Lobby.find_by_token(lobby_token)
     game: Game = Game.create(moderator=moderator, users=lobby.users)
-    lobby.games.append(game)
+    lobby.add_game(game)
 
     db.session.commit()
     sio.emit("reload", to=lobby_token)
@@ -94,7 +94,7 @@ def update_game(lobby_token: str, game_token: str):
     if user.token != game.moderator.token:
         return {"message": "You are not moderator"}, 403
         
-    game: Game = Game.load(body)
+    game: Game = Game.load(data=body)
     db.session.commit()
 
     sio.emit("reload", to=lobby_token)
