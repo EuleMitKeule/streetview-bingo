@@ -12,6 +12,8 @@ COPY ./ /app/
 # Install all the dependencies
 RUN npm install
 
+RUN npm run generate:api
+
 # Generate the build of the application
 RUN npm run build-prod
 
