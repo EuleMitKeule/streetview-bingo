@@ -35,17 +35,48 @@ Street View Bingo can be played in person, using multiple devices, or via the in
 
 You need Python and Node installed on your machine to run this application. Furthermore, all dependencies defined in ``requirements.txt`` should be installed.
 
-## How to deploy
+### Configuration
 
-### Development
+Example config.yml:
+```yml
+sqlite:
+    db_path: ../data/streetview-bingo.sqlite
+    recreate: false
+
+networking:
+    port: 5000
+    host: localhost
+
+secret_key: secret
+```
+
+### Deployment
+
+#### Backend
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python streetview-bingo.py --config <path_to_config_yml>
+```
+
+#### Frontend
+
+##### Development
 
 Start the frontend by first running the OpenAPI-Generator, then start the application using ``ng serve``. The UI should run on port 4200.
 
-### Production
+##### Production
 
 The flask server is set up to serve the Angular build files. Run ``ng build`` to generate them. The UI should be available at the root path of the flask server.
 
 ### Docker
+
+#### Backend
+Mount the config.yml file to `/app/backend/config/streetview-bingo.yml`.<br>
+Mount a data folder to `/app/backend/data`
 
 #### Frontend
 

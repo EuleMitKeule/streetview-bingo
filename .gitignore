@@ -57,3 +57,4 @@ Thumbs.db
 **/venv/*
 **/*.log
 **/*.sqlite
+backend/config/streetview-bingo.yml
