@@ -33,4 +33,5 @@ jobs:
         run: |
           cd backend
           mkdir data
-          python -m pytest --rootdir src --cov=src --cov-config=config/.coveragerc
+          cd src
+          python -m pytest --rootdir . --cov=. --cov-config=../config/.coveragerc
