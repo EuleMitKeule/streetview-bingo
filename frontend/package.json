@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "generate:api": "openapi-generator-cli generate -g typescript-angular -i ../backend/specification/openapi.yaml -o ./generated/openapi"
+    "generate:api": "openapi-generator-cli generate -g typescript-angular -i ./openapi.yml -o ./generated/openapi"
   },
   "private": true,
   "dependencies": {
