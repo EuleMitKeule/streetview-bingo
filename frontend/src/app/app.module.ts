@@ -12,8 +12,7 @@ import { GameCreatorComponent } from './lobby/game-creator/game-creator.componen
 import { GameComponent } from './lobby/game/game.component';
 import { BASE_PATH } from 'generated/openapi';
 import { ConfigurationService } from './_shared/configuration.service';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { BingoSocket } from './_shared/bingo-socket';
+import { SocketIoModule } from 'ngx-socket-io';
 
 
 @NgModule({
@@ -43,8 +42,7 @@ import { BingoSocket } from './_shared/bingo-socket';
       provide: BASE_PATH,
       useFactory: (configurationService: ConfigurationService) => {return configurationService.getConfig().API_BASE_PATH},
       deps: [ConfigurationService]
-    },
-    BingoSocket
+    }
   ],
   bootstrap: [AppComponent]
 })

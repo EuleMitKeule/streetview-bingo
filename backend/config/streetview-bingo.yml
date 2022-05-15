@@ -1,0 +1,10 @@
+
+sqlite:
+    db_path: ../data//streetview-bingo.sqlite
+    recreate: false
+
+networking:
+    port: 5000
+    host: localhost
+
+secret_key: secret
