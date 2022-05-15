@@ -10,7 +10,7 @@ export class SocketService {
   public socket?: Socket;
 
   constructor(configurationService: ConfigurationService) {
-    let url: string = configurationService.getConfig().API_BASE_PATH;
+    let url: string = configurationService.getConfig().SOCKET_BASE_PATH;
     this.socket = new Socket({
       url: url
     })
