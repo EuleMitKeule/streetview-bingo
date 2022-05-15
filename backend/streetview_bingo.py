@@ -1,8 +1,12 @@
+import logging
+
 from connexion import FlaskApp
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_cors import CORS
 from flask import current_app
+from flask_socketio import SocketIO, emit, send
+from threading import Thread
 
 from config.config import Config
 from config.database_config import SqliteConfig, MysqlConfig
@@ -21,7 +25,7 @@ class StreetViewBingo:
 
         with self.connex_app.app.app_context():
 
-            self.connex_app.app.config['SQLALCHEMY_ECHO'] = True
+            self.connex_app.app.config['SQLALCHEMY_ECHO'] = False
             self.connex_app.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
             if type(config.database_config) is SqliteConfig:
@@ -36,19 +40,23 @@ class StreetViewBingo:
 
             self.db = SQLAlchemy(self.connex_app.app)
             self.ma = Marshmallow(self.connex_app.app)
+            self.socketio = SocketIO(self.connex_app.app, cors_allowed_origins="*")
 
+            current_app.streetview_bingo = self
             current_app.db = self.db
             current_app.ma = self.ma
 
             self.connex_app.add_api('openapi.yaml', strict_validation=True, validate_responses=True, base_path="/api")
-            self.connex_app.add_api('angular.yaml', options={"swagger_ui": False})
+            import frontend
 
             CORS(self.connex_app.app)
 
         self.create_db()
 
     def run(self):
-        self.connex_app.run()
+        # self.connex_app.run()
+        logging.getLogger('socketio').setLevel(logging.INFO)
+        self.socketio.run(app=self.connex_app.app, debug=True)
 
     def create_db(self):
         if type(self.config.database_config) is SqliteConfig:

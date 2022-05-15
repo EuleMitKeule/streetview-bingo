@@ -12,6 +12,9 @@ import { GameCreatorComponent } from './lobby/game-creator/game-creator.componen
 import { GameComponent } from './lobby/game/game.component';
 import { BASE_PATH } from 'generated/openapi';
 import { ConfigurationService } from './_shared/configuration.service';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:4200', options: {} };
 
 @NgModule({
   declarations: [
@@ -26,7 +29,8 @@ import { ConfigurationService } from './_shared/configuration.service';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [
     {
