@@ -7,4 +7,5 @@ COPY ./frontend/dist /app/frontend/dist
 
 RUN pip install -r /app/backend/requirements.txt
 
-CMD ["python", "/app/backend/main.py"]
+WORKDIR /app/backend/src
+CMD ["python", "streetview-bingo.py"]
