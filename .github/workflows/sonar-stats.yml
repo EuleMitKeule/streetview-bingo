@@ -33,9 +33,10 @@ jobs:
           cd src
           python -m pytest --rootdir . --cov=. --cov-config=../config/.coveragerc --cov-report=xml:../coverage/coverage.xml
           cat ../coverage/coverage.xml
-          cd ../coverage/
-          python -m coverage xml -i
-          cat ../coverage/coverage.xml
+
+      - name: fix code coverage paths
+        run: |
+          sed -i 's/\/home\/runner\/work\/streetview-bingo\/streetview-bingo\//\/github\/workspace\//g' ..coverage/coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
