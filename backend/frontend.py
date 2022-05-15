@@ -7,6 +7,8 @@ def serve_file(filename: str):
     content_type = 'application/javascript'
     if filename == "index.html":
         content_type = 'text/html'
+    if "css" in filename:
+        content_type = 'text/css'
     return send_from_directory("../frontend/dist/frontend/", filename), {'content-type': content_type}
 
 
