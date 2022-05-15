@@ -10,7 +10,12 @@
 
       <ul ngbNav #nav="ngbNav" class="nav-pills nav-fill">
         <li ngbNavItem>
-          <a ngbNavLink>Create Lobby</a>
+          <a ngbNavLink>
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M2,16H10V14H2M18,14V10H16V14H12V16H16V20H18V16H22V14M14,6H2V8H14M14,10H2V12H14V10Z" />
+            </svg>
+            Create Lobby
+          </a>
           <ng-template ngbNavContent>
             
             <div class="form-group">
@@ -19,12 +24,16 @@
               <small class="form-text text-muted">Please enter your name</small>
             </div>
 
-            <button class="btn btn-primary" (click)="createLobby()">Create Lobby</button>
+            <button class="btn btn-primary mt-2" (click)="createLobby()">Create Lobby</button>
 
           </ng-template>
         </li>
         <li ngbNavItem>
-          <a ngbNavLink>Join Lobby</a>
+          <a ngbNavLink>
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M19 17V19H7V17S7 13 13 13 19 17 19 17M16 8A3 3 0 1 0 13 11A3 3 0 0 0 16 8M19.2 13.06A5.6 5.6 0 0 1 21 17V19H24V17S24 13.55 19.2 13.06M18 5A2.91 2.91 0 0 0 17.11 5.14A5 5 0 0 1 17.11 10.86A2.91 2.91 0 0 0 18 11A3 3 0 0 0 18 5M8 10H5V7H3V10H0V12H3V15H5V12H8Z" />
+            </svg>
+            Join Lobby</a>
           <ng-template ngbNavContent>
             
 
@@ -41,17 +50,22 @@
               <small class="form-text text-muted">Please enter the token the owner of the lobby sent to you.</small>
             </div>
 
-            <button class="btn btn-primary" (click)="joinLobby()">Join Lobby</button>
+            <button class="btn btn-primary mt-2" (click)="joinLobby()">Join Lobby</button>
 
           </ng-template>
         </li>
         <li ngbNavItem>
-          <a ngbNavLink>Login into previous lobby</a>
+          <a ngbNavLink>
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3" />
+            </svg>
+            Login into previous lobby
+          </a>
           <ng-template ngbNavContent>
             
             <div class="form-group">
               <label for="inputUserToken">User Token</label>
-              <input class="form-control" name="inputUserToken" [(ngModel)]="userToken">
+              <input class="form-control" name="inputUserToken" [(ngModel)]="userToken" disabled>
               <small class="form-text text-muted">If you already have a user token for the lobby you can enter it
                 here.</small>
             </div>
