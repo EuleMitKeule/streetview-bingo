@@ -30,10 +30,8 @@ jobs:
         run: |
           cd backend
           mkdir data
-          cd src
-          python -m pytest --rootdir . --cov=. --cov-config=../config/.coveragerc --cov-report=xml:../coverage/coverage.xml
-          cd ..
-          mv coverage/* ./src/
+          python -m pytest --rootdir src --cov=src --cov-config=config/.coveragerc --cov-report=xml:coverage/coverage.xml
+          cat ./coverage/coverage.xml
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
