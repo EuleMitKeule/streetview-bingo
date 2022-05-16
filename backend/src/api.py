@@ -56,6 +56,22 @@ def join_lobby(lobby_token: str):
     return jsonify(user_dict)
 
 
+@bp.route("/lobby/<lobby_token>/rejoin, methods=['POST']")
+def rejoin_lobby(lobby_token: str):    
+    user_token: str = request.args.get("user_token")
+    user: User = User.find_by_token(user_token)
+    lobby: Lobby = Lobby.find_by_token(lobby_token)
+
+    if user not in lobby.users:
+        lobby.users.append(user)
+        db.session.commit()
+        sio.emit("reload", to=lobby_token)
+
+    lobby_dict = Lobby.dump(lobby)
+
+    return jsonify(lobby_dict)
+
+
 @bp.route("/lobby/<lobby_token>/game/", methods=["POST"])
 def create_game(lobby_token: str):
     body: dict = request.get_json()
