@@ -1,4 +1,4 @@
 {
-    "API_BASE_PATH": "http://localhost:5000/api",
+    "API_BASE_PATH": "http://localhost:5000",
     "SOCKET_BASE_PATH": "http://localhost:5000/"
 }

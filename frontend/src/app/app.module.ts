@@ -13,6 +13,10 @@ import { GameComponent } from './lobby/game/game.component';
 import { BASE_PATH } from 'generated/openapi';
 import { ConfigurationService } from './_shared/configuration.service';
 import { SocketIoModule } from 'ngx-socket-io';
+import { LobbyUsersListComponent } from './lobby/lobby-users-list/lobby-users-list.component';
+import { LobbyInformationComponent } from './lobby/lobby-information/lobby-information.component';
+import { LobbyInformationFormComponent } from './lobby/lobby-information-form/lobby-information-form.component';
+import { MenuCardComponent } from './menu-card/menu-card.component';
 
 
 @NgModule({
@@ -21,7 +25,11 @@ import { SocketIoModule } from 'ngx-socket-io';
     LoginComponent,
     LobbyComponent,
     GameCreatorComponent,
-    GameComponent
+    GameComponent,
+    LobbyUsersListComponent,
+    LobbyInformationComponent,
+    LobbyInformationFormComponent,
+    MenuCardComponent
   ],
   imports: [
     BrowserModule,

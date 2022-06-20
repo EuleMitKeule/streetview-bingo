@@ -15,7 +15,6 @@ export class ConfigurationService {
       .toPromise()
       .then((config: any) => {
         this.config = config;
-        console.log(this.config);
       })
       .catch((err: any) => {
         console.error(err);

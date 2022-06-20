@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run generate:api && ng serve",
     "build": "ng build",
     "build-prod": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "generate:api": "openapi-generator-cli generate -g typescript-angular -i ./openapi.yml -o ./generated/openapi"
+    "generate:api": "openapi-generator-cli generate -g typescript-angular -i http://localhost:5000/openapi.json -o ./generated/openapi"
   },
   "private": true,
   "dependencies": {

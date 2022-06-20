@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Lobby, User } from 'generated/openapi';
 
 @Injectable({
   providedIn: 'root'
@@ -7,17 +8,16 @@ export class LoginService {
 
   constructor() { }
 
-  public userToken: string = localStorage.getItem('userToken');
-  public userId: number = Number(localStorage.getItem('userId'));
+  public user: User = JSON.parse(localStorage.getItem("user"));
+  public lobby: Lobby = JSON.parse(localStorage.getItem("lobby"));
 
-  setUserToken(token: string) {
-    localStorage.setItem("userToken", token);
-    this.userToken = token;
+  setUser(user: User) {
+    localStorage.setItem("user", JSON.stringify(user));
+    this.user = user;
   }
 
-  setUserId(id: number) {
-    localStorage.setItem("userId", id.toString());
-    this.userId = id;
+  setLobby(lobby: Lobby) {
+    localStorage.setItem("lobby", JSON.stringify(lobby));
+    this.lobby = lobby;
   }
-
 }

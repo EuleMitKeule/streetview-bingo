@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LobbyService } from 'generated/openapi';
+import { JoinService } from 'generated/openapi/api/join.service';
+import { LobbiesService } from 'generated/openapi/api/lobbies.service';
+import { UsersService } from 'generated/openapi/api/users.service';
 import { LoginService } from '../_shared/login.service';
 
 @Component({
@@ -12,28 +14,44 @@ export class LoginComponent implements OnInit {
 
   username: string = "";
   lobbyToken: string = "";
-  userToken: string = "";
 
-  constructor(private lobbyService: LobbyService, private loginService: LoginService, private router: Router) {}
+  constructor(private joinService: JoinService, private lobbiesService: LobbiesService, private usersService: UsersService, private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
+    if (this.loginService.user && this.loginService.lobby) {
+      this.router.navigate(['lobby', this.loginService.lobby])
+    }
   }
 
   createLobby() {
-    this.lobbyService.apiCreateLobby({"username": this.username }).subscribe(x => {
-      this.loginService.setUserToken(x.user.token);
-      this.loginService.setUserId(x.user.id)
-      this.router.navigate(['lobby', x.lobby.token])
-    });
+    this.usersService.createUser({
+      "name": this.username
+    }).subscribe(user => {
+      this.loginService.setUser(user);
 
+      this.lobbiesService.createLobby({
+        "owner": this.loginService.user,
+        "users": [this.loginService.user],
+      
+      }).subscribe(lobby => {
+        this.loginService.setLobby(lobby.token);
+        this.router.navigate(['lobby', lobby.token])
+      });
+    });
   }
 
   joinLobby() {
-    this.lobbyService.apiJoinLobby(this.lobbyToken, {"username": this.username}).subscribe(x => {
-      this.loginService.setUserToken(x.token);
-      this.loginService.setUserId(x.id)
-      this.router.navigate(['lobby', this.lobbyToken])
-    })
+    this.usersService.createUser({
+      "name": this.username
+    }).subscribe(user => {
+      this.loginService.setUser(user);
+      this.joinService.joinLobby(
+        this.lobbyToken, 
+        this.loginService.user
+      ).subscribe(lobby => {
+        this.loginService.setLobby(lobby.token);
+        this.router.navigate(['lobby', lobby.token])
+      })
+    });
   }
-
 }

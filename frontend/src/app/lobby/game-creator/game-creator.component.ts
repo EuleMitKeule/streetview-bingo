@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Game, GameService, Lobby, User } from 'generated/openapi';
+import { Lobby, User } from 'generated/openapi';
 import { LoginService } from 'src/app/_shared/login.service';
 
 @Component({
@@ -14,27 +14,27 @@ export class GameCreatorComponent implements OnInit {
 
   selectedModeratorId: number;
 
-  constructor(private gameService: GameService, private loginService: LoginService, private router: Router) { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log("hello")
-    console.log(this.lobby);
+    // console.log("hello")
+    // console.log(this.lobby);
   }
 
-  createGame() {
-    console.log("hallo world")
+  // createGame() {
+  //   console.log("hallo world")
 
-    let game: Game = {
-      moderator: {
-        id: Number(this.selectedModeratorId)
-      },
-      users: this.lobby.users
-    }
+  //   let game: Game = {
+  //     moderator: {
+  //       id: Number(this.selectedModeratorId)
+  //     },
+  //     users: this.lobby.users
+  //   }
 
-    this.gameService.apiCreateGame(this.lobby.token, this.loginService.userToken, game).subscribe(x => {
-      console.log(x);
-      this.router.navigate(["lobby", this.lobby.token, "game", x.token]);
-    });
-  }
+  //   this.gameService.apiCreateGame(this.lobby.token, this.loginService.userToken, game).subscribe(x => {
+  //     console.log(x);
+  //     this.router.navigate(["lobby", this.lobby.token, "game", x.token]);
+  //   });
+  // }
 
 }

@@ -1,0 +1,9 @@
+<div *ngIf="lobby && user">
+    <p>The lobby token is <strong (click)="copyToken()" class="copy-link">{{ lobby.token }}</strong>. Send this token to your friends to let them join this lobby.</p>
+    
+    <div *ngIf="user.id == lobby.owner.id">
+        <p>You are the owner of this lobby.</p>
+        <app-lobby-information-form [lobby]="lobby"></app-lobby-information-form>
+        <button class="btn btn-primary" (click)="startGame()">Start Game</button>
+    </div>
+</div>
