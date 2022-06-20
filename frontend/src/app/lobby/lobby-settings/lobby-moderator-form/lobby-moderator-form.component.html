@@ -1,0 +1,11 @@
+<div class="form-group" *ngIf="users">
+    <label for="exampleInputEmail1">Next moderator</label>
+
+    <select class="form-control" [(ngModel)]="selectedModeratorId">
+        <option *ngFor="let user of users" value="{{user.id}}">{{ user.name }}</option>
+    </select>
+
+    <small id="emailHelp" class="form-text text-muted">Please select the moderator for the next round.</small>
+
+    <button class="btn btn-primary" (click)="onSubmit()">Next</button>
+</div>

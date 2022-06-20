@@ -1,7 +1,0 @@
-<div class="form-group" *ngIf="lobby">
-    <label for="exampleInputEmail1">Next moderator</label>
-    <select class="form-control" [(ngModel)]="selectedModeratorId" (change)="selectModerator()">
-        <option *ngFor="let user of lobby.users" value="{{user.id}}">{{ user.name }}</option>
-    </select>
-    <small id="emailHelp" class="form-text text-muted">Please select the moderator for the next round.</small>
-</div>

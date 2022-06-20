@@ -1,6 +1,7 @@
-<div class="container" [ngSwitch]="lobby?.state">
+<div class="container" *ngIf="lobby">
 
-  <div *ngSwitchCase="'lobby'">
+  
+  <div *ngIf="lobby.state === 'lobby' || lobby.state === 'words'">
     <div class="row">
       <div class="col">
         <nav aria-label="breadcrumb">
@@ -14,30 +15,35 @@
     
     <div class="row">
       <div class="col">
+        <app-menu-card [title]="'Lobby Information'">
+          <app-lobby-information [lobby]="lobby" [user]="user"></app-lobby-information>
+        </app-menu-card>
         <app-menu-card [title]="'Users'">
           <app-lobby-users-list [lobby]="lobby"></app-lobby-users-list>
         </app-menu-card>
       </div>
   
       <div class="col">
-        <app-menu-card [title]="'Lobby Information'">
-          <app-lobby-information [lobby]="lobby" [user]="user"></app-lobby-information>
+        <app-menu-card [title]="'Lobby Settings'">
+            <app-lobby-settings [lobby]="lobby" [user]="user"></app-lobby-settings>
         </app-menu-card>
       </div>
     </div>
   </div>
 
-  <div *ngSwitchCase="'game'">
-    <div *ngIf="lobby && lobby.moderator">
+  <div *ngIf="lobby.state === 'game'">
+    <!-- <div *ngIf="lobby && lobby.moderator">
 
       <div class="row" *ngIf="lobby; else indicator">
         <div class="col">
-          <p>Status: {{lobby.state}}</p>
-          <p>Moderator: {{ lobby.moderator.name }}</p>
-          <p>Players:</p>
-          <ul>
-            <li *ngFor="let user of lobby.users">{{ user.name }}</li>
-          </ul>
+          <app-menu-card [title]="'Lobby Information'">
+            <p>Status: {{lobby.state}}</p>
+            <p>Moderator: {{ lobby.moderator.name }}</p>
+            <p>Players:</p>
+            <ul>
+              <li *ngFor="let user of lobby.users">{{ user.name }}</li>
+            </ul>
+          </app-menu-card>
         </div>
         <div class="col" *ngIf="lobby.state == 'lobby'">
           <div *ngIf="lobby.moderator.id == user.id; then thenBlock else elseBlock">
@@ -99,10 +105,7 @@
         
       </div>
     </div>
-  </div>
-  </div>
-
-  <div *ngSwitchDefault>
+  </div> -->
   </div>
   
 </div>

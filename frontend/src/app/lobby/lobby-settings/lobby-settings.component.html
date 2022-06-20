@@ -1,0 +1,24 @@
+
+<div [ngSwitch]="lobby.state">
+
+    <app-lobby-moderator-form 
+        [users]="lobby.users"
+        (onFormSubmit)="onModeratorFormSubmit($event)" 
+        *ngSwitchCase="'lobby'"
+    ></app-lobby-moderator-form>
+
+    <div *ngSwitchCase="'words'">
+        <app-lobby-words-form 
+            [words]="lobby.words" 
+            [isModerator]="lobby.moderator.id === user.id"
+            (onWordsFormSubmit)="onWordsFormSubmit()"
+            (onAddWord)="onAddWord($event)"
+            (onRemoveWord)="onRemoveWord($event)"
+        ></app-lobby-words-form>
+    </div>
+
+    <div *ngSwitchDefault>
+
+    </div>
+
+</div>

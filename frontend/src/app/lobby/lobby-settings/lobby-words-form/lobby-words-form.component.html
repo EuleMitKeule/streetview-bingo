@@ -1,0 +1,29 @@
+<div class="col">
+    <div *ngIf="isModerator; then thenBlock else elseBlock">
+    </div>
+    <ng-template #thenBlock>
+      <p>You are the moderator. Please select the words for this round.</p>
+      <h3>Words</h3>
+      <div class="input-group mt-3">
+        <input type="text" class="form-control" placeholder="Enter a word to add" [(ngModel)]="wordInput">
+        <div class="input-group-append">
+          <button class="btn btn-outline-primary" type="button" (click)="addWord()">Add Word</button>
+        </div>
+      </div>
+      
+      <ul class="list-group mt-3">
+        <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let word of words">
+          {{ word.text}}
+          <button type="button" class="btn-close" aria-label="Close" (click)="removeWord(word)">
+          </button>
+        </li>
+      </ul>
+      
+      <button class="btn btn-primary mt-5" (click)="onSubmit()">
+        Start Game
+      </button>
+    </ng-template>
+    <ng-template #elseBlock>
+      <p>The moderator is selecting the words for this round.</p>
+    </ng-template>
+  </div>

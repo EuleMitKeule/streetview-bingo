@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         "users": [this.loginService.user],
       
       }).subscribe(lobby => {
-        this.loginService.setLobby(lobby.token);
+        this.loginService.setLobby(lobby);
         this.router.navigate(['lobby', lobby.token])
       });
     });
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
         this.lobbyToken, 
         this.loginService.user
       ).subscribe(lobby => {
-        this.loginService.setLobby(lobby.token);
+        this.loginService.setLobby(lobby);
         this.router.navigate(['lobby', lobby.token])
       })
     });

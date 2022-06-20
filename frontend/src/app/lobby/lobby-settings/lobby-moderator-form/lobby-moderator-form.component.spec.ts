@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LobbyInformationFormComponent } from './lobby-information-form.component';
+import { LobbyInformationFormComponent } from './lobby-moderator-form.component';
 
 describe('LobbyInformationFormComponent', () => {
   let component: LobbyInformationFormComponent;

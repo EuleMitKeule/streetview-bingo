@@ -8,15 +8,16 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { LobbyComponent } from './lobby/lobby.component';
 import { FormsModule } from '@angular/forms';
-import { GameCreatorComponent } from './lobby/game-creator/game-creator.component';
-import { GameComponent } from './lobby/game/game.component';
 import { BASE_PATH } from 'generated/openapi';
 import { ConfigurationService } from './_shared/configuration.service';
 import { SocketIoModule } from 'ngx-socket-io';
 import { LobbyUsersListComponent } from './lobby/lobby-users-list/lobby-users-list.component';
 import { LobbyInformationComponent } from './lobby/lobby-information/lobby-information.component';
-import { LobbyInformationFormComponent } from './lobby/lobby-information-form/lobby-information-form.component';
+import { LobbyModeratorFormComponent } from './lobby/lobby-settings/lobby-moderator-form/lobby-moderator-form.component';
 import { MenuCardComponent } from './menu-card/menu-card.component';
+import { LobbySettingsComponent } from './lobby/lobby-settings/lobby-settings.component';
+import { LobbyWordsFormComponent } from './lobby/lobby-settings/lobby-words-form/lobby-words-form.component';
+import { GoogleMapComponent } from './lobby/game/google-map/google-map.component';
 
 
 @NgModule({
@@ -24,12 +25,13 @@ import { MenuCardComponent } from './menu-card/menu-card.component';
     AppComponent,
     LoginComponent,
     LobbyComponent,
-    GameCreatorComponent,
-    GameComponent,
     LobbyUsersListComponent,
     LobbyInformationComponent,
-    LobbyInformationFormComponent,
-    MenuCardComponent
+    LobbyModeratorFormComponent,
+    MenuCardComponent,
+    LobbySettingsComponent,
+    LobbyWordsFormComponent,
+    GoogleMapComponent
   ],
   imports: [
     BrowserModule,

@@ -33,7 +33,7 @@ export class LobbyComponent implements OnInit {
       this.refreshLobby();
       
       this.socket.emit("join", { 
-        room: this.loginService.lobby
+        room: this.loginService.lobby.token
       });
     });
 
