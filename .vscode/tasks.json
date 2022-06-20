@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": 
+    [
+        {
+            "label": "Run backend",
+            "type": "shell",
+            
+            "windows": {
+                "command": "powershell.exe",
+                "args": [
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-File",
+                    "${workspaceFolder}/scripts/run-backend.ps1"
+                ],
+            },
+            "linux": {
+                "command": "bash",
+                "args": [
+                    "-c",
+                    "${workspaceFolder}/scripts/run-backend.sh"
+                ],
+            },
+            "isBackground": true,
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "runOptions": { 
+                "runOn": "folderOpen" 
+            }
+        },
+        {
+            "label": "Run frontend",
+            "type": "shell",
+            
+            "windows": {
+                "command": "powershell.exe",
+                "args": [
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-File",
+                    "${workspaceFolder}/scripts/run-frontend.ps1"
+                ],
+            },
+            "linux": {
+                "command": "bash",
+                "args": [
+                    "-c",
+                    "${workspaceFolder}/scripts/run-frontend.sh"
+                ],
+            },
+            "isBackground": true,
+            "group": "build",
+            "presentation": {
+                "reveal": "always"
+            },
+            "runOptions": { 
+                "runOn": "folderOpen" 
+            }
+        }
+    ]
+}

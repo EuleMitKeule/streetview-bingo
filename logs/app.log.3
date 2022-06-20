@@ -1,0 +1,329 @@
+[2022-06-19 03:13:42] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words setup primary join lobbies.id = words.lobby_id
+[2022-06-19 03:13:42] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words setup secondary join None
+[2022-06-19 03:13:42] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words synchronize pairs [(lobbies.id => words.lobby_id)]
+[2022-06-19 03:13:42] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words secondary synchronize pairs []
+[2022-06-19 03:13:42] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words local/remote pairs [(lobbies.id / words.lobby_id)]
+[2022-06-19 03:13:42] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words remote columns [words.lobby_id]
+[2022-06-19 03:13:42] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words local columns [lobbies.id]
+[2022-06-19 03:13:42] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words relationship direction symbol('ONETOMANY')
+[2022-06-19 03:13:42] (sqlalchemy.orm.strategies.LazyLoader) INFO Lobby.words lazy loading clause :param_1 = words.lobby_id
+[2022-06-19 03:13:42] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop id
+[2022-06-19 03:13:42] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop token
+[2022-06-19 03:13:42] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop _state
+[2022-06-19 03:13:42] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _post_configure_properties() complete
+[2022-06-19 03:13:42] (sqlalchemy.pool.impl.NullPool) DEBUG Created new connection <sqlite3.Connection object at 0x7f01a12aa940>
+[2022-06-19 03:13:42] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7f01a12aa940> checked out from pool
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO BEGIN (implicit)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("users")
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (0, 'id', 'INTEGER', 1, None, 1)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (1, 'name', 'VARCHAR(255)', 1, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (2, 'lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (3, 'owned_lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (4, 'moderated_lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (5, 'ready', 'BOOLEAN', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("word_user")
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (0, 'word_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (1, 'user_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("words")
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (0, 'id', 'INTEGER', 1, None, 1)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (1, 'text', 'VARCHAR(32)', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (2, 'lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("lobby_user")
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (0, 'lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (1, 'user_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("lobbies")
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (0, 'id', 'INTEGER', 1, None, 1)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (1, 'token', 'VARCHAR(64)', 0, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) DEBUG Row (2, '_state', 'VARCHAR(16)', 1, None, 0)
+[2022-06-19 03:13:42] (sqlalchemy.engine.Engine) INFO COMMIT
+[2022-06-19 03:13:42] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7f01a12aa940> being returned to pool
+[2022-06-19 03:13:42] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7f01a12aa940> rollback-on-return
+[2022-06-19 03:13:42] (sqlalchemy.pool.impl.NullPool) DEBUG Closing connection <sqlite3.Connection object at 0x7f01a12aa940>
+[2022-06-19 03:13:42] (flask-template) INFO flask-template initialized.
+[2022-06-19 03:13:52] (flask-template) INFO Starting flask-template...
+[2022-06-19 03:13:52] (flask-template) INFO Loading config from /home/eule/projects/streetview-bingo/config/test.config.yml.
+[2022-06-19 03:13:52] (flask-template) INFO Using log file at logs/app.log.
+[2022-06-19 03:13:52] (flask-template) INFO Using database file at /home/eule/projects/streetview-bingo/data/app.sqlite.
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(id, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(name, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(lobby_id, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(owned_lobby_id, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(moderated_lobby_id, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(ready, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) Identified primary key columns: ColumnSet([Column('id', Integer(), table=<users>, primary_key=True, nullable=False)])
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) constructed
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _post_configure_properties() started
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop name
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop owned_lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop moderated_lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop ready
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _post_configure_properties() complete
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _configure_property(users, RelationshipProperty)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _configure_property(id, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _configure_property(text, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _configure_property(lobby_id, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) Identified primary key columns: ColumnSet([Column('id', Integer(), table=<words>, primary_key=True, nullable=False)])
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) constructed
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _post_configure_properties() started
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) initialize prop users
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users setup primary join words.id = word_user.word_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users setup secondary join users.id = word_user.user_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users synchronize pairs [(words.id => word_user.word_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users secondary synchronize pairs [(users.id => word_user.user_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users local/remote pairs [(words.id / word_user.word_id),(users.id / word_user.user_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users remote columns [word_user.word_id,word_user.user_id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users local columns [words.id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users relationship direction symbol('MANYTOMANY')
+[2022-06-19 03:13:52] (sqlalchemy.orm.strategies.LazyLoader) INFO Word.users lazy loading clause :param_1 = word_user.word_id AND users.id = word_user.user_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) initialize prop id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) initialize prop text
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) initialize prop lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _post_configure_properties() complete
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(owner, RelationshipProperty)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(users, RelationshipProperty)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(moderator, RelationshipProperty)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(words, RelationshipProperty)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(id, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(token, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(_state, Column)
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) Identified primary key columns: ColumnSet([Column('id', Integer(), table=<lobbies>, primary_key=True, nullable=False)])
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) constructed
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _post_configure_properties() started
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop owner
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner setup primary join lobbies.id = users.owned_lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner setup secondary join None
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner synchronize pairs [(lobbies.id => users.owned_lobby_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner secondary synchronize pairs []
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner local/remote pairs [(lobbies.id / users.owned_lobby_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner remote columns [users.owned_lobby_id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner local columns [lobbies.id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner relationship direction symbol('ONETOMANY')
+[2022-06-19 03:13:52] (sqlalchemy.orm.strategies.LazyLoader) INFO Lobby.owner lazy loading clause :param_1 = users.owned_lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop users
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users setup primary join lobbies.id = lobby_user.lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users setup secondary join users.id = lobby_user.user_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users synchronize pairs [(lobbies.id => lobby_user.lobby_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users secondary synchronize pairs [(users.id => lobby_user.user_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users local/remote pairs [(lobbies.id / lobby_user.lobby_id),(users.id / lobby_user.user_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users remote columns [lobby_user.lobby_id,lobby_user.user_id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users local columns [lobbies.id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users relationship direction symbol('MANYTOMANY')
+[2022-06-19 03:13:52] (sqlalchemy.orm.strategies.LazyLoader) INFO Lobby.users lazy loading clause :param_1 = lobby_user.lobby_id AND users.id = lobby_user.user_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop moderator
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator setup primary join lobbies.id = users.moderated_lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator setup secondary join None
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator synchronize pairs [(lobbies.id => users.moderated_lobby_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator secondary synchronize pairs []
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator local/remote pairs [(lobbies.id / users.moderated_lobby_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator remote columns [users.moderated_lobby_id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator local columns [lobbies.id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator relationship direction symbol('ONETOMANY')
+[2022-06-19 03:13:52] (sqlalchemy.orm.strategies.LazyLoader) INFO Lobby.moderator lazy loading clause :param_1 = users.moderated_lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop words
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words setup primary join lobbies.id = words.lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words setup secondary join None
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words synchronize pairs [(lobbies.id => words.lobby_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words secondary synchronize pairs []
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words local/remote pairs [(lobbies.id / words.lobby_id)]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words remote columns [words.lobby_id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words local columns [lobbies.id]
+[2022-06-19 03:13:52] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words relationship direction symbol('ONETOMANY')
+[2022-06-19 03:13:52] (sqlalchemy.orm.strategies.LazyLoader) INFO Lobby.words lazy loading clause :param_1 = words.lobby_id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop id
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop token
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop _state
+[2022-06-19 03:13:52] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _post_configure_properties() complete
+[2022-06-19 03:13:52] (sqlalchemy.pool.impl.NullPool) DEBUG Created new connection <sqlite3.Connection object at 0x7fb0a7232940>
+[2022-06-19 03:13:52] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7fb0a7232940> checked out from pool
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO BEGIN (implicit)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("users")
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (0, 'id', 'INTEGER', 1, None, 1)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (1, 'name', 'VARCHAR(255)', 1, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (2, 'lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (3, 'owned_lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (4, 'moderated_lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (5, 'ready', 'BOOLEAN', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("word_user")
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (0, 'word_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (1, 'user_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("words")
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (0, 'id', 'INTEGER', 1, None, 1)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (1, 'text', 'VARCHAR(32)', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (2, 'lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("lobby_user")
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (0, 'lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (1, 'user_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("lobbies")
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (0, 'id', 'INTEGER', 1, None, 1)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (1, 'token', 'VARCHAR(64)', 0, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) DEBUG Row (2, '_state', 'VARCHAR(16)', 1, None, 0)
+[2022-06-19 03:13:52] (sqlalchemy.engine.Engine) INFO COMMIT
+[2022-06-19 03:13:52] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7fb0a7232940> being returned to pool
+[2022-06-19 03:13:52] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7fb0a7232940> rollback-on-return
+[2022-06-19 03:13:52] (sqlalchemy.pool.impl.NullPool) DEBUG Closing connection <sqlite3.Connection object at 0x7fb0a7232940>
+[2022-06-19 03:13:52] (flask-template) INFO flask-template initialized.
+[2022-06-19 03:13:58] (flask-template) INFO Starting flask-template...
+[2022-06-19 03:13:58] (flask-template) INFO Loading config from /home/eule/projects/streetview-bingo/config/test.config.yml.
+[2022-06-19 03:13:58] (flask-template) INFO Using log file at logs/app.log.
+[2022-06-19 03:13:58] (flask-template) INFO Using database file at /home/eule/projects/streetview-bingo/data/app.sqlite.
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(id, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(name, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(lobby_id, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(owned_lobby_id, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(moderated_lobby_id, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _configure_property(ready, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) Identified primary key columns: ColumnSet([Column('id', Integer(), table=<users>, primary_key=True, nullable=False)])
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) constructed
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _post_configure_properties() started
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop name
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop owned_lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop moderated_lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) initialize prop ready
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (User|users) _post_configure_properties() complete
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _configure_property(users, RelationshipProperty)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _configure_property(id, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _configure_property(text, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _configure_property(lobby_id, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) Identified primary key columns: ColumnSet([Column('id', Integer(), table=<words>, primary_key=True, nullable=False)])
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) constructed
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _post_configure_properties() started
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) initialize prop users
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users setup primary join words.id = word_user.word_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users setup secondary join users.id = word_user.user_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users synchronize pairs [(words.id => word_user.word_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users secondary synchronize pairs [(users.id => word_user.user_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users local/remote pairs [(words.id / word_user.word_id),(users.id / word_user.user_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users remote columns [word_user.word_id,word_user.user_id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users local columns [words.id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Word.users relationship direction symbol('MANYTOMANY')
+[2022-06-19 03:13:58] (sqlalchemy.orm.strategies.LazyLoader) INFO Word.users lazy loading clause :param_1 = word_user.word_id AND users.id = word_user.user_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) initialize prop id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) initialize prop text
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) initialize prop lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Word|words) _post_configure_properties() complete
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(owner, RelationshipProperty)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(users, RelationshipProperty)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(moderator, RelationshipProperty)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(words, RelationshipProperty)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(id, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(token, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _configure_property(_state, Column)
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) Identified primary key columns: ColumnSet([Column('id', Integer(), table=<lobbies>, primary_key=True, nullable=False)])
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) constructed
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _post_configure_properties() started
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop owner
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner setup primary join lobbies.id = users.owned_lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner setup secondary join None
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner synchronize pairs [(lobbies.id => users.owned_lobby_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner secondary synchronize pairs []
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner local/remote pairs [(lobbies.id / users.owned_lobby_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner remote columns [users.owned_lobby_id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner local columns [lobbies.id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.owner relationship direction symbol('ONETOMANY')
+[2022-06-19 03:13:58] (sqlalchemy.orm.strategies.LazyLoader) INFO Lobby.owner lazy loading clause :param_1 = users.owned_lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop users
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users setup primary join lobbies.id = lobby_user.lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users setup secondary join users.id = lobby_user.user_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users synchronize pairs [(lobbies.id => lobby_user.lobby_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users secondary synchronize pairs [(users.id => lobby_user.user_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users local/remote pairs [(lobbies.id / lobby_user.lobby_id),(users.id / lobby_user.user_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users remote columns [lobby_user.user_id,lobby_user.lobby_id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users local columns [lobbies.id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.users relationship direction symbol('MANYTOMANY')
+[2022-06-19 03:13:58] (sqlalchemy.orm.strategies.LazyLoader) INFO Lobby.users lazy loading clause :param_1 = lobby_user.lobby_id AND users.id = lobby_user.user_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop moderator
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator setup primary join lobbies.id = users.moderated_lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator setup secondary join None
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator synchronize pairs [(lobbies.id => users.moderated_lobby_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator secondary synchronize pairs []
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator local/remote pairs [(lobbies.id / users.moderated_lobby_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator remote columns [users.moderated_lobby_id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator local columns [lobbies.id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.moderator relationship direction symbol('ONETOMANY')
+[2022-06-19 03:13:58] (sqlalchemy.orm.strategies.LazyLoader) INFO Lobby.moderator lazy loading clause :param_1 = users.moderated_lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop words
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words setup primary join lobbies.id = words.lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words setup secondary join None
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words synchronize pairs [(lobbies.id => words.lobby_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words secondary synchronize pairs []
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words local/remote pairs [(lobbies.id / words.lobby_id)]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words remote columns [words.lobby_id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words local columns [lobbies.id]
+[2022-06-19 03:13:58] (sqlalchemy.orm.relationships.RelationshipProperty) INFO Lobby.words relationship direction symbol('ONETOMANY')
+[2022-06-19 03:13:58] (sqlalchemy.orm.strategies.LazyLoader) INFO Lobby.words lazy loading clause :param_1 = words.lobby_id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop id
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop token
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) initialize prop _state
+[2022-06-19 03:13:58] (sqlalchemy.orm.mapper.Mapper) INFO (Lobby|lobbies) _post_configure_properties() complete
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Created new connection <sqlite3.Connection object at 0x7efe936b1e40>
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7efe936b1e40> checked out from pool
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO BEGIN (implicit)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("users")
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (0, 'id', 'INTEGER', 1, None, 1)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (1, 'name', 'VARCHAR(255)', 1, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (2, 'lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (3, 'owned_lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (4, 'moderated_lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (5, 'ready', 'BOOLEAN', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("word_user")
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (0, 'word_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (1, 'user_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("words")
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (0, 'id', 'INTEGER', 1, None, 1)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (1, 'text', 'VARCHAR(32)', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (2, 'lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("lobby_user")
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (0, 'lobby_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (1, 'user_id', 'INTEGER', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO PRAGMA main.table_info("lobbies")
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO [raw sql] ()
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Col ('cid', 'name', 'type', 'notnull', 'dflt_value', 'pk')
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (0, 'id', 'INTEGER', 1, None, 1)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (1, 'token', 'VARCHAR(64)', 0, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) DEBUG Row (2, '_state', 'VARCHAR(16)', 1, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO COMMIT
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7efe936b1e40> being returned to pool
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7efe936b1e40> rollback-on-return
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Closing connection <sqlite3.Connection object at 0x7efe936b1e40>
+[2022-06-19 03:13:58] (flask-template) INFO flask-template initialized.
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Created new connection <sqlite3.Connection object at 0x7efe936b1f40>
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7efe936b1f40> checked out from pool
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO BEGIN (implicit)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO INSERT INTO users (name, lobby_id, owned_lobby_id, moderated_lobby_id, ready) VALUES (?, ?, ?, ?, ?)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO [generated in 0.00030s] ('eule', None, None, None, 0)
+[2022-06-19 03:13:58] (sqlalchemy.engine.Engine) INFO ROLLBACK
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7efe936b1f40> being returned to pool
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Connection <sqlite3.Connection object at 0x7efe936b1f40> rollback-on-return
+[2022-06-19 03:13:58] (sqlalchemy.pool.impl.NullPool) DEBUG Closing connection <sqlite3.Connection object at 0x7efe936b1f40>

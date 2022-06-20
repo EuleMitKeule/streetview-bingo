@@ -1,0 +1,29 @@
+apscheduler: {}
+auth:
+  admin_password: admin
+  admin_username: admin
+debug: false
+logging:
+  date_format: '%Y-%m-%d %H:%M:%S'
+  disable: false
+  format: '[%(asctime)s] (%(name)s) %(levelname)s %(message)s'
+  level: DEBUG
+  loggers: []
+  max_files: 3
+  max_size: 1000000
+  path: logs/test.app.log
+  propagate: true
+  recreate: false
+  rotate: true
+  stream: sys.stderr
+networking:
+  host: localhost
+  port: 5000
+openapi:
+  redoc_url: https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js
+  swagger_url: https://cdn.jsdelivr.net/npm/swagger-ui-dist/
+secret_key: changeme
+sqlite:
+  path: data/test.app.sqlite
+  recreate: false
+testing: false
