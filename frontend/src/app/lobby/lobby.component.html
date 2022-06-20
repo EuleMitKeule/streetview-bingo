@@ -1,114 +1,60 @@
-<div class="container" *ngIf="lobby">
 
-  
+<div *ngIf="lobby">
+
   <div *ngIf="lobby.state === 'lobby' || lobby.state === 'words'">
-    <div class="row">
-      <div class="col">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a role="button" (click)="backToHome()">Login</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Lobby</li>
-          </ol>
-        </nav>
+
+    <div class="container" *ngIf="lobby">
+
+      <div class="row">
+        <div class="col">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a role="button" (click)="backToHome()">Login</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Lobby</li>
+            </ol>
+          </nav>
+        </div>
       </div>
-    </div>
+      
+      <div class="row">
+        <div class="col">
+          <app-menu-card [title]="'Lobby Information'">
+            <app-lobby-information [lobby]="lobby" [user]="user"></app-lobby-information>
+          </app-menu-card>
+          <app-menu-card [title]="'Users'">
+            <app-lobby-users-list [lobby]="lobby"></app-lobby-users-list>
+          </app-menu-card>
+        </div>
     
-    <div class="row">
-      <div class="col">
-        <app-menu-card [title]="'Lobby Information'">
-          <app-lobby-information [lobby]="lobby" [user]="user"></app-lobby-information>
-        </app-menu-card>
-        <app-menu-card [title]="'Users'">
-          <app-lobby-users-list [lobby]="lobby"></app-lobby-users-list>
-        </app-menu-card>
-      </div>
-  
-      <div class="col">
-        <app-menu-card [title]="'Lobby Settings'">
-            <app-lobby-settings [lobby]="lobby" [user]="user"></app-lobby-settings>
-        </app-menu-card>
+        <div class="col">
+          <app-menu-card [title]="'Lobby Settings'">
+              <app-lobby-settings [lobby]="lobby" [user]="user"></app-lobby-settings>
+          </app-menu-card>
+        </div>
       </div>
     </div>
+
   </div>
 
   <div *ngIf="lobby.state === 'game'">
-    <!-- <div *ngIf="lobby && lobby.moderator">
 
-      <div class="row" *ngIf="lobby; else indicator">
+    <div class="container-fluid vh-100">
+      <div class="row vh-100">
         <div class="col">
-          <app-menu-card [title]="'Lobby Information'">
-            <p>Status: {{lobby.state}}</p>
-            <p>Moderator: {{ lobby.moderator.name }}</p>
-            <p>Players:</p>
-            <ul>
-              <li *ngFor="let user of lobby.users">{{ user.name }}</li>
-            </ul>
-          </app-menu-card>
-        </div>
-        <div class="col" *ngIf="lobby.state == 'lobby'">
-          <div *ngIf="lobby.moderator.id == user.id; then thenBlock else elseBlock">
-          </div>
-          <ng-template #thenBlock>
-            <p>You are the moderator. Please select the words for this round.</p>
-            <h3>Words</h3>
-            <div class="input-group mt-3">
-              <input type="text" class="form-control" placeholder="Enter a word to add" [(ngModel)]="wordInput">
-              <div class="input-group-append">
-                <button class="btn btn-outline-primary" type="button" (click)="addWord()">Add Word</button>
-              </div>
-            </div>
-            
-            <ul class="list-group mt-3">
-              <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let word of lobby.words">
-                {{ word.text}}
-                <button type="button" class="btn-close" aria-label="Close" (click)="removeWord(word)">
-                </button>
-              </li>
-            </ul>
-            
-            <button class="btn btn-primary mt-5" (click)="startRound()">
-              Start Game
-            </button>
-          </ng-template>
-          <ng-template #elseBlock>
-            <p>The moderator is selecting the words for this round.</p>
-          </ng-template>
-        </div>
-        <div class="col" *ngIf="lobby.state == 'started'">
-          <p>Game started! Find the following things:</p>
           
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col" *ngFor="let word of lobby.words">{{ word.text }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let user of lobby.users">
-                <th scope="row">{{ user.name }}</th>
-                <td *ngFor="let word of lobby.words" >
-                <div *ngIf="user.id == lobby.moderator.id; then thenBlock else elseBlock"></div>
-                <ng-template #thenBlock>
-                  <button *ngIf="!userFoundWord(user.id, word.id)" class="btn btn-primary" (click)="markFound(word.id, user.id)">Mark Found</button>
-                  <button *ngIf="userFoundWord(user.id, word.id)" class="btn btn-primary" (click)="markNotFound(word.id, user.id)">Mark Not Found</button>
-                </ng-template>
-                <ng-template #elseBlock>
-                  <p *ngIf="userFoundWord(user.id, word.id)">Gefunden</p>
-                </ng-template>
-                
-                
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        
+        </div>
+        <div class="col-10 vh-100">
+          <app-game-map [gameMapOptions]="gameMapOptions"></app-game-map>
+        </div>
+        <div class="col">
+
+        </div>
       </div>
     </div>
-  </div> -->
+    
   </div>
   
-</div>
+</div> 
 
 <ng-template #indicator>
   <div class="text-center">

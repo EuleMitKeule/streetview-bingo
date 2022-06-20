@@ -23,6 +23,11 @@ export class LobbyComponent implements OnInit {
 
   selectedModeratorId: number;
 
+  public gameMapOptions: google.maps.MapOptions = {
+    center: { lat: 40, lng: -20 },
+    zoom: 4,
+  }
+
   socket: Socket = this.socketService.socket;
 
   ngOnInit(): void {
@@ -32,14 +37,14 @@ export class LobbyComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.refreshLobby();
       
-      this.socket.emit("join", { 
-        room: this.loginService.lobby.token
-      });
+      // this.socket.emit("join", { 
+      //   room: this.loginService.lobby.token
+      // });
     });
 
-    this.socket.on("reload", x => {
-      this.refreshLobby();
-    });
+    // this.socket.on("reload", x => {
+    //   this.refreshLobby();
+    // });
   }
 
   refreshLobby() {
@@ -52,38 +57,10 @@ export class LobbyComponent implements OnInit {
     });
   }
 
-  startGame() {
-    
-  }
-
   backToHome() {
     this.loginService.setUser(null);
     this.loginService.setLobby(null);
     this.router.navigate(["/"]);
-  }
-
-  markFound(wordId: number, userId: number) {
-
-  }
-
-  markNotFound(wordId: number, userId: number) {
-
-  }
-
-  userFoundWord(userId: number, wordId: number) {
-    return false;
-  }
-
-  addWord() {
-
-  }
-
-  removeWord(word: Word) {
-    
-  }
-
-  startRound() {
-
   }
 
   selectModerator() {

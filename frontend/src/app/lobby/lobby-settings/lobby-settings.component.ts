@@ -7,15 +7,12 @@ import { LoginService } from 'src/app/_shared/login.service';
   templateUrl: './lobby-settings.component.html',
   styleUrls: ['./lobby-settings.component.scss']
 })
-export class LobbySettingsComponent implements OnInit {
+export class LobbySettingsComponent {
 
   constructor(private wordsService: WordsService, private usersService: UsersService, private lobbiesService: LobbiesService, private loginService: LoginService) { }
 
   @Input() lobby: Lobby;
   @Input() user: User;
-
-  ngOnInit(): void {
-  }
 
   onModeratorFormSubmit(userId: number): void {
     this.usersService.readUser(userId).subscribe(user => {  
@@ -49,10 +46,10 @@ export class LobbySettingsComponent implements OnInit {
   }
 
   onWordsFormSubmit(): void {
-    console.log("OIASJDOIAJSDio")
     this.lobby.state = "game";
     this.lobbiesService.updateLobby(this.lobby.id, this.lobby).subscribe(lobby => {
       this.loginService.setLobby(lobby);
+      console.log(this.loginService.lobby)
     });
   }
 }

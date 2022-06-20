@@ -3,7 +3,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { LobbyComponent } from './lobby/lobby.component';
@@ -17,7 +17,8 @@ import { LobbyModeratorFormComponent } from './lobby/lobby-settings/lobby-modera
 import { MenuCardComponent } from './menu-card/menu-card.component';
 import { LobbySettingsComponent } from './lobby/lobby-settings/lobby-settings.component';
 import { LobbyWordsFormComponent } from './lobby/lobby-settings/lobby-words-form/lobby-words-form.component';
-import { GoogleMapComponent } from './lobby/game/google-map/google-map.component';
+import { GoogleMapsModule } from '@angular/google-maps';
+import { GameMapComponent } from './lobby/game/game-map/game-map.component';
 
 
 @NgModule({
@@ -31,15 +32,17 @@ import { GoogleMapComponent } from './lobby/game/google-map/google-map.component
     MenuCardComponent,
     LobbySettingsComponent,
     LobbyWordsFormComponent,
-    GoogleMapComponent
+    GameMapComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    SocketIoModule
+    SocketIoModule,
+    GoogleMapsModule
   ],
   providers: [
     {
