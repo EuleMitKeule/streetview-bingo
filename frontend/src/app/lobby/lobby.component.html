@@ -9,7 +9,7 @@
         <div class="col">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a role="button" (click)="backToHome()">Login</a></li>
+              <li class="breadcrumb-item"><a routerLink="/">Login</a></li>
               <li class="breadcrumb-item active" aria-current="page">Lobby</li>
             </ol>
           </nav>
@@ -18,7 +18,7 @@
       
       <div class="row">
         <div class="col">
-          <app-menu-card [title]="'Lobby Information'">
+          <app-menu-card class="mb-3" [title]="'Lobby Information'">
             <app-lobby-information [lobby]="lobby" [user]="user"></app-lobby-information>
           </app-menu-card>
           <app-menu-card [title]="'Users'">
@@ -28,7 +28,7 @@
     
         <div class="col">
           <app-menu-card [title]="'Lobby Settings'">
-              <app-lobby-settings [lobby]="lobby" [user]="user"></app-lobby-settings>
+              <app-lobby-settings [lobby]="lobby" [setLobby]="setLobby" [user]="user"></app-lobby-settings>
           </app-menu-card>
         </div>
       </div>

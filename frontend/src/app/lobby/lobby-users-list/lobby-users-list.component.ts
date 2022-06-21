@@ -8,20 +8,10 @@ import { LoginService } from 'src/app/_shared/login.service';
   templateUrl: './lobby-users-list.component.html',
   styleUrls: ['./lobby-users-list.component.scss']
 })
-export class LobbyUsersListComponent implements OnInit {
+export class LobbyUsersListComponent {
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor() { }
 
   @Input() lobby: Lobby;
-
-  ngOnInit(): void {
-
-  }
-
-  backToHome(): void {
-    this.loginService.setUser(null);
-    this.loginService.setLobby(null);
-    this.router.navigate(["/"]);
-  }
 
 }

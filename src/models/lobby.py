@@ -66,7 +66,6 @@ class Lobby(BaseModel):
     def add_user(self, user: User):
         self.users.append(user)
         self.save()
-        db.session.commit()
 
     @classmethod
     def generate_token(cls, length: int) -> str:

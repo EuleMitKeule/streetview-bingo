@@ -6,7 +6,7 @@ import { Lobby, User, Word, WordsService } from 'generated/openapi';
   templateUrl: './lobby-words-form.component.html',
   styleUrls: ['./lobby-words-form.component.scss']
 })
-export class LobbyWordsFormComponent implements OnInit {
+export class LobbyWordsFormComponent {
 
   constructor(private wordsService: WordsService) { }
 
@@ -18,9 +18,6 @@ export class LobbyWordsFormComponent implements OnInit {
 
   public wordInput: string;
 
-  ngOnInit(): void {
-  }
-
   addWord(): void {
     this.onAddWord.emit(this.wordInput);
   }
@@ -31,5 +28,9 @@ export class LobbyWordsFormComponent implements OnInit {
 
   onSubmit(): void {
     this.onWordsFormSubmit.emit();
+  }
+
+  onBack(): void {
+    
   }
 }

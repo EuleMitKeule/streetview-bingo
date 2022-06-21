@@ -1,11 +1,17 @@
-<div class="form-group" *ngIf="users">
+<div class="form-group" *ngIf="lobby">
     <label for="exampleInputEmail1">Next moderator</label>
 
-    <select class="form-control" [(ngModel)]="selectedModeratorId">
-        <option *ngFor="let user of users" value="{{user.id}}">{{ user.name }}</option>
+    <select class="form-control" [disabled]="lobby.owner.id !== user.id" [(ngModel)]="selectedModeratorId">
+        <option *ngFor="let user of lobby.users" [ngValue]="user.id">{{ user.name }}</option>
     </select>
 
-    <small id="emailHelp" class="form-text text-muted">Please select the moderator for the next round.</small>
-
-    <button class="btn btn-primary" (click)="onSubmit()">Next</button>
+    <div class="row mt-2">
+        <div class="col">
+            <small *ngIf="lobby.owner.id === user.id" id="emailHelp" class="form-text text-muted">Please select the moderator for the next round.</small>
+            <small *ngIf="lobby.owner.id !== user.id" id="emailHelp" class="form-text text-muted">The owner is selecting the moderator for the next round.</small>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary" [disabled]="lobby.owner.id !== user.id || !selectedModeratorId" (click)="onSubmit()">Next</button>
+        </div>
+    </div>
 </div>

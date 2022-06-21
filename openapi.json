@@ -12,21 +12,21 @@
       "Error": {
         "type": "object",
         "properties": {
+          "status": {
+            "type": "string",
+            "description": "Error name"
+          },
           "errors": {
             "type": "object",
             "description": "Errors"
-          },
-          "message": {
-            "type": "string",
-            "description": "Error message"
           },
           "code": {
             "type": "integer",
             "description": "Error code"
           },
-          "status": {
+          "message": {
             "type": "string",
-            "description": "Error name"
+            "description": "Error message"
           }
         }
       },
@@ -59,32 +59,32 @@
       "User": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "maxLength": 255
+          "ready": {
+            "type": "boolean",
+            "nullable": true
           },
           "id": {
             "type": "integer"
           },
-          "ready": {
-            "type": "boolean",
-            "nullable": true
+          "name": {
+            "type": "string",
+            "maxLength": 255
           }
         }
       },
       "Word": {
         "type": "object",
         "properties": {
-          "text": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 32
-          },
           "users": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User"
             }
+          },
+          "text": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 32
           },
           "id": {
             "type": "integer"
@@ -100,14 +100,11 @@
               "$ref": "#/components/schemas/User"
             }
           },
+          "state": {
+            "type": "string"
+          },
           "moderator": {
             "$ref": "#/components/schemas/User"
-          },
-          "words": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Word"
-            }
           },
           "token": {
             "type": "string",
@@ -117,8 +114,11 @@
           "id": {
             "type": "integer"
           },
-          "state": {
-            "type": "string"
+          "words": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Word"
+            }
           },
           "owner": {
             "$ref": "#/components/schemas/User"

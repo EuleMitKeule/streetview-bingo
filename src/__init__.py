@@ -28,10 +28,10 @@ with app.app_context():
     if config.config_model.sqlite.recreate:
         app.logger.info("Recreating database...")
         db.drop_all()
-        db.session.commit()
+        # db.session.commit()
 
     db.create_all()
-    db.session.commit()
+    # db.session.commit()
 
 app.register_blueprint(frontend_bp)
 

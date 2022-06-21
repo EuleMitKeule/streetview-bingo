@@ -2,8 +2,9 @@
 <div [ngSwitch]="lobby.state">
 
     <app-lobby-moderator-form 
-        [users]="lobby.users"
-        (onFormSubmit)="onModeratorFormSubmit($event)" 
+        [lobby]="lobby"
+        [user]="user"
+        (moderatorFormSubmit)="onModeratorFormSubmit($event)" 
         *ngSwitchCase="'lobby'"
     ></app-lobby-moderator-form>
 

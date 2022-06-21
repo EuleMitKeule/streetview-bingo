@@ -15,7 +15,8 @@ config: Config = Config()
 cors: CORS = CORS(resources={r"/*": {"origins": "*", "send_wildcard": "False"}})
 
 db: SQLAlchemy = SQLAlchemy(session_options={
-    'expire_on_commit': False
+    'expire_on_commit': False,
+    "autocommit": True
 })
 
 ma: Marshmallow = Marshmallow()

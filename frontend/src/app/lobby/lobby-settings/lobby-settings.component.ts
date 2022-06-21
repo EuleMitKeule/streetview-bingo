@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { LobbiesService, Lobby, User, UsersService, Word, WordsService } from 'generated/openapi';
+import { Socket } from 'ngx-socket-io';
 import { LoginService } from 'src/app/_shared/login.service';
+import { SocketService } from 'src/app/_shared/socket.service';
 
 @Component({
   selector: 'app-lobby-settings',
@@ -9,17 +11,23 @@ import { LoginService } from 'src/app/_shared/login.service';
 })
 export class LobbySettingsComponent {
 
-  constructor(private wordsService: WordsService, private usersService: UsersService, private lobbiesService: LobbiesService, private loginService: LoginService) { }
+  constructor(private socketService: SocketService, private wordsService: WordsService, private usersService: UsersService, private lobbiesService: LobbiesService, private loginService: LoginService) { }
 
   @Input() lobby: Lobby;
+  @Input() setLobby: (lobby: Lobby) => void;
   @Input() user: User;
+  
+  socket: Socket = this.socketService.socket;
 
-  onModeratorFormSubmit(userId: number): void {
-    this.usersService.readUser(userId).subscribe(user => {  
+  onModeratorFormSubmit(selectedModeratorId: number): void {
+    this.usersService.readUser(selectedModeratorId).subscribe(user => {
       this.lobby.moderator = user;
       this.lobby.state = "words";
       this.lobbiesService.updateLobby(this.lobby.id, this.lobby).subscribe(lobby => {
-        this.loginService.setLobby(lobby);
+        this.setLobby(lobby);
+        this.socket.emit("reload", {
+          room: this.lobby.token
+        });
       });
     });
   }
@@ -30,26 +38,28 @@ export class LobbySettingsComponent {
     }).subscribe(word => {
       this.lobby.words.push(word);
       this.lobbiesService.updateLobby(this.lobby.id, this.lobby).subscribe(lobby => {
-        this.loginService.setLobby(lobby);
+        this.setLobby(lobby);
+        this.socket.emit("reload", {
+          room: this.lobby.token
+        });
       });
     });
-
   }
 
   onRemoveWord(word: Word): void {
-    console.log(this.lobby.words);
     this.lobby.words = this.lobby.words.filter(w => w.id !== word.id);
-    console.log(this.lobby.words);
     this.lobbiesService.updateLobby(this.lobby.id, this.lobby).subscribe(lobby => {
-      this.loginService.setLobby(lobby);
+      this.setLobby(lobby);
+      this.socket.emit("reload", {
+        room: this.lobby.token
+      });
     });
   }
 
   onWordsFormSubmit(): void {
     this.lobby.state = "game";
     this.lobbiesService.updateLobby(this.lobby.id, this.lobby).subscribe(lobby => {
-      this.loginService.setLobby(lobby);
-      console.log(this.loginService.lobby)
+      this.setLobby(lobby);
     });
   }
 }

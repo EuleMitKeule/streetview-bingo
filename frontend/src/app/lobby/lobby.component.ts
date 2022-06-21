@@ -18,10 +18,7 @@ export class LobbyComponent implements OnInit {
 
   lobby: Lobby;
   user: User;
-  lobbyToken: string;
   wordInput: string;
-
-  selectedModeratorId: number;
 
   public gameMapOptions: google.maps.MapOptions = {
     center: { lat: 40, lng: -20 },
@@ -32,44 +29,44 @@ export class LobbyComponent implements OnInit {
 
   ngOnInit(): void {
 
+    if (this.loginService.user == null) {
+      this.router.navigate(['/']);
+    }
+
     this.user = this.loginService.user;
 
+    
     this.route.params.subscribe(params => {
-      this.refreshLobby();
-      
-      // this.socket.emit("join", { 
-      //   room: this.loginService.lobby.token
-      // });
+      this.lobbiesByTokenService.readLobbyByToken(params.token).subscribe(lobby => {
+        this.lobby = lobby;
+        this.socket.emit("join", { 
+          room: lobby.token
+        });
+      });
     });
 
-    // this.socket.on("reload", x => {
-    //   this.refreshLobby();
-    // });
+    this.socket.on("reload", data => {
+      this.refreshLobby();
+    });
+
+    this.socket.on("connect", data => {
+      console.log("Connected");
+    });
   }
 
   refreshLobby() {
     this.lobbiesByTokenService.readLobbyByToken(
-      this.loginService.lobby.token
+      this.lobby.token
     ).subscribe(lobby => {
-      this.loginService.setLobby(lobby);
-      this.lobbyToken = lobby.token;
       this.lobby = lobby;
     });
   }
 
   backToHome() {
-    this.loginService.setUser(null);
-    this.loginService.setLobby(null);
     this.router.navigate(["/"]);
   }
 
-  selectModerator() {
-    this.usersService.readUser(this.selectedModeratorId).subscribe(user => {
-      this.lobby.moderator = user;
+  setLobby(lobby: Lobby) {
 
-      this.lobbiesService.updateLobby(this.lobby.id, this.lobby).subscribe(lobby => {
-        this.lobby = lobby;
-      });
-    });
   }
 }

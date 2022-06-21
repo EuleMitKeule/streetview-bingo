@@ -85,7 +85,6 @@ def add_view(**kwargs):
             def post(self, entity: BaseModel):
                 entity.save()
                 todo_dict: dict = cls.dump(entity)
-                db.session.commit()
                 return jsonify(todo_dict), 201
         
         for operation_type, decorators in decorators_dict.items():
