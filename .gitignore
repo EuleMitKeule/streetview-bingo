@@ -25,6 +25,7 @@ speed-measure-plugin*.json
 *.launch
 **/.settings/
 **/*.sublime-workspace
+**/.angular
 
 # misc
 frontend/.sass-cache
