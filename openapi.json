@@ -20,13 +20,13 @@
             "type": "object",
             "description": "Errors"
           },
-          "message": {
-            "type": "string",
-            "description": "Error message"
-          },
           "code": {
             "type": "integer",
             "description": "Error code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
           }
         }
       },
@@ -63,21 +63,22 @@
             "type": "boolean",
             "nullable": true
           },
-          "id": {
-            "type": "integer"
+          "color": {
+            "type": "string",
+            "maxLength": 255
           },
           "name": {
             "type": "string",
             "maxLength": 255
+          },
+          "id": {
+            "type": "integer"
           }
         }
       },
       "Word": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer"
-          },
           "users": {
             "type": "array",
             "items": {
@@ -88,12 +89,18 @@
             "type": "string",
             "nullable": true,
             "maxLength": 32
+          },
+          "id": {
+            "type": "integer"
           }
         }
       },
       "Lobby": {
         "type": "object",
         "properties": {
+          "lobby_state": {
+            "type": "string"
+          },
           "state": {
             "type": "string"
           },
@@ -109,22 +116,19 @@
               "$ref": "#/components/schemas/User"
             }
           },
-          "moderator": {
-            "$ref": "#/components/schemas/User"
-          },
           "words": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Word"
             }
           },
+          "moderator": {
+            "$ref": "#/components/schemas/User"
+          },
           "token": {
             "type": "string",
             "nullable": true,
             "maxLength": 64
-          },
-          "lobby_state": {
-            "type": "string"
           }
         }
       }

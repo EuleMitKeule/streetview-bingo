@@ -12,3 +12,4 @@ class User(BaseModel):
     owned_lobby_id: int = db.Column(db.Integer, db.ForeignKey("lobbies.id"))
     moderated_lobby_id: int = db.Column(db.Integer, db.ForeignKey("lobbies.id"))
     ready: bool = db.Column(db.Boolean, default=False)
+    color: str = db.Column(db.String(255), nullable=False, default="")

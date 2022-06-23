@@ -14,7 +14,7 @@ export class GameMapComponent implements OnInit {
   
   constructor(private socketService: SocketService, private httpClient: HttpClient) { 
     this.apiLoaded = httpClient.jsonp(
-      'https://maps.googleapis.com/maps/api/js', 
+      'https://maps.googleapis.com/maps/api/js?', 
       'callback'
     ).pipe(
       map(() => true),

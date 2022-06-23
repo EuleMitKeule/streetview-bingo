@@ -13,6 +13,11 @@
 </div>
 <div class="row">
     <div class="col-auto">
-        <span class="badge bg-primary mx-1" *ngFor="let user of word?.users">{{ user?.name }}</span>
+        <span 
+            class="badge mx-1" 
+            *ngFor="let user of word?.users"
+            [ngStyle]="{'background-color': user.color}">
+            {{ user?.name }}
+        </span>
     </div>
 </div>

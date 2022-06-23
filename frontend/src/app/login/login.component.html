@@ -27,12 +27,10 @@
             Create Lobby
           </a>
           <ng-template ngbNavContent>
-            <div class="form-group">
-              <label for="inputName">Your Name</label>
-              <input class="form-control" name="inputUsername" [(ngModel)]="username">
-              <small class="form-text text-muted">Please enter your name</small>
-            </div>
-            <button class="btn btn-primary mt-2" (click)="createLobby()">Create Lobby</button>
+            <app-login-user-form
+              [submitText]="'Create Lobby'"
+              (loginUserFormSubmit)="onCreateLobbyFormSubmit($event)">
+            </app-login-user-form>
           </ng-template>
         </li>
 
@@ -45,35 +43,14 @@
           </a>
           <ng-template ngbNavContent>
             <div class="form-group">
-              <label for="inputName">Your Name</label>
-              <input class="form-control" name="inputUsername" [(ngModel)]="username">
-              <small class="form-text text-muted">Please enter your name</small>
-            </div>
-
-            <div class="form-group">
               <label for="inputLobbyToken">Lobby Token</label>
               <input class="form-control" name="inputLobbyToken" [(ngModel)]="lobbyToken">
               <small class="form-text text-muted">Please enter the token the owner of the lobby sent to you.</small>
             </div>
-
-            <button class="btn btn-primary mt-2" (click)="joinLobby()">Join Lobby</button>
-          </ng-template>
-        </li>
-
-        <li ngbNavItem>
-          <a ngbNavLink>
-            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-              <path fill="currentColor" d="M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3" />
-            </svg>
-            Login into previous lobby
-          </a>
-          <ng-template ngbNavContent>  
-            <div class="form-group">
-              <label for="inputUserToken">User Token</label>
-              <!-- <input class="form-control" name="inputUserToken" [(ngModel)]="userToken" disabled> -->
-              <small class="form-text text-muted">If you already have a user token for the lobby you can enter it
-                here.</small>
-            </div>
+            <app-login-user-form
+              [submitText]="'Join Lobby'"
+              (loginUserFormSubmit)="onJoinLobbyFormSubmit($event)">
+            </app-login-user-form>
           </ng-template>
         </li>
       </ul>

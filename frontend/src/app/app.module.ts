@@ -28,6 +28,7 @@ import { BingoComponent } from './bingo/bingo.component';
 import { GameWordComponent } from './bingo/game/game-words-list/game-word/game-word.component';
 import { GameMapModeratorOverlayComponent } from './bingo/game/game-map/game-map-moderator-overlay/game-map-moderator-overlay.component';
 import { GameMapPlayerOverlayComponent } from './bingo/game/game-map/game-map-player-overlay/game-map-player-overlay.component';
+import { LoginUserFormComponent } from './login/login-user-form/login-user-form.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { GameMapPlayerOverlayComponent } from './bingo/game/game-map/game-map-pl
     BingoComponent,
     GameWordComponent,
     GameMapModeratorOverlayComponent,
-    GameMapPlayerOverlayComponent
+    GameMapPlayerOverlayComponent,
+    LoginUserFormComponent
   ],
   imports: [
     BrowserModule,

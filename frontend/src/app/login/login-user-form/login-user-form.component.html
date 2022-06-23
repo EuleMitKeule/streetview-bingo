@@ -1,0 +1,28 @@
+
+<form>
+    <div class="input-group my-2">
+        <span class="input-group-text">
+            Username
+        </span>
+        <input 
+            type="text" 
+            class="form-control" 
+            [(ngModel)]="name" 
+            name="username">
+    </div>
+    <div class="input-group my-2">
+        <span class="input-group-text">
+            Color
+        </span>
+        <input 
+            type="color" 
+            class="form-control form-control-color" 
+            [(ngModel)]="color" 
+            name="username">
+    </div>
+    <button 
+        class="btn btn-primary mt-2"
+        (click)="onSubmit()">
+        {{ submitText }}
+    </button>
+</form>

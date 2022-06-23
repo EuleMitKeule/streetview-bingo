@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'generated/openapi';
 import { JoinService } from 'generated/openapi/api/join.service';
 import { LobbiesService } from 'generated/openapi/api/lobbies.service';
 import { UsersService } from 'generated/openapi/api/users.service';
@@ -21,35 +22,24 @@ export class LoginComponent {
 
   socket: Socket = this.socketService.socket;
 
-  createLobby() {
-    this.usersService.createUser({
-      "name": this.username
-    }).subscribe(user => {
-      this.loginService.setUser(user);
-
-      this.lobbiesService.createLobby({
-        "owner": this.loginService.user,
-        "users": [this.loginService.user],
-      }).subscribe(lobby => {
-        this.router.navigate(['lobby', lobby.token])
-      });
+  onCreateLobbyFormSubmit(user: User): void {
+    this.lobbiesService.createLobby({
+      "owner": user,
+      "users": [user],
+    }).subscribe(lobby => {
+      this.router.navigate(['lobby', lobby.token])
     });
   }
 
-  joinLobby() {
-    this.usersService.createUser({
-      "name": this.username
-    }).subscribe(user => {
-      this.loginService.setUser(user);
-      this.joinService.joinLobby(
-        this.lobbyToken, 
-        this.loginService.user
-      ).subscribe(lobby => {
-        this.socket.emit("reload", {
-          room: lobby.token
-        });
-        this.router.navigate(['lobby', lobby.token])
-      })
-    });
+  onJoinLobbyFormSubmit(user: User): void {
+    this.joinService.joinLobby(
+      this.lobbyToken, 
+      user
+    ).subscribe(lobby => {
+      this.socket.emit("reload", {
+        room: lobby.token
+      });
+      this.router.navigate(['lobby', lobby.token])
+    })
   }
 }
