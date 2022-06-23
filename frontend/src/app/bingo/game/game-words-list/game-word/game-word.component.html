@@ -1,0 +1,18 @@
+<div class="row align-items-center">
+    <div class="col-auto h-100 align-self-center" *ngIf="!isModerator">
+        <fa-icon class="mx-1" [ngClass]="isFound ? 'color-correct' : 'color-incorrect'" [icon]="isFound ? faCheck : faXmark"></fa-icon>
+    </div>
+    <div class="col-auto">
+        <p class="mx-1">
+            {{ word.text }}
+        </p>
+    </div>    
+    <div class="col-auto">
+        <span class="badge bg-primary mx-1">{{ word?.users?.length }}/{{ currentLobby?.users?.length - 1 }}</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-auto">
+        <span class="badge bg-primary mx-1" *ngFor="let user of word?.users">{{ user?.name }}</span>
+    </div>
+</div>

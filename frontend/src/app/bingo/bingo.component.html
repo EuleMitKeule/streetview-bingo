@@ -1,0 +1,23 @@
+<div *ngIf="currentLobby?.state === 'lobby'">
+    <div class="container mt-5 mb-5">
+      <div class="row">
+        <div class="col">
+          <h1>Streetview Bingo</h1>
+        </div>
+      </div>
+    </div>
+    <app-lobby
+        [currentUser]="currentUser"
+        [currentLobby]="currentLobby"
+        (lobbyUpdate)="onLobbyUpdate($event)"
+    ></app-lobby>
+    </div>
+    
+<div *ngIf="currentLobby?.state === 'game'">
+    <app-game
+        [currentUser]="currentUser"
+        [currentLobby]="currentLobby"
+        (gameLobbyUpdate)="onLobbyUpdate($event)"
+        (gameWordUpdate)="onWordUpdate($event)"
+    ></app-game>
+</div>

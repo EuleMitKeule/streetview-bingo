@@ -10,7 +10,8 @@ from sqlalchemy.ext.hybrid import hybrid_property
 @add_schema(
     meta={
         "exclude": [
-            "_state"
+            "_state",
+            "_lobby_state",
         ]
     },
     users=ma.Nested(
@@ -29,15 +30,25 @@ from sqlalchemy.ext.hybrid import hybrid_property
     ),
     state=ma.String(
         attribute="_state"
-    )
+    ),
+    lobby_state=ma.String(
+        attribute="_lobby_state"
+    ),
 )
 class Lobby(BaseModel):
     __tablename__ = "lobbies"
     
     token: str = db.Column(db.String(64))
+
     _state: str = db.Column(
         db.String(16),
         default="lobby",
+        nullable=False
+    )
+
+    _lobby_state: str = db.Column(
+        db.String(16),
+        default="moderator",
         nullable=False
     )
 
@@ -62,6 +73,14 @@ class Lobby(BaseModel):
             return
 
         self._state = value
+
+    @hybrid_property
+    def lobby_state(self):
+        return self._lobby_state
+
+    @lobby_state.setter
+    def lobby_state(self, value):
+        self._lobby_state = value
 
     def add_user(self, user: User):
         self.users.append(user)

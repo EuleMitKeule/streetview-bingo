@@ -1,0 +1,24 @@
+<div class="container-fluid vh-100">
+    <div class="row vh-100">
+        <div class="col-9 vh-100">
+            <app-game-map 
+                [currentUser]="currentUser" 
+                [currentLobby]="currentLobby"
+                [viewedUser]="getViewedUser()"
+                [isReviewing]="isReviewing"
+                (acceptClick)="onAcceptClick()"
+                (rejectClick)="onRejectClick()"
+                (followUser)="onFollowUser($event)"
+                (wordClick)="onWordClick($event)"
+            ></app-game-map>
+        </div>
+        <div class="col-3">
+            <app-sidebar [title]="'Words'">
+                <app-game-words-list 
+                    [currentLobby]="currentLobby" 
+                    [currentUser]="currentUser"
+                ></app-game-words-list>
+            </app-sidebar>
+        </div>
+    </div>
+</div>

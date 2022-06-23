@@ -6,19 +6,28 @@ import { AppComponent } from './app.component';
 import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
-import { LobbyComponent } from './lobby/lobby.component';
+import { LobbyComponent } from './bingo/lobby/lobby.component';
 import { FormsModule } from '@angular/forms';
 import { BASE_PATH } from 'generated/openapi';
 import { ConfigurationService } from './_shared/configuration.service';
 import { SocketIoModule } from 'ngx-socket-io';
-import { LobbyUsersListComponent } from './lobby/lobby-users-list/lobby-users-list.component';
-import { LobbyInformationComponent } from './lobby/lobby-information/lobby-information.component';
-import { LobbyModeratorFormComponent } from './lobby/lobby-settings/lobby-moderator-form/lobby-moderator-form.component';
+import { LobbyUsersListComponent } from './bingo/lobby/lobby-users-list/lobby-users-list.component';
+import { LobbyInformationComponent } from './bingo/lobby/lobby-information/lobby-information.component';
+import { LobbyModeratorFormComponent } from './bingo/lobby/lobby-settings/lobby-moderator-form/lobby-moderator-form.component';
 import { MenuCardComponent } from './menu-card/menu-card.component';
-import { LobbySettingsComponent } from './lobby/lobby-settings/lobby-settings.component';
-import { LobbyWordsFormComponent } from './lobby/lobby-settings/lobby-words-form/lobby-words-form.component';
+import { LobbySettingsComponent } from './bingo/lobby/lobby-settings/lobby-settings.component';
+import { LobbyWordsFormComponent } from './bingo/lobby/lobby-settings/lobby-words-form/lobby-words-form.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { GameMapComponent } from './lobby/game/game-map/game-map.component';
+import { GameMapComponent } from './bingo/game/game-map/game-map.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { GameUsersListComponent } from './bingo/game/game-users-list/game-users-list.component';
+import { GameWordsListComponent } from './bingo/game/game-words-list/game-words-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GameComponent } from './bingo/game/game.component';
+import { BingoComponent } from './bingo/bingo.component';
+import { GameWordComponent } from './bingo/game/game-words-list/game-word/game-word.component';
+import { GameMapModeratorOverlayComponent } from './bingo/game/game-map/game-map-moderator-overlay/game-map-moderator-overlay.component';
+import { GameMapPlayerOverlayComponent } from './bingo/game/game-map/game-map-player-overlay/game-map-player-overlay.component';
 
 
 @NgModule({
@@ -32,7 +41,15 @@ import { GameMapComponent } from './lobby/game/game-map/game-map.component';
     MenuCardComponent,
     LobbySettingsComponent,
     LobbyWordsFormComponent,
-    GameMapComponent
+    GameMapComponent,
+    SidebarComponent,
+    GameUsersListComponent,
+    GameWordsListComponent,
+    GameComponent,
+    BingoComponent,
+    GameWordComponent,
+    GameMapModeratorOverlayComponent,
+    GameMapPlayerOverlayComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +59,8 @@ import { GameMapComponent } from './lobby/game/game-map/game-map.component';
     NgbModule,
     FormsModule,
     SocketIoModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    FontAwesomeModule
   ],
   providers: [
     {

@@ -1,0 +1,11 @@
+<ul class="list-group list-group-flush">
+  <li 
+    class="list-group-item" 
+    *ngFor="let user of currentLobby?.users"
+  >
+    {{user.name}}
+    <small *ngIf="user?.id === currentLobby?.owner?.id">
+      Owner
+    </small>
+  </li>
+</ul>

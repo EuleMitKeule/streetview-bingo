@@ -1,0 +1,18 @@
+
+<app-lobby-moderator-form 
+    *ngIf="currentLobby?.lobby_state === 'moderator'"
+    [currentUser]="currentUser"
+    [currentLobby]="currentLobby"
+    (moderatorFormSubmit)="onModeratorFormSubmit($event)" 
+></app-lobby-moderator-form>
+
+<app-lobby-words-form 
+    *ngIf="currentLobby?.lobby_state === 'words'"
+    [currentUser]="currentUser"
+    [currentLobby]="currentLobby" 
+    (onWordsFormSubmit)="onWordsFormSubmit()"
+    (onWordsFormBack)="onWordsFormBack()"
+    (onAddWord)="onAddWord($event)"
+    (onRemoveWord)="onRemoveWord($event)"
+></app-lobby-words-form>
+

@@ -1,0 +1,54 @@
+<div class="row h-50">
+    <div class="col text-center mt-4">
+        <span 
+            class="badge bg-primary"
+            *ngIf="viewedUser">
+            Following {{ viewedUser?.name }}
+        </span>
+    </div>
+</div>
+<div class="row align-items-end h-50">
+    <div class="col text-start ms-2 mb-2">
+        <div 
+            ngbDropdown 
+            class="d-inline-block" 
+            #selectUserDropdown="ngbDropdown">
+            <button 
+                ngbDropdownAnchor
+                id="dropdownManual"
+                class="btn btn-primary" 
+                type="button"
+                [disabled]="isReviewing"
+                (focus)="selectUserDropdown.open()">
+                {{ viewedUser?.name || 'Follow user' }}
+            </button>
+            <div
+                ngbDropdownMenu
+                aria-labelledby="dropdownManual">
+                <button 
+                    ngbDropdownItem 
+                    *ngFor="let user of otherUsers"
+                    [value]="user.id"
+                    (click)="onFollowUserClick($event)">
+                    {{ user?.name }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col text-end">
+        <button
+            class="btn btn-danger mb-4 me-2 game-map-button"
+            *ngIf="isReviewing"
+            (click)="onRejectClick()">
+            Reject
+        </button>
+    </div>
+    <div class="col text-start">
+        <button
+            class="btn btn-primary mb-4 ms-2 game-map-button"
+            *ngIf="isReviewing"
+            (click)="onAcceptClick()">
+            Accept
+        </button>
+    </div>
+</div>

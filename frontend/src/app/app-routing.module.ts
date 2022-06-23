@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LobbyComponent } from './lobby/lobby.component';
+import { BingoComponent } from './bingo/bingo.component';
 import { LoginComponent } from './login/login.component';
 
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'lobby/:token', component: LobbyComponent},
+  {path: 'lobby/:token', component: BingoComponent},
 ];
 
 @NgModule({

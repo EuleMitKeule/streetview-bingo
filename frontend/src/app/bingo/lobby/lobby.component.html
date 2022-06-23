@@ -1,0 +1,33 @@
+<div class="container">  
+  <div class="row">
+    <div class="col">
+      <app-menu-card 
+        class="mb-3" 
+        [title]="'Lobby Information'"
+      >
+        <app-lobby-information 
+          [currentUser]="currentUser"
+          [currentLobby]="currentLobby" 
+        ></app-lobby-information>
+      </app-menu-card>
+
+      <app-menu-card [title]="'Users'">
+        <app-lobby-users-list 
+          [currentLobby]="currentLobby"
+        ></app-lobby-users-list>
+      </app-menu-card>
+    </div>
+
+    <div class="col">
+      <app-menu-card 
+        [title]="'Lobby Settings'"
+      >
+        <app-lobby-settings 
+          [currentUser]="currentUser"
+          [currentLobby]="currentLobby" 
+          (lobbySettingsUpdate)="onLobbySettingsUpdate($event)"
+        ></app-lobby-settings>
+      </app-menu-card>
+    </div>
+  </div>
+</div>

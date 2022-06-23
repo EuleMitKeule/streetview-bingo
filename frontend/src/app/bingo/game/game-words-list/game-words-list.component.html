@@ -1,0 +1,9 @@
+<ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let word of currentLobby?.words">
+        <app-game-word 
+            [currentUser]="currentUser"
+            [currentLobby]="currentLobby"
+            [word]="word">
+        </app-game-word>
+    </li>
+</ul>

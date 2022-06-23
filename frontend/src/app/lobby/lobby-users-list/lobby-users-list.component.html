@@ -1,7 +1,0 @@
-<div *ngIf="lobby">
-
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let user of lobby.users">{{user.name}} <small *ngIf="user.id === lobby.owner.id">Owner</small></li>
-  </ul>
-  
-</div>

@@ -1,0 +1,25 @@
+<ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let user of currentLobby?.users">
+        <div class="row align-items-center">
+            <div class="col">
+                {{user.name}}
+            </div>
+            <div class="col-auto">
+                <button
+                    *ngIf="user?.id !== currentUser?.id && currentUser?.id === currentLobby?.moderator?.id" 
+                    class="btn"
+                    [ngClass]="user?.id === followedUser?.id ? 'btn-primary' : 'btn-outline-secondary'"
+                    (click)="onFollowUser(user)"
+                >
+                    <fa-icon 
+                        [icon]="faEye"
+                    ></fa-icon>
+                </button>
+                <small *ngIf="user?.id === currentUser?.id">
+                  You
+                </small>
+            </div>
+        </div>
+        
+    </li>
+</ul>

@@ -20,13 +20,13 @@
             "type": "object",
             "description": "Errors"
           },
-          "code": {
-            "type": "integer",
-            "description": "Error code"
-          },
           "message": {
             "type": "string",
             "description": "Error message"
+          },
+          "code": {
+            "type": "integer",
+            "description": "Error code"
           }
         }
       },
@@ -75,6 +75,9 @@
       "Word": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer"
+          },
           "users": {
             "type": "array",
             "items": {
@@ -85,34 +88,29 @@
             "type": "string",
             "nullable": true,
             "maxLength": 32
-          },
-          "id": {
-            "type": "integer"
           }
         }
       },
       "Lobby": {
         "type": "object",
         "properties": {
+          "state": {
+            "type": "string"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/User"
+          },
           "users": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User"
             }
           },
-          "state": {
-            "type": "string"
-          },
           "moderator": {
             "$ref": "#/components/schemas/User"
-          },
-          "token": {
-            "type": "string",
-            "nullable": true,
-            "maxLength": 64
-          },
-          "id": {
-            "type": "integer"
           },
           "words": {
             "type": "array",
@@ -120,8 +118,13 @@
               "$ref": "#/components/schemas/Word"
             }
           },
-          "owner": {
-            "$ref": "#/components/schemas/User"
+          "token": {
+            "type": "string",
+            "nullable": true,
+            "maxLength": 64
+          },
+          "lobby_state": {
+            "type": "string"
           }
         }
       }

@@ -1,0 +1,29 @@
+<div *ngIf="apiLoaded | async" class="position-relative">
+    <google-map 
+        #googleMap
+        class="position-relative"
+        height="100vh" 
+        width="100%"
+        [options]="gameMapOptions"
+        (mapInitialized)="onMapInitialized($event)"
+    >
+    </google-map>
+    <div id="game-map-area" class="h-100 w-100">
+        <app-game-map-moderator-overlay
+            *ngIf="isModerator"
+            [currentLobby]="currentLobby"
+            [currentUser]="currentUser"
+            [viewedUser]="viewedUser"
+            [isReviewing]="isReviewing"
+            (acceptClick)="onAcceptClick()"
+            (rejectClick)="onRejectClick()"
+            (followUser)="onFollowUser($event)"
+        ></app-game-map-moderator-overlay>
+        <app-game-map-player-overlay
+            *ngIf="!isModerator"
+            [currentLobby]="currentLobby"
+            [currentUser]="currentUser"
+            (wordClick)="onWordClick($event)"
+        ></app-game-map-player-overlay>
+    </div>
+</div>

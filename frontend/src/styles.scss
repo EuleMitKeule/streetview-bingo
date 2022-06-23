@@ -18,3 +18,59 @@ ol.breadcrumb {
 
 // Then import Bootstrap
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+html, body {
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+}
+
+p {
+    margin: 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+h2 {
+    margin: 0;
+}
+
+h3 {
+    margin: 0;
+}
+
+h4 {
+    margin: 0;
+}
+
+h5 {
+    margin: 0;
+}
+
+h6 {
+    margin: 0;
+}
+
+.from-label {
+    margin: 0;
+}
+
+.container-fluid {
+    --bs-gutter-x: 0;
+}
+
+.container {
+    --bs-gutter-x: 0;
+}
+
+.row {
+    --bs-gutter-x: 0;
+}
+
+.col {
+    --bs-gutter-x: 0;
+}

@@ -1,0 +1,13 @@
+.map-container {
+    height: 100vh !important;
+}
+
+.game-map-button {
+    width: 60%;
+}
+
+#game-map-area {
+    position: absolute;
+    top: 0;
+    pointer-events: none;
+}
