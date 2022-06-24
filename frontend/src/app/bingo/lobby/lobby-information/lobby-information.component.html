@@ -1,3 +1,8 @@
 <div>
-    <p>The lobby token is <strong (click)="copyToken()" class="copy-link">{{ currentLobby?.token }}</strong>. Send this token to your friends to let them join this lobby.</p>
+    <div class="input-group">
+        <span class="input-group-text" for="lobby-url">Join URL</span>
+        <input type="text" class="form-control" id="lobby-url" value="{{ baseUrl }}/#/join/{{ currentLobby?.token }}" readonly>
+        <button #copyButton class="btn btn-outline-primary" (click)="copyToClipboard()">Copy</button>
+    </div>
+    <p>Send this link to your friends to let them join this lobby.</p>
 </div>

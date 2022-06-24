@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'generated/openapi';
 import { JoinService } from 'generated/openapi/api/join.service';
 import { LobbiesService } from 'generated/openapi/api/lobbies.service';
@@ -13,14 +13,21 @@ import { SocketService } from '../_shared/socket.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  constructor(private socketService: SocketService, private joinService: JoinService, private lobbiesService: LobbiesService, private usersService: UsersService, private loginService: LoginService, private router: Router) {}
+  constructor(private route: ActivatedRoute,private socketService: SocketService, private joinService: JoinService, private lobbiesService: LobbiesService, private usersService: UsersService, private loginService: LoginService, private router: Router) {}
   
   username: string = "";
   lobbyToken: string = "";
-
-  socket: Socket = this.socketService.socket;
+  
+  public activeNavId: number;
+    
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.lobbyToken = params.token;
+      this.activeNavId = this.lobbyToken !== "" ? 2 : 1;
+    });
+  }
 
   onCreateLobbyFormSubmit(user: User): void {
     this.lobbiesService.createLobby({
@@ -36,7 +43,7 @@ export class LoginComponent {
       this.lobbyToken, 
       user
     ).subscribe(lobby => {
-      this.socket.emit("reload", {
+      this.socketService.socket.emit("reload", {
         room: lobby.token
       });
       this.router.navigate(['lobby', lobby.token])

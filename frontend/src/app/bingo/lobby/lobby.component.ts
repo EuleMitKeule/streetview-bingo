@@ -10,19 +10,14 @@ import { SocketService } from '../../_shared/socket.service';
   templateUrl: './lobby.component.html',
   styleUrls: ['./lobby.component.scss']
 })
-export class LobbyComponent implements OnInit {
+export class LobbyComponent {
 
   constructor() { }
 
   @Input() currentLobby: Lobby;
   @Input() currentUser: User;
-  @Input() setLobby: (lobby: Lobby) => void;
 
   @Output() lobbyUpdate: EventEmitter<Lobby> = new EventEmitter<Lobby>();
-
-  ngOnInit(): void {
-    console.log(this.currentUser);
-  }
 
   onLobbySettingsUpdate(lobby: Lobby): void {
     this.lobbyUpdate.emit(lobby);

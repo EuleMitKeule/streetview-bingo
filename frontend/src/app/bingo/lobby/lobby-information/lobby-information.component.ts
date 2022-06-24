@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { LobbiesService, Lobby, User } from 'generated/openapi';
 
 @Component({
@@ -12,6 +12,22 @@ export class LobbyInformationComponent {
 
   @Input() currentUser: User;
   @Input() currentLobby: Lobby;
+
+  @ViewChild("copyButton") copyButton: any;
+
+  get baseUrl(): string {
+    return window.location.origin;
+  }
+
+  get joinUrl(): string {
+    return `${this.baseUrl}/#/join/${this.currentLobby.token}`;
+  }
+
+  copyToClipboard(): void {
+    navigator.clipboard.writeText(this.joinUrl).then(() => {
+      this.copyButton.nativeElement.innerText = "Copied!";
+    });
+  }
 
   copyToken(): void {
     const selBox = document.createElement('textarea');

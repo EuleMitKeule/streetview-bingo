@@ -1,32 +1,30 @@
 <div class="container">  
   <div class="row">
-    <div class="col">
+    <div class="col mx-2">
       <app-menu-card 
         class="mb-3" 
-        [title]="'Lobby Information'"
-      >
+        [title]="'Lobby Information'">
         <app-lobby-information 
           [currentUser]="currentUser"
-          [currentLobby]="currentLobby" 
-        ></app-lobby-information>
+          [currentLobby]="currentLobby">
+        </app-lobby-information>
       </app-menu-card>
 
       <app-menu-card [title]="'Users'">
         <app-lobby-users-list 
-          [currentLobby]="currentLobby"
-        ></app-lobby-users-list>
+          [currentLobby]="currentLobby">
+        </app-lobby-users-list>
       </app-menu-card>
     </div>
 
-    <div class="col">
+    <div class="col mx-2">
       <app-menu-card 
-        [title]="'Lobby Settings'"
-      >
+        [title]="'Lobby Settings'">
         <app-lobby-settings 
           [currentUser]="currentUser"
           [currentLobby]="currentLobby" 
-          (lobbySettingsUpdate)="onLobbySettingsUpdate($event)"
-        ></app-lobby-settings>
+          (lobbySettingsUpdate)="onLobbySettingsUpdate($event)">
+        </app-lobby-settings>
       </app-menu-card>
     </div>
   </div>

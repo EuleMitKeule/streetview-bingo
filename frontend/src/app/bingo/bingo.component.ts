@@ -43,7 +43,14 @@ export class BingoComponent implements OnInit {
       this.lobbiesByTokenService.readLobbyByToken(
         params.token
       ).subscribe(lobby => {
-        console.log(this.currentLobby);
+        if (!lobby.users.includes(this.currentUser)) {
+          if (lobby?.state === "lobby" && lobby?.lobby_state === "moderator") {
+            // Navigate to join page with token
+          } else {
+            this.router.navigate(['/']);
+          }
+        }
+
         this.currentLobby = lobby;
         this.emitJoin(lobby);
       });
