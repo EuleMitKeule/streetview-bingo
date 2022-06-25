@@ -29,6 +29,13 @@ import { GameWordComponent } from './bingo/game/game-words-list/game-word/game-w
 import { GameMapModeratorOverlayComponent } from './bingo/game/game-map/game-map-moderator-overlay/game-map-moderator-overlay.component';
 import { GameMapPlayerOverlayComponent } from './bingo/game/game-map/game-map-player-overlay/game-map-player-overlay.component';
 import { LoginUserFormComponent } from './login/login-user-form/login-user-form.component';
+import { GameLogComponent } from './bingo/game/game-log/game-log.component';
+import { GameChatInputComponent } from './bingo/game/game-chat-input/game-chat-input.component';
+import { SharedModule } from 'src/shared/shared.module';
+import { GameLogChatMessageComponent } from './bingo/game/game-log/game-log-chat-message/game-log-chat-message.component';
+import { GameLogUserWordMessageComponent } from './bingo/game/game-log/game-log-user-word-message/game-log-user-word-message.component';
+import { GameLogWordRejectedMessageComponent } from './bingo/game/game-log/game-log-word-rejected-message/game-log-word-rejected-message.component';
+import { GameLogWordAcceptedMessageComponent } from './bingo/game/game-log/game-log-word-accepted-message/game-log-word-accepted-message.component';
 
 
 @NgModule({
@@ -51,7 +58,13 @@ import { LoginUserFormComponent } from './login/login-user-form/login-user-form.
     GameWordComponent,
     GameMapModeratorOverlayComponent,
     GameMapPlayerOverlayComponent,
-    LoginUserFormComponent
+    LoginUserFormComponent,
+    GameLogComponent,
+    GameChatInputComponent,
+    GameLogChatMessageComponent,
+    GameLogUserWordMessageComponent,
+    GameLogWordRejectedMessageComponent,
+    GameLogWordAcceptedMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +75,8 @@ import { LoginUserFormComponent } from './login/login-user-form/login-user-form.
     FormsModule,
     SocketIoModule,
     GoogleMapsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedModule
   ],
   providers: [
     {

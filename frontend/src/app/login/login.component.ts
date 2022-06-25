@@ -20,12 +20,13 @@ export class LoginComponent implements OnInit {
   username: string = "";
   lobbyToken: string = "";
   
-  public activeNavId: number;
+  public activeNavId: number = 1;
     
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.lobbyToken = params.token;
-      this.activeNavId = this.lobbyToken !== "" ? 2 : 1;
+      console.log(this.lobbyToken);
+      this.activeNavId = this.lobbyToken?.length > 0 ? 2 : 1;
     });
   }
 

@@ -12,6 +12,10 @@
       "Error": {
         "type": "object",
         "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
           "status": {
             "type": "string",
             "description": "Error name"
@@ -23,10 +27,6 @@
           "code": {
             "type": "integer",
             "description": "Error code"
-          },
-          "message": {
-            "type": "string",
-            "description": "Error message"
           }
         }
       },
@@ -59,32 +59,26 @@
       "User": {
         "type": "object",
         "properties": {
-          "ready": {
-            "type": "boolean",
-            "nullable": true
-          },
           "color": {
-            "type": "string",
-            "maxLength": 255
-          },
-          "name": {
             "type": "string",
             "maxLength": 255
           },
           "id": {
             "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 255
+          },
+          "ready": {
+            "type": "boolean",
+            "nullable": true
           }
         }
       },
       "Word": {
         "type": "object",
         "properties": {
-          "users": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/User"
-            }
-          },
           "text": {
             "type": "string",
             "nullable": true,
@@ -92,29 +86,23 @@
           },
           "id": {
             "type": "integer"
-          }
-        }
-      },
-      "Lobby": {
-        "type": "object",
-        "properties": {
-          "lobby_state": {
-            "type": "string"
-          },
-          "state": {
-            "type": "string"
-          },
-          "id": {
-            "type": "integer"
-          },
-          "owner": {
-            "$ref": "#/components/schemas/User"
           },
           "users": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/User"
             }
+          }
+        }
+      },
+      "Lobby": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/User"
           },
           "words": {
             "type": "array",
@@ -122,13 +110,25 @@
               "$ref": "#/components/schemas/Word"
             }
           },
-          "moderator": {
-            "$ref": "#/components/schemas/User"
+          "users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "state": {
+            "type": "string"
           },
           "token": {
             "type": "string",
             "nullable": true,
             "maxLength": 64
+          },
+          "moderator": {
+            "$ref": "#/components/schemas/User"
+          },
+          "lobby_state": {
+            "type": "string"
           }
         }
       }

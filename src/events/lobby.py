@@ -21,3 +21,8 @@ def on_game_word_found(data):
 def on_game_map_sync(data):
     room = data["room"]
     sio.emit("game_map_sync", data, room=room, include_self=False)
+
+@sio.on("game_chat_message")
+def on_game_chat_message(data):
+    room = data["room"]
+    sio.emit("game_chat_message", data, room=room, include_self=True)

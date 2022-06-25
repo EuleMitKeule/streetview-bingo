@@ -1,0 +1,9 @@
+
+<span 
+    class="badge bg-secondary">
+    <fa-icon 
+        *ngIf="displayFound" 
+        [icon]="isFound ? faCheck : faXmark">
+    </fa-icon>
+    {{ word?.text }}
+</span>

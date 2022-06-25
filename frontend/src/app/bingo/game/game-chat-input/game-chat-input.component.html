@@ -1,0 +1,16 @@
+<div class="input-group">
+    <input 
+        id="game-log-chat-input"
+        class="form-control"
+        type="text"
+        placeholder="Enter chat message"
+        style="border-top-left-radius: 0;"
+        [(ngModel)]="message">
+    <button 
+        id="game-log-chat-send"
+        class="btn btn-outline-primary"
+        style="border-top-right-radius: 0;"
+        (click)="onClick()">
+        Send
+    </button>
+</div>

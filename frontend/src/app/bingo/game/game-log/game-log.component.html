@@ -1,0 +1,21 @@
+<div
+    class="chat-message"
+    *ngFor="let entry of gameLog">
+    <div [ngSwitch]="entry[0]">
+        <app-game-log-chat-message
+            *ngSwitchCase="'ChatMessage'"
+            [user]="entry[1]?.user"
+            [message]="entry[1]?.message">
+        </app-game-log-chat-message>
+        <app-game-log-word-accepted-message
+            *ngSwitchCase="'WordAcceptedMessage'"
+            [user]="entry[1]?.user"
+            [word]="entry[1]?.word">
+         </app-game-log-word-accepted-message>
+         <app-game-log-word-rejected-message
+            *ngSwitchCase="'WordRejectedMessage'"
+            [user]="entry[1]?.user"
+            [word]="entry[1]?.word">
+        </app-game-log-word-rejected-message>
+    </div>
+</div>

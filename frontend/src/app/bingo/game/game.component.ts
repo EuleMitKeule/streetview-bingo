@@ -59,10 +59,13 @@ export class GameComponent implements OnInit {
 
     word.users.push(user);
     this.gameWordUpdate.emit(word);
+    this.emitGameWordFoundMessage(user, word);
   }
 
   onRejectClick(): void {
     let [user, word]: [User, Word] = this.usersToReview.shift();
+    
+    this.emitGameWordRejectedMessage(user, word);
     //TODO: send reject to user
   }
 
@@ -75,6 +78,32 @@ export class GameComponent implements OnInit {
       room: this.currentLobby.token,
       user: this.currentUser,
       word: word
+    });
+  }
+
+  emitGameWordFoundMessage(user: User, word: Word): void {
+    console.log(`emitting game word found message for user ${user.name} and word ${word.text}`);
+
+    this.socketService.socket.emit("game_chat_message", {
+      room: this.currentLobby.token,
+      messageType: "WordAcceptedMessage",
+      messageData: {
+        user: user,
+        word: word
+      }
+    });
+  }
+
+  emitGameWordRejectedMessage(user: User, word: Word): void {
+    console.log(`emitting game word rejected message for user ${user.name} and word ${word.text}`);
+
+    this.socketService.socket.emit("game_chat_message", {
+      room: this.currentLobby.token,
+      messageType: "WordRejectedMessage",
+      messageData: {
+        user: user,
+        word: word
+      }
     });
   }
 }

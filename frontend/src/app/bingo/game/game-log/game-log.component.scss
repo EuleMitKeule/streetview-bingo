@@ -1,0 +1,11 @@
+
+@import "styles.scss";
+
+
+.chat-message {
+
+    &:not(:last-child) {
+        margin-bottom: map-get($spacers, 2);
+    }
+
+}

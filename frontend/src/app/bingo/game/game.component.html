@@ -12,13 +12,24 @@
                 (wordClick)="onWordClick($event)"
             ></app-game-map>
         </div>
-        <div class="col-3">
-            <app-sidebar [title]="'Words'">
+        <div class="col-3 d-flex flex-column vh-100 p-2">
+            <div 
+                style="overflow-y: scroll; height: 75%;">
                 <app-game-words-list 
-                    [currentLobby]="currentLobby" 
-                    [currentUser]="currentUser"
-                ></app-game-words-list>
-            </app-sidebar>
+                    [currentLobby]="currentLobby"
+                    [currentUser]="currentUser">
+                </app-game-words-list>
+            </div>
+            <div 
+                class="pb-2 px-2 flex-grow-1 form-control" 
+                style="max-height: 25%; border-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0; overflow-y: scroll;">
+                <app-game-log>
+                </app-game-log>
+            </div>
+            <app-game-chat-input
+                [currentUser]="currentUser"
+                [currentLobby]="currentLobby">
+            </app-game-chat-input>
         </div>
     </div>
 </div>
